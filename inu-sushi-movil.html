@@ -228,6 +228,18 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .bs-progress{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:4;background:rgba(245,235,213,.12)}
 .bs-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rosa),var(--naranja))}
 @media (prefers-reduced-motion: reduce){.bs-hint{animation:none}}
+
+/* ===== HORARIO + DIRECCION ===== */
+.status-pill{display:inline-flex;align-items:center;font-size:.68rem;font-weight:800;padding:.28rem .65rem;border-radius:999px;white-space:nowrap;margin-left:auto;margin-right:.6rem}
+.status-pill.abierto{background:rgba(46,204,113,.15);color:#2ECC71;border:1px solid rgba(46,204,113,.45)}
+.status-pill.cerrado{background:rgba(225,37,27,.14);color:#FF8A80;border:1px solid rgba(225,37,27,.45)}
+@media(max-width:420px){.status-pill{font-size:.6rem;padding:.24rem .5rem}}
+.addr-label{display:block;font-size:.78rem;font-weight:800;color:var(--crema);margin-bottom:.35rem}
+.addr-input{width:100%;background:#181816;border:1.5px solid rgba(245,235,213,.25);border-radius:10px;color:var(--crema);font-family:inherit;font-size:.9rem;padding:.6rem .7rem;resize:none;margin-bottom:.55rem}
+.addr-input:focus{outline:none;border-color:var(--rosa)}
+.addr-input.falta{border-color:var(--rojo)}
+.addr-hint{font-size:.7rem;color:#FF8A80;margin:0 0 .55rem;display:none}
+.pay-note{font-size:.68rem;opacity:.7;margin-top:.6rem;text-align:center;line-height:1.5}
 </style>
 <nav>
   <div class="nav-inner">
@@ -590,8 +602,12 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <div class="cart-empty">Tu carrito está vacío.<br>Agrega platillos del menú para armar tu pedido.</div>
   </div>
   <div class="drawer-foot">
+    <label class="addr-label" for="addrInput">📍 Dirección de entrega <span style="color:var(--rosa)">*</span></label>
+    <textarea id="addrInput" class="addr-input" rows="2" placeholder="Calle, número, colonia y una referencia"></textarea>
+    <p class="addr-hint" id="addrHint">Escribe tu dirección para poder enviar el pedido 🙏</p>
     <div class="subtotal-row"><span>Subtotal</span><span class="val" id="subtotalVal">$0</span></div>
     <button class="send-btn" id="sendOrder" disabled>📲 Enviar pedido por WhatsApp</button>
+    <p class="pay-note">🕐 Entrega: 30–90 min según demanda · 💵 Pago en efectivo o transferencia (te pasamos los datos por WhatsApp)</p>
   </div>
 </aside>
 
@@ -751,11 +767,74 @@ document.querySelectorAll('[data-add]').forEach(function(btn){
   });
 });
 
+// ===== HORARIOS: viernes a domingo de 12:00 a 20:00 (hora CDMX) =====
+// Para cambiar temporada solo edita "dias": 0=dom 1=lun 2=mar 3=mié 4=jue 5=vie 6=sáb
+var HORARIO = { dias: [5, 6, 0], abre: 12, cierra: 20 };
+var DIA_CORTO = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+
+function ahoraCDMX(){
+  return new Date(new Date().toLocaleString('en-US', {timeZone: 'America/Mexico_City'}));
+}
+function estaAbierto(){
+  var n = ahoraCDMX();
+  return HORARIO.dias.indexOf(n.getDay()) !== -1 && n.getHours() >= HORARIO.abre && n.getHours() < HORARIO.cierra;
+}
+function proximaApertura(){
+  var n = ahoraCDMX();
+  for (var i = 0; i < 8; i++){
+    var d = (n.getDay() + i) % 7;
+    if (HORARIO.dias.indexOf(d) === -1) continue;
+    if (i === 0 && n.getHours() >= HORARIO.cierra) continue;
+    if (i === 0) return 'hoy 12 pm';
+    if (i === 1) return 'mañana 12 pm';
+    return DIA_CORTO[d] + ' 12 pm';
+  }
+  return 'vie 12 pm';
+}
+function pintarEstado(){
+  var abierto = estaAbierto();
+  var pill = document.getElementById('statusPill');
+  if (!pill){
+    pill = document.createElement('span');
+    pill.id = 'statusPill';
+    document.querySelector('.nav-inner').insertBefore(pill, document.getElementById('openCart'));
+  }
+  pill.className = 'status-pill ' + (abierto ? 'abierto' : 'cerrado');
+  pill.textContent = abierto ? '🟢 Abierto · hasta 8 pm' : '🔴 Abre ' + proximaApertura();
+  document.getElementById('sendOrder').textContent = abierto ? '📲 Enviar pedido por WhatsApp' : '🐾 Programar pedido por WhatsApp';
+  var bb = document.getElementById('buyBurger');
+  if (bb) bb.textContent = abierto ? '🍔 Comprar Kangreburger · $150' : '🐾 Programar Kangreburger · $150';
+}
+pintarEstado();
+setInterval(pintarEstado, 60000);
+
+// ===== Direccion obligatoria =====
+function direccionOk(){
+  return document.getElementById('addrInput').value.trim().length >= 10;
+}
+document.getElementById('addrInput').addEventListener('input', function(){
+  this.classList.remove('falta');
+  document.getElementById('addrHint').style.display = 'none';
+});
+
 // Enviar pedido por WhatsApp con el mensaje ya armado
 document.getElementById('sendOrder').addEventListener('click', function(){
   var names = Object.keys(cart);
   if(names.length === 0) return;
-  var lines = ['¡Hola Inu Sushi! 🍣 Quiero hacer este pedido:', ''];
+  if(!direccionOk()){
+    var inp = document.getElementById('addrInput');
+    inp.classList.add('falta');
+    document.getElementById('addrHint').style.display = 'block';
+    inp.focus();
+    return;
+  }
+  var lines = [];
+  if (!estaAbierto()){
+    lines.push('🕐 *PEDIDO ANTICIPADO* — para cuando abran');
+    lines.push('');
+  }
+  lines.push('¡Hola Inu Sushi! 🍣 Quiero hacer este pedido:');
+  lines.push('');
   var subtotal = 0;
   names.forEach(function(name){
     var item = cart[name];
@@ -766,7 +845,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   lines.push('');
   lines.push('*Subtotal: $' + subtotal + '*');
   lines.push('');
-  lines.push('Mi dirección es: ');
+  lines.push('📍 Dirección: ' + document.getElementById('addrInput').value.trim());
   var msg = encodeURIComponent(lines.join('\n'));
   window.open('https://wa.me/' + CART_KEY_NUMBER + '?text=' + msg, '_blank');
 });
