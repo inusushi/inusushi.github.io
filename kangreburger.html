@@ -353,6 +353,9 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
 /* ===== Kangreburger + verduritas: miniatura doble ===== */
 .thumb-dual{display:flex;gap:2px;width:52px;height:52px;border-radius:10px;overflow:hidden;flex-shrink:0}
 .thumb-dual img{width:50%;height:100%;object-fit:cover}
+
+.item.agotado{opacity:.5;filter:grayscale(.65)}
+.item.agotado .p{color:#FF8A80;font-size:.7rem;font-weight:800;font-family:inherit}
 </style>
 </head>
 <body>
@@ -932,6 +935,32 @@ function pintarEstado(){
 pintarEstado();
 setInterval(pintarEstado, 60000);
 
+// ===== Disponibilidad de platillos del menu regular (por fuera de stock hoy) =====
+// Para reactivar un platillo, cambia su valor a true aqui abajo.
+var ITEM_DISPONIBLE = {
+  'Rollo Gobernador': false,
+  'Ichigo Roll': false,
+  'Sakura Roll': false,
+  'Don Kangrejo': false,
+  'Gohan Camarón': false,
+  'Yakimeshi Camarón': false,
+  'Bento Camarón': false
+};
+function pintarDisponibilidadItems(){
+  Object.keys(ITEM_DISPONIBLE).forEach(function(name){
+    if (ITEM_DISPONIBLE[name]) return;
+    var el = document.querySelector('.item[data-name="' + name + '"]');
+    if (!el) return;
+    el.classList.add('agotado');
+    var precio = el.querySelector('.p');
+    if (precio) precio.textContent = 'Agotado hoy';
+    var btn = el.querySelector('[data-add]');
+    if (btn) btn.remove();
+  });
+}
+pintarDisponibilidadItems();
+
+
 // ===== Direccion obligatoria =====
 function direccionOk(){
   return document.getElementById('addrInput').value.trim().length >= 10;
@@ -1227,14 +1256,15 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   addBtn.addEventListener('click', function(){ if (cfgOnAdd) cfgOnAdd(); });
 
   // ---------- Generico (Sakana Bowl, Palomitas, Rollitos10, Kushiage3, Onigiris, Gohan/Yakimeshi, Mushi Pan) ----------
-  var MUSHI_DULCES = ['Chocobanana', 'Chocolate Abuelita', 'Nutella', 'Nutella y Filadelfia', 'Galleta Oreo',
-    'Frutos Rojos', 'Zarzamora y Queso Crema', 'Pay de Limón', 'Bubulubu'];
+  var MUSHI_DULCES = ['Chocobanana', 'Chocolate Abuelita', 'Nutella', 'Nutella con Filadelfia y Nuez (Premium)', 'Galleta Oreo',
+    'Frutos Rojos', 'Zarzamora y Queso Crema', 'Pay de Limón', 'Mango con Queso Crema'];
   var MUSHI_SALADOS = ['Cerdo Teriyaki', 'Carne con Cebollín', 'Pizza de Pepperoni'];
   // Para quitar un sabor temporalmente (agotado): cambia su valor a false aqui abajo.
+  // Para reactivar TODOS de un jalon cuando repongan ingredientes: pon todos en true.
   var MUSHI_DISPONIBLE = {
-    'Chocobanana': true, 'Chocolate Abuelita': true, 'Nutella': true, 'Nutella y Filadelfia': true,
-    'Galleta Oreo': true, 'Frutos Rojos': true, 'Zarzamora y Queso Crema': true, 'Pay de Limón': true,
-    'Bubulubu': true, 'Cerdo Teriyaki': true, 'Carne con Cebollín': true, 'Pizza de Pepperoni': true
+    'Chocobanana': false, 'Chocolate Abuelita': false, 'Nutella': true, 'Nutella con Filadelfia y Nuez (Premium)': false,
+    'Galleta Oreo': false, 'Frutos Rojos': true, 'Zarzamora y Queso Crema': true, 'Pay de Limón': true,
+    'Mango con Queso Crema': true, 'Cerdo Teriyaki': false, 'Carne con Cebollín': true, 'Pizza de Pepperoni': true
   };
   function mushiDisponibles(lista){
     var r = lista.filter(function(s){ return MUSHI_DISPONIBLE[s] !== false; });
@@ -1366,30 +1396,53 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   var MUSHI_PRECIO = {};
   MUSHI_DULCES.forEach(function(s){ MUSHI_PRECIO[s] = 25; });
   MUSHI_SALADOS.forEach(function(s){ MUSHI_PRECIO[s] = 30; });
+  MUSHI_PRECIO['Nutella con Filadelfia y Nuez (Premium)'] = 30; // version premium, mas elaborada
+
+  // Promo 5+1: al llenar los 6 espacios, el 6to sale gratis.
+  // Si hay mezcla o son puros dulces, el gratis es un dulce ($25).
+  // Si son puros salados, el gratis puede ser salado o dulce de cortesia (se confirma por WhatsApp).
+  function calcularPromoMushi(seleccion){
+    if (seleccion.length < 6) return { descuento: 0, nota: '' };
+    var esDulce = function(s){ return MUSHI_DULCES.indexOf(s) !== -1; };
+    var hayDulce = seleccion.some(esDulce);
+    var haySalado = seleccion.some(function(s){ return !esDulce(s); });
+    if (!hayDulce && haySalado){
+      return { descuento: 25, nota: '🎉 Promo 5+1: el 6° es gratis — puede ser salado o dulce de cortesía (lo confirmamos por WhatsApp)' };
+    }
+    return { descuento: 25, nota: '🎉 Promo 5+1: compra 5 y el 6° es gratis (dulce)' };
+  }
 
   function abrirMushiCaja(){
     titleEl.textContent = 'Arma tu caja de Mushipan';
     var dulces = mushiDisponibles(MUSHI_DULCES);
     var salados = mushiDisponibles(MUSHI_SALADOS);
-    var h = '<div class="cfg-step"><h4>Elige hasta 6 mushipanes</h4><p class="cfg-note">Puedes repetir el mismo sabor. Deja "— No incluir —" si quieres menos de 6.</p>';
+    var h = '<div class="cfg-step"><h4>Elige hasta 6 mushipanes</h4><p class="cfg-note">Puedes repetir el mismo sabor. Deja "— No incluir —" si quieres menos de 6. Compra 5 y el 6° es gratis 🎉</p>';
     for (var i = 1; i <= 6; i++){
       h += '<div class="cfg-row"><span class="n">' + i + '.</span><select data-mushi="' + i + '" style="flex:1">';
       if (i > 1) h += opt('', '— No incluir —', true);
-      h += '<optgroup label="Dulces $25">';
-      dulces.forEach(function(s){ h += opt(s, s, i === 1 && s === dulces[0]); });
-      h += '</optgroup><optgroup label="Salados $30">';
-      salados.forEach(function(s){ h += opt(s, s, false); });
+      h += '<optgroup label="Dulces">';
+      dulces.forEach(function(s){ h += opt(s, s + ' — $' + MUSHI_PRECIO[s], i === 1 && s === dulces[0]); });
+      h += '</optgroup><optgroup label="Salados">';
+      salados.forEach(function(s){ h += opt(s, s + ' — $' + MUSHI_PRECIO[s], false); });
       h += '</optgroup></select></div>';
     }
     h += '</div>';
     body.innerHTML = h;
 
-    function recalc(){
-      var total = 0;
+    function seleccionActual(){
+      var seleccion = [];
       for (var i = 1; i <= 6; i++){
         var val = body.querySelector('[data-mushi="' + i + '"]').value;
-        if (val && MUSHI_PRECIO[val]) total += MUSHI_PRECIO[val];
+        if (val) seleccion.push(val);
       }
+      return seleccion;
+    }
+
+    function recalc(){
+      var seleccion = seleccionActual();
+      var subtotal = seleccion.reduce(function(a, s){ return a + (MUSHI_PRECIO[s] || 0); }, 0);
+      var promo = calcularPromoMushi(seleccion);
+      var total = subtotal - promo.descuento;
       totalEl.textContent = '$' + total;
       return total;
     }
@@ -1399,15 +1452,15 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     recalc();
 
     cfgOnAdd = function(){
+      var seleccion = seleccionActual();
       var lines = [];
-      var total = 0;
-      for (var i = 1; i <= 6; i++){
-        var val = body.querySelector('[data-mushi="' + i + '"]').value;
-        if (val && MUSHI_PRECIO[val]){
-          lines.push(i + '. ' + val + ' — $' + MUSHI_PRECIO[val]);
-          total += MUSHI_PRECIO[val];
-        }
+      for (var i = 0; i < seleccion.length; i++){
+        lines.push((i + 1) + '. ' + seleccion[i] + ' — $' + MUSHI_PRECIO[seleccion[i]]);
       }
+      var subtotal = seleccion.reduce(function(a, s){ return a + (MUSHI_PRECIO[s] || 0); }, 0);
+      var promo = calcularPromoMushi(seleccion);
+      var total = subtotal - promo.descuento;
+      if (promo.descuento > 0) lines.push(promo.nota + ' (-$' + promo.descuento + ')');
       cfgOnAdd = null;
       addConfigurado('Mushi Pan — Caja armada', total, lines);
       closeCfg();
