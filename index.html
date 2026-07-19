@@ -336,6 +336,24 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 
 .item.agotado{opacity:.5;filter:grayscale(.65)}
 .item.agotado .p{color:#FF8A80;font-size:.7rem;font-weight:800;font-family:inherit}
+
+.evento-wrap{background:linear-gradient(135deg, var(--rojo), var(--naranja));border-radius:26px;padding:2.8rem 1.8rem;text-align:center;color:#fff}
+.evento-wrap .eyebrow{color:#fff;opacity:.85}
+.evento-wrap h2{color:#fff}
+.evento-wrap h2 .acc{color:var(--negro)}
+.evento-wrap .sec-sub{color:#fff;opacity:.92;max-width:520px;margin:0 auto 1.7rem}
+.evento-btn-wrap{position:relative;display:inline-block}
+.btn-paw{background:var(--negro);color:#fff;box-shadow:0 8px 26px rgba(0,0,0,.35);transition:transform .15s ease, box-shadow .2s ease}
+.btn-paw:hover{transform:translateY(-2px)}
+.pawico{width:1.25em;height:1.2em;flex:none}
+.bh-walk{position:absolute;width:24px;height:24px;color:#fff;opacity:0;pointer-events:none;z-index:6;animation:bhWalkEvt 1.3s ease forwards}
+@keyframes bhWalkEvt{0%{opacity:0}20%{opacity:.95}100%{opacity:0;transform:translateX(52px) translateY(-10px)}}
+
+.mushi-teaser{display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:center;background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.25);border-radius:26px;padding:1.8rem;text-decoration:none;color:inherit;transition:border-color .2s ease, transform .2s ease}
+.mushi-teaser:hover{border-color:var(--rosa);transform:translateY(-3px)}
+.mushi-teaser img{width:100%;filter:drop-shadow(0 14px 30px rgba(0,0,0,.5))}
+.mushi-teaser .btn{pointer-events:none;margin-top:1.1rem}
+@media(max-width:760px){.mushi-teaser{grid-template-columns:1fr;text-align:center;padding:1.6rem}.mushi-teaser img{max-width:200px;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -382,7 +400,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 
 <div class="trustbar">
   <div class="trustbar-inner">
-    <div class="tstat"><span class="tnum">8</span><span class="tlabel">años de experiencia</span></div>
+    <div class="tstat"><span class="tnum">2018</span><span class="tlabel">Desde</span></div>
     <div class="tdot">🌸</div>
     <div class="tstat"><span class="tnum">10</span><span class="tlabel">piezas por rollo, siempre</span></div>
     <div class="tdot">🌸</div>
@@ -557,7 +575,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <div class="items">
       <div class="item" data-name="Mushi Pan Dulce" data-price="25" data-cfg="generic"><img class="thumb" src="fotos/mushi-pan-dulce.webp" alt="Mushi Pan Dulce" loading="lazy"><div class="info"><div class="nombre">Mushi Pan Dulce</div><div class="desc">Elige tu sabor al agregarlo al carrito.</div></div><div class="right"><span class="p">$25</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Mushi Pan Salado" data-price="30" data-cfg="generic"><img class="thumb" src="fotos/mushi-pan-salado.webp" alt="Mushi Pan Salado" loading="lazy"><div class="info"><div class="nombre">Mushi Pan Salado</div><div class="desc">Elige tu sabor al agregarlo al carrito.</div></div><div class="right"><span class="p">$30</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Mushi Pan Caja" data-price="0" data-cfg="mushibox"><img class="thumb" src="fotos/mushi-hero.webp" alt="Arma tu caja de Mushipan" loading="lazy"><div class="info"><div class="nombre">🎁 Arma tu caja</div><div class="desc">Elige hasta 6 mushipanes, iguales o distintos.</div></div><div class="right"><span class="p">Desde $25</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Mushi Pan Caja" data-price="0" data-cfg="mushibox"><img class="thumb" src="fotos/mushi-hero.webp" alt="Arma tu caja de Mushipan" loading="lazy"><div class="info"><div class="nombre">🎁 Arma tu caja</div><div class="desc">Elige hasta 6 mushipanes — al llevar 5 ganas 1 gratis 🎉</div></div><div class="right"><span class="p">Desde $25</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
   </div>
 
@@ -615,10 +633,10 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 <section id="kage">
   <div class="kage-wrap">
     <div>
-      <p class="eyebrow">Entrega a domicilio</p>
-      <h2>Conoce a <span class="acc">Kage</span>, el ninja de las entregas 🥷</h2>
-      <p>En Inu Sushi tu pedido no "se envía" — lo lleva <b>Kage</b>, nuestro shiba ninja. Sigiloso, rápido, y con la misión de que tu sushi llegue fresco a tu puerta.</p>
-      <p><b>El camino más corto es WhatsApp:</b> arma tu pedido arriba y envíalo directo, sin comisiones de apps.</p>
+      <p class="eyebrow">Modelo Dark Kitchen</p>
+      <h2>Servicio a <span class="acc">domicilio</span></h2>
+      <p>En nuestro mundo de Inu Sushi tu pedido no se "envía", te lo lleva <b>Kage</b>, nuestro Shiba ninja de las entregas quien, sigiloso y rápido, cuando hay muchas entregas que hacer utiliza su habilidad especial "técnica multi clon de sombras" con la misión de llevar el pedido fresco hasta tu puerta.</p>
+      <p><b>El camino más corto</b> es armar tu pedido arriba en el menú y, ya que lo hayas confirmado, lo envías desde el carrito poniendo tu dirección de envío. Ya que la pongas, presiona el botón para enviar tu mensaje por WhatsApp — ¡Listo, te atendemos directamente!</p>
       <div class="canales">
         <div class="canal destacado"><span class="badge">Recomendado</span><div class="n">WhatsApp</div><div class="d">55 4898 1886</div></div>
         <div class="canal"><div class="n">Rappi</div><div class="d">Inu Sushi</div></div>
@@ -637,12 +655,37 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
       <p class="eyebrow">Nuestra historia</p>
       <h2>8 años uniendo <span class="acc">dos culturas</span></h2>
       <p>Inu Sushi nació en Tlalnepantla como una dark kitchen con una idea simple: la técnica japonesa no tiene por qué renunciar al sabor mexicano que nos formó. De ahí el nombre "Japomexa" — cada rollo, cada bowl, cada charola es un punto de encuentro entre ambas cocinas.</p>
-      <p>Detrás de cada pedido está <b>Mariana</b>, nuestra jefa de cocina, cuidando que cada receta salga igual de bien la pieza 1 que la pieza 5,000. Y detrás de cada bocado de Mushi Pan, un detalle que nos define: <b>5 gramos más de relleno</b> que cualquier competencia — porque en Inu Sushi no escatimamos donde más se nota.</p>
+      <p>Detrás de cada pedido está <b>Mariana</b>, nuestra jefa de cocina, y <b>Daniel</b> diseñando nuestras recetas y cuidando que cada platillo salga igual de bien la pieza 1 que la pieza 5,000. Manteniendo la mejora constante con nuestro "Laboratorio de Cocina", práctica semanal que tenemos para mejorar cada platillo desde sus pequeños finos detalles.</p>
+      <p>También sabemos que a nuestros compatriotas les gustan los platillos "bien servidos", así que no dudes que te vas a ir satisfecho con las porciones.</p>
+      <p>Hemos entrenado a más de 25 personas en estos años, de los cuales han salido 12 de nuestros discípulos con el grado de "Samurái Susher@".</p>
+      <p>Esta denominación se la damos a las personas que, así como en el pasado los honorables samuráis se ganaban la vida blandiendo con habilidad su katana sin importar el lugar donde se ubiquen o se aventuren del mundo, así mismo un buen sushi chef puede portar su cuchillo con honor e ir a donde quiera con su habilidad como un guerrero samurái.</p>
     </div>
     <div class="hstats">
       <div class="hstat"><span class="hnum">2018</span><span class="hlabel">Año de fundación</span></div>
-      <div class="hstat"><span class="hnum">+5g</span><span class="hlabel">de relleno extra en Mushi Pan</span></div>
-      <div class="hstat"><span class="hnum">🥷</span><span class="hlabel">Kage, nuestro ninja de entregas</span></div>
+      <div class="hstat"><span class="hnum">👨‍🍳🥷</span><span class="hlabel">Entrenando a los samuráis susheros de mañana</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="mushipan-promo" aria-label="Conoce nuestra linea de Mushipan para distribuidores">
+  <a class="mushi-teaser" href="mushipan.html">
+    <img src="fotos/mushi-vaporera.webp" alt="Mushipanes en vaporera de bambú" loading="lazy">
+    <div>
+      <p class="eyebrow">Nueva oportunidad de negocio</p>
+      <h2>¿Tienes un negocio? <span class="acc">Vende Mushipan</span></h2>
+      <p class="sec-sub">El pan japonés al vapor que nadie más ofrece en tu zona. Conoce cómo ser distribuidor.</p>
+      <span class="btn btn-wa">🥟 Conocer la oportunidad</span>
+    </div>
+  </a>
+</section>
+
+<section id="evento-privado" aria-label="Cotizar servicio para evento privado">
+  <div class="evento-wrap">
+    <p class="eyebrow">Para tu celebración</p>
+    <h2>Cotizar el servicio <span class="acc">para mi evento privado</span></h2>
+    <p class="sec-sub">Cumpleaños, oficina, reunión familiar — cuéntanos dónde será y armamos tu charola a la medida.</p>
+    <div class="evento-btn-wrap">
+      <button class="btn btn-paw" id="btnEvento" type="button"><svg class="pawico" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg><span>Cotizar mi evento</span></button>
     </div>
   </div>
 </section>
@@ -933,13 +976,13 @@ setInterval(pintarEstado, 60000);
 // ===== Disponibilidad de platillos del menu regular (por fuera de stock hoy) =====
 // Para reactivar un platillo, cambia su valor a true aqui abajo.
 var ITEM_DISPONIBLE = {
-  'Rollo Gobernador': false,
-  'Ichigo Roll': false,
-  'Sakura Roll': false,
-  'Don Kangrejo': false,
-  'Gohan Camarón': false,
-  'Yakimeshi Camarón': false,
-  'Bento Camarón': false
+  'Rollo Gobernador': true,
+  'Ichigo Roll': true,
+  'Sakura Roll': true,
+  'Don Kangrejo': true,
+  'Gohan Camarón': true,
+  'Yakimeshi Camarón': true,
+  'Bento Camarón': true
 };
 function pintarDisponibilidadItems(){
   Object.keys(ITEM_DISPONIBLE).forEach(function(name){
@@ -1408,7 +1451,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   }
 
   function abrirMushiCaja(){
-    titleEl.textContent = 'Arma tu caja de Mushipan';
+    titleEl.textContent = 'Promoción: eliges 5 y te llevas 6 mushipanes';
     var dulces = mushiDisponibles(MUSHI_DULCES);
     var salados = mushiDisponibles(MUSHI_SALADOS);
     var h = '<div class="cfg-step"><h4>Elige hasta 6 mushipanes</h4><p class="cfg-note">Puedes repetir el mismo sabor. Deja "— No incluir —" si quieres menos de 6. Compra 5 y el 6° es gratis 🎉</p>';
@@ -1594,6 +1637,33 @@ renderCart();
   window.addEventListener('resize', resize);
   resize();
   onScroll();
+})();
+</script>
+<script>
+// ===== Cotizar evento privado: boton con caminito de huellitas -> WhatsApp =====
+(function(){
+  var btn = document.getElementById('btnEvento');
+  if (!btn) return;
+  var msg = encodeURIComponent('Me interesa cotizar el servicio para un evento, la dirección donde será el evento es ');
+  var url = 'https://wa.me/525548981886?text=' + msg;
+  btn.addEventListener('click', function(){
+    var host = btn.parentElement;
+    for (var i = 0; i < 3; i++){
+      (function(i){
+        setTimeout(function(){
+          var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          s.setAttribute('viewBox', '0 0 106 100');
+          s.setAttribute('class', 'bh-walk');
+          s.innerHTML = '<use href="#pawshape" fill="currentColor"/>';
+          s.style.left = (btn.offsetLeft + btn.offsetWidth - 12 + i * 30) + 'px';
+          s.style.top = (btn.offsetTop + (i % 2 ? 4 : -12)) + 'px';
+          host.appendChild(s);
+          setTimeout(function(){ s.remove(); }, 1400);
+        }, i * 150);
+      })(i);
+    }
+    setTimeout(function(){ window.open(url, '_blank'); }, 500);
+  });
 })();
 </script>
 </body>
