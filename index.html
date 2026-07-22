@@ -34,7 +34,7 @@ button{font-family:inherit}
 
 /* ===== NAV ===== */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(29,29,27,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--rosa)}
-.nav-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.5rem 1.2rem}
+.nav-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1.2rem;row-gap:.35rem}
 .nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
 .nav-brand img{width:40px;height:40px;border-radius:50%}
 .nav-brand span{font-family:'Reggae One','Arial Black',sans-serif;font-size:1.05rem;color:var(--crema);letter-spacing:1px}
@@ -238,11 +238,15 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .status-pill.abierto{background:rgba(46,204,113,.15);color:#2ECC71;border:1px solid rgba(46,204,113,.45)}
 .status-pill.cerrado{background:rgba(225,37,27,.14);color:#FF8A80;border:1px solid rgba(225,37,27,.45)}
 @media(max-width:420px){.status-pill{font-size:.6rem;padding:.24rem .5rem}}
+.delivery-note{font-size:.7rem;font-weight:700;color:var(--crema);opacity:.85;white-space:nowrap;margin-left:auto;margin-right:.5rem}
+@media(max-width:420px){.delivery-note{font-size:.62rem}}
 .addr-label{display:block;font-size:.78rem;font-weight:800;color:var(--crema);margin-bottom:.35rem}
 .addr-input{width:100%;background:#181816;border:1.5px solid rgba(245,235,213,.25);border-radius:10px;color:var(--crema);font-family:inherit;font-size:.9rem;padding:.6rem .7rem;resize:none;margin-bottom:.55rem}
 .addr-input:focus{outline:none;border-color:var(--rosa)}
 .addr-input.falta{border-color:var(--rojo)}
 .addr-hint{font-size:.7rem;color:#FF8A80;margin:0 0 .55rem;display:none}
+.pickup-check{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--crema);opacity:.9;margin:0 0 .8rem;cursor:pointer}
+.pickup-check input{width:16px;height:16px;accent-color:var(--rosa);cursor:pointer}
 .pay-note{font-size:.68rem;opacity:.7;margin-top:.6rem;text-align:center;line-height:1.5}
 
 /* ===== HUELLAS EN BOTONES ===== */
@@ -313,6 +317,8 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.8rem}
 .cat-tile{position:relative;aspect-ratio:1;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,73,176,.18);background:#000;padding:0;transition:transform .15s ease, border-color .15s ease}
 .cat-tile:hover{transform:translateY(-3px);border-color:var(--rosa)}
+@keyframes catFlash{0%{box-shadow:0 0 0 0 rgba(255,73,176,.85)}70%{box-shadow:0 0 0 16px rgba(255,73,176,0)}100%{box-shadow:0 0 0 0 rgba(255,73,176,0)}}
+.cat-tile.flash{animation:catFlash .6s ease-out;border-color:var(--rosa)}
 .cat-tile img{width:100%;height:100%;object-fit:cover;opacity:.85;display:block}
 .cat-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(20,20,18,.88))}
 .cat-tile span{position:absolute;left:.4rem;right:.4rem;bottom:.55rem;z-index:2;font-weight:900;color:var(--crema);font-size:.82rem;text-align:center;line-height:1.2}
@@ -436,7 +442,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <button class="cat-tile" data-goto="p-poke" type="button"><img src="fotos/fondo-poke.webp" alt="" loading="lazy"><span>Poke Bowl</span></button>
     <button class="cat-tile" data-goto="p-ramen" type="button"><img src="fotos/fondo-ramen.webp" alt="" loading="lazy"><span>Ramen</span></button>
     <button class="cat-tile" data-goto="p-bento" type="button"><img src="fotos/fondo-bento.webp" alt="" loading="lazy"><span>Bento Box</span></button>
-    <button class="cat-tile" data-goto="p-burger" type="button"><img src="fotos/fondo-burger.webp" alt="" loading="lazy"><span>Sushi Burger</span></button>
+    <button class="cat-tile" data-goto="p-burger" type="button"><img src="fotos/boton-sushi-burger.webp" alt="" loading="lazy"><span>Sushi Burger</span></button>
     <button class="cat-tile" data-goto="p-onigiri" type="button"><img src="fotos/fondo-onigiri.webp" alt="" loading="lazy"><span>Onigiris</span></button>
     <button class="cat-tile" data-goto="p-mushi" type="button"><img src="fotos/fondo-mushi.webp" alt="" loading="lazy"><span>Mushi Pan</span></button>
     <button class="cat-tile" data-goto="p-tores" type="button"><img src="fotos/fondo-tores.webp" alt="" loading="lazy"><span>Charolas</span></button>
@@ -486,12 +492,12 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
   <div class="panel panel-fondo" id="p-entradas" style="--catbg:url('fotos/fondo-entradas.webp')">
     <p class="panel-desc">Crujientes para abrir el apetito: palomitas, tempura, brochetas y rollitos.</p>
     <div class="items">
-      <div class="item" data-name="Mix de verduritas tempura" data-price="70"><img class="thumb" src="fotos/mix-de-verduritas-tempura.webp" alt="Mix de verduritas tempura" loading="lazy"><div class="info"><div class="nombre">Mix de verduritas tempura</div><div class="desc">Zanahoria, calabacita y brocolí capeadas, con salsa de anguila.</div></div><div class="right"><span class="p">$70</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Mix de verduritas tempura" data-price="70" data-cfg="generic"><img class="thumb" src="fotos/mix-de-verduritas-tempura.webp" alt="Mix de verduritas tempura" loading="lazy"><div class="info"><div class="nombre">Mix de verduritas tempura</div><div class="desc">Zanahoria, calabacita y brocolí capeadas, con salsa de anguila.</div></div><div class="right"><span class="p">$70</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Palomitas Camarón" data-price="130" data-cfg="generic"><img class="thumb" src="fotos/palomitas-camaron.webp" alt="Palomitas Camarón" loading="lazy"><div class="info"><div class="nombre">Palomitas panko — Camarón</div><div class="desc">Capeadas en tempura y empanizadas en panko, con sriracha.</div></div><div class="right"><span class="p">$130</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Palomitas Pollo/Queso/Cangrejo" data-price="95" data-cfg="generic"><img class="thumb" src="fotos/palomitas-pollo-queso-cangrejo.webp" alt="Palomitas Pollo/Queso/Cangrejo" loading="lazy"><div class="info"><div class="nombre">Palomitas — Pollo / Queso / Cangrejo</div><div class="desc">Crujientes, con topping de salsa sriracha.</div></div><div class="right"><span class="p">$95</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Rollitos Primavera 5pz" data-price="70"><img class="thumb" src="fotos/rollitos-primavera-5pz.webp" alt="Rollitos Primavera 5pz" loading="lazy"><div class="info"><div class="nombre">Rollitos Primavera — 5 pzas</div><div class="desc">Verduritas en pasta wonton, con soya ponzu.</div></div><div class="right"><span class="p">$70</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Rollitos Primavera 5pz" data-price="70" data-cfg="generic"><img class="thumb" src="fotos/rollitos-primavera-5pz.webp" alt="Rollitos Primavera 5pz" loading="lazy"><div class="info"><div class="nombre">Rollitos Primavera — 5 pzas</div><div class="desc">Verduritas en pasta wonton, con soya ponzu.</div></div><div class="right"><span class="p">$70</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Rollitos Primavera 10pz" data-price="130" data-cfg="generic"><img class="thumb" src="fotos/rollitos-primavera-10pz.webp" alt="Rollitos Primavera 10pz" loading="lazy"><div class="info"><div class="nombre">Rollitos Primavera — 10 pzas</div></div><div class="right"><span class="p">$130</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Brocheta Kushiage 1pz" data-price="40"><img class="thumb" src="fotos/brocheta-kushiage-1pz.webp" alt="Brocheta Kushiage 1pz" loading="lazy"><div class="info"><div class="nombre">Brocheta Kushiage — 1 pza</div><div class="desc">Plátano macho con queso manchego, empanizada.</div></div><div class="right"><span class="p">$40</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Brocheta Kushiage 1pz" data-price="40" data-cfg="generic"><img class="thumb" src="fotos/brocheta-kushiage-1pz.webp" alt="Brocheta Kushiage 1pz" loading="lazy"><div class="info"><div class="nombre">Brocheta Kushiage — 1 pza</div><div class="desc">Plátano macho con queso manchego, empanizada.</div></div><div class="right"><span class="p">$40</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Brochetas Kushiage 3pz" data-price="105" data-cfg="generic"><img class="thumb" src="fotos/brochetas-kushiage-3pz.webp" alt="Brochetas Kushiage 3pz" loading="lazy"><div class="info"><div class="nombre">Brochetas Kushiage — 3 pzas</div></div><div class="right"><span class="p">$105</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
   </div>
@@ -519,7 +525,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
   <div class="panel panel-fondo" id="p-poke" style="--catbg:url('fotos/fondo-poke.webp')">
     <p class="panel-desc">Bowls de comida fresca y bien preparada, arroz gohan con proteína, vegetales, salsas y toppings bien pensados para saciar tu antojo.</p>
     <div class="items">
-      <div class="item" data-name="Chikin Bowl" data-price="100"><img class="thumb" src="fotos/chikin-bowl.webp" alt="Chikin Bowl" loading="lazy"><div class="info"><div class="nombre">Chikin Bowl</div><div class="desc">Pollo teriyaki, hongos, calabacita, jitomate, aguacate y fruta con amaranto.</div></div><div class="right"><span class="p">$100</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Chikin Bowl" data-price="100" data-cfg="generic"><img class="thumb" src="fotos/chikin-bowl.webp" alt="Chikin Bowl" loading="lazy"><div class="info"><div class="nombre">Chikin Bowl</div><div class="desc">Pollo teriyaki, hongos, calabacita, jitomate, aguacate y fruta con amaranto.</div></div><div class="right"><span class="p">$100</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Sakana Bowl" data-price="135" data-cfg="generic"><img class="thumb" src="fotos/sakana-bowl.webp" alt="Sakana Bowl" loading="lazy"><div class="info"><div class="nombre">Sakana Bowl</div><div class="desc">Proteína a elegir (salmón, atún o kanikama), aguacate, pepino, wakame, tampico y edamames.</div></div><div class="right"><span class="p">$135</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
   </div>
@@ -527,10 +533,10 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
   <div class="panel panel-fondo" id="p-ramen" style="--catbg:url('fotos/fondo-ramen.webp')">
     <p class="panel-desc">Caldito que abraza: nuestro ramen y sopas de la casa.</p>
     <div class="items">
-      <div class="item" data-name="Sopa Jiraiya 1/2L" data-price="85"><img class="thumb" src="fotos/sopa-jiraiya-1-2l.webp" alt="Sopa Jiraiya 1/2L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — ½ litro</div><div class="desc">Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.</div></div><div class="right"><span class="p">$85</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Sopa Jiraiya 1L" data-price="160"><img class="thumb" src="fotos/sopa-jiraiya-1l.webp" alt="Sopa Jiraiya 1L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — 1 litro</div></div><div class="right"><span class="p">$160</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Inu Dashi Ramen 1/2L" data-price="87"><img class="thumb" src="fotos/inu-dashi-ramen-1-2l.webp" alt="Inu Dashi Ramen 1/2L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — ½ litro</div><div class="desc">Tallarines de trigo, camarón, cangrejo, atún y salmón.</div></div><div class="right"><span class="p">$87</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Inu Dashi Ramen 1L" data-price="165"><img class="thumb" src="fotos/inu-dashi-ramen-1l.webp" alt="Inu Dashi Ramen 1L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — 1 litro</div></div><div class="right"><span class="p">$165</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Sopa Jiraiya 1/2L" data-price="85" data-cfg="generic"><img class="thumb" src="fotos/sopa-jiraiya-1-2l.webp" alt="Sopa Jiraiya 1/2L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — ½ litro</div><div class="desc">Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.</div></div><div class="right"><span class="p">$85</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Sopa Jiraiya 1L" data-price="160" data-cfg="generic"><img class="thumb" src="fotos/sopa-jiraiya-1l.webp" alt="Sopa Jiraiya 1L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — 1 litro</div></div><div class="right"><span class="p">$160</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Inu Dashi Ramen 1/2L" data-price="87" data-cfg="generic"><img class="thumb" src="fotos/inu-dashi-ramen-1-2l.webp" alt="Inu Dashi Ramen 1/2L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — ½ litro</div><div class="desc">Tallarines de trigo, camarón, cangrejo, atún y salmón.</div></div><div class="right"><span class="p">$87</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Inu Dashi Ramen 1L" data-price="165" data-cfg="generic"><img class="thumb" src="fotos/inu-dashi-ramen-1l.webp" alt="Inu Dashi Ramen 1L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — 1 litro</div></div><div class="right"><span class="p">$165</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
   </div>
 
@@ -547,24 +553,25 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
   </div>
 
   <div class="panel panel-fondo" id="p-burger" style="--catbg:url('fotos/fondo-burger.webp')">
-    <p class="panel-desc">La hamburguesa de sushi: bollos de arroz empanizados.</p>
+    <p class="panel-desc">¡¡La parte exótica del menú!! Todo el sabor Inu sushi en una super burger</p>
     <div class="items">
-      <div class="item" data-name="Kangreburger" data-price="150"><img class="thumb" src="fotos/kangreburger.webp" alt="Kangreburger" loading="lazy"><div class="info"><div class="nombre">Kangreburger</div><div class="desc">Hamburguesa con ingredientes de sushi, bollos de arroz gohan empanizados en panko con queso crema y tampico untados y proteína doble kanikama y lomo de atún con alga wakame, aguacate, jitomate y salsa teriyaki artesanal.</div></div><div class="right"><span class="p">$150</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Kangreburger + verduritas" data-price="180"><img class="thumb" src="fotos/kangreburger-verduritas.webp" alt="Kangreburger + verduritas tempura" loading="lazy"><div class="info"><div class="nombre">Kangreburger + verduritas tempura</div><div class="desc">+120 gramos de verduritas tempura fritas.</div></div><div class="right"><span class="p">$180</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Kangreburger con lomo de atún" data-price="150"><img class="thumb" src="fotos/kangreburger.webp" alt="Kangreburger con lomo de atún" loading="lazy"><div class="info"><div class="nombre">Kangreburger con lomo de atún</div><div class="desc">Hamburguesa con ingredientes de sushi, bollos de arroz gohan empanizados en panko con queso crema y tampico untados y proteína doble kanikama y lomo de atún con alga wakame, aguacate, jitomate y salsa teriyaki artesanal.</div></div><div class="right"><span class="p">$150</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Kangreburger con lomo de atún + las verduritas tempura" data-price="180" data-cfg="generic"><img class="thumb" src="fotos/kangreburger-verduritas.webp" alt="Kangreburger con lomo de atún + las verduritas tempura" loading="lazy"><div class="info"><div class="nombre">Kangreburger con lomo de atún + las verduritas tempura</div><div class="desc">+120 gramos de verduritas tempura fritas.</div></div><div class="right"><span class="p">$180</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Kangreburger Salmón Ahumado" data-price="180"><img class="thumb" src="fotos/kangreburger-salmon-ahumado.webp" alt="Kangreburger Salmón Ahumado" loading="lazy"><div class="info"><div class="nombre">Kangreburger Salmón Ahumado</div><div class="desc">Hamburguesa con ingredientes de sushi, bollos de arroz gohan empanizados en panko con queso crema y tampico untados y proteína de salmón ahumado con kanikama, alga wakame, aguacate, jitomate y salsa teriyaki artesanal.</div></div><div class="right"><span class="p">$180</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Kangreburger con salmón ahumado + verduritas tempura" data-price="210" data-cfg="generic"><img class="thumb" src="fotos/kangreburger-salmon-ahumado-verduritas.webp" alt="Kangreburger con salmón ahumado + verduritas tempura" loading="lazy"><div class="info"><div class="nombre">Kangreburger con salmón ahumado + verduritas tempura</div><div class="desc">Proteína de salmón ahumado con kanikama + 120 gramos de verduritas tempura fritas.</div></div><div class="right"><span class="p">$210</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
   </div>
 
   <div class="panel panel-fondo" id="p-onigiri" style="--catbg:url('fotos/fondo-onigiri.webp')">
     <p class="panel-desc">El snack japomexa: triángulos de arroz rellenos.</p>
     <div class="items">
-<div class="item" data-name="Onigiri Frutal" data-price="42" data-cfg="generic"><img class="thumb" src="fotos/onigiri-frutal-green.webp" alt="Onigiri Frutal" loading="lazy"><div class="info"><div class="nombre">Onigiri Frutal</div></div><div class="right"><span class="p">$42</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Onigiri Green Roll" data-price="42" data-cfg="generic"><img class="thumb" src="fotos/onigiri-frutal-green.webp" alt="Onigiri Green Roll" loading="lazy"><div class="info"><div class="nombre">Onigiri Green Roll</div></div><div class="right"><span class="p">$42</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Onigiri Pollo" data-price="47" data-cfg="generic"><img class="thumb" src="fotos/onigiri-pollo-cangrejo.webp" alt="Onigiri Pollo" loading="lazy"><div class="info"><div class="nombre">Onigiri Pollo</div></div><div class="right"><span class="p">$47</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Onigiri Cangrejo" data-price="47" data-cfg="generic"><img class="thumb" src="fotos/onigiri-pollo-cangrejo.webp" alt="Onigiri Cangrejo" loading="lazy"><div class="info"><div class="nombre">Onigiri Cangrejo</div></div><div class="right"><span class="p">$47</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Onigiri Camarón" data-price="52" data-cfg="generic"><img class="thumb" src="fotos/onigiri-camaron-atun-kanikama.webp" alt="Onigiri Camarón" loading="lazy"><div class="info"><div class="nombre">Onigiri Camarón</div></div><div class="right"><span class="p">$52</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Onigiri Lomo de Atún" data-price="52" data-cfg="generic"><img class="thumb" src="fotos/onigiri-camaron-atun-kanikama.webp" alt="Onigiri Lomo de Atún" loading="lazy"><div class="info"><div class="nombre">Onigiri Lomo de Atún</div></div><div class="right"><span class="p">$52</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Onigiri Kanikama" data-price="52" data-cfg="generic"><img class="thumb" src="fotos/onigiri-camaron-atun-kanikama.webp" alt="Onigiri Kanikama" loading="lazy"><div class="info"><div class="nombre">Onigiri Kanikama</div></div><div class="right"><span class="p">$52</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+<div class="item" data-name="Onigiri Frutal" data-price="42" data-cfg="generic"><img class="thumb" src="fotos/onigiri-frutal.webp" alt="Onigiri Frutal" loading="lazy"><div class="info"><div class="nombre">Onigiri Frutal</div></div><div class="right"><span class="p">$42</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Onigiri Green Roll" data-price="42" data-cfg="generic"><img class="thumb" src="fotos/onigiri-green-roll.webp" alt="Onigiri Green Roll" loading="lazy"><div class="info"><div class="nombre">Onigiri Green Roll</div></div><div class="right"><span class="p">$42</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Onigiri Pollo" data-price="47" data-cfg="generic"><img class="thumb" src="fotos/onigiri-pollo.webp" alt="Onigiri Pollo" loading="lazy"><div class="info"><div class="nombre">Onigiri Pollo</div></div><div class="right"><span class="p">$47</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Onigiri Cangrejo" data-price="47" data-cfg="generic"><img class="thumb" src="fotos/onigiri-cangrejo.webp" alt="Onigiri Cangrejo" loading="lazy"><div class="info"><div class="nombre">Onigiri Cangrejo</div></div><div class="right"><span class="p">$47</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Onigiri Camarón" data-price="52" data-cfg="generic"><img class="thumb" src="fotos/onigiri-camaron.webp" alt="Onigiri Camarón" loading="lazy"><div class="info"><div class="nombre">Onigiri Camarón</div></div><div class="right"><span class="p">$52</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Onigiri Lomo de Atún" data-price="52" data-cfg="generic"><img class="thumb" src="fotos/onigiri-lomo-atun.webp" alt="Onigiri Lomo de Atún" loading="lazy"><div class="info"><div class="nombre">Onigiri Lomo de Atún</div></div><div class="right"><span class="p">$52</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Onigiri Kanikama" data-price="52" data-cfg="generic"><img class="thumb" src="fotos/onigiri-cangrejo.webp" alt="Onigiri Kanikama" loading="lazy"><div class="info"><div class="nombre">Onigiri Kanikama</div></div><div class="right"><span class="p">$52</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Onigiri Salmón" data-price="60" data-cfg="generic"><img class="thumb" src="fotos/onigiri-salmon.webp" alt="Onigiri Salmón" loading="lazy"><div class="info"><div class="nombre">Onigiri Salmón</div></div><div class="right"><span class="p">$60</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Onigiri Salmón Ahumado" data-price="60" data-cfg="generic"><img class="thumb" src="fotos/onigiri-salmon.webp" alt="Onigiri Salmón Ahumado" loading="lazy"><div class="info"><div class="nombre">Onigiri Salmón Ahumado</div></div><div class="right"><span class="p">$60</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
@@ -672,9 +679,9 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <img src="fotos/mushi-vaporera.webp" alt="Mushipanes en vaporera de bambú" loading="lazy">
     <div>
       <p class="eyebrow">Nueva oportunidad de negocio</p>
-      <h2>¿Tienes un negocio? <span class="acc">Vende Mushipan</span></h2>
-      <p class="sec-sub">El pan japonés al vapor que nadie más ofrece en tu zona. Conoce cómo ser distribuidor.</p>
-      <span class="btn btn-wa">🥟 Conocer la oportunidad</span>
+      <h2>Si te hace sentido la frase, <span class="acc">SE VENDE COMO PAN CALIENTE</span>, estás listo para conocer esta oportunidad de distribución.</h2>
+      <p class="sec-sub">El pan al vapor con técnica japonesa y fusión de sabores mexicanos que nadie ofrece por tu zona. Un sector en pleno crecimiento en México.</p>
+      <span class="btn btn-wa">🥟 ¿Cómo ser distribuidor?</span>
     </div>
   </a>
 </section>
@@ -683,7 +690,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
   <div class="evento-wrap">
     <p class="eyebrow">Para tu celebración</p>
     <h2>Cotizar el servicio <span class="acc">para mi evento privado</span></h2>
-    <p class="sec-sub">Cumpleaños, oficina, reunión familiar — cuéntanos dónde será y armamos tu charola a la medida.</p>
+    <p class="sec-sub">Cumpleaños, oficina, reunión familiar — contáctanos y te ayudamos a cotizar el evento a tus necesidades.</p>
     <div class="evento-btn-wrap">
       <button class="btn btn-paw" id="btnEvento" type="button"><svg class="pawico" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg><span>Cotizar mi evento</span></button>
     </div>
@@ -727,6 +734,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <label class="addr-label" for="addrInput">📍 Dirección de entrega <span style="color:var(--rosa)">*</span></label>
     <textarea id="addrInput" class="addr-input" rows="2" placeholder="Calle, número, colonia y una referencia"></textarea>
     <p class="addr-hint" id="addrHint">Escribe tu dirección para poder enviar el pedido 🙏</p>
+    <label class="pickup-check"><input type="checkbox" id="pickupCheck"> 🏠 Paso por mi pedido a la cocina</label>
     <button class="ship-btn" id="shipBtn" type="button">🛵 Calcular mi envío estimado (usa tu ubicación)</button>
     <p class="ship-out" id="shipOut"></p>
     <div class="subtotal-row"><span>Subtotal</span><span class="val" id="subtotalVal">$0</span></div>
@@ -770,6 +778,10 @@ document.querySelectorAll('[data-goto]').forEach(function(tile){
     var tab = document.querySelector('.tab[data-panel="' + tile.dataset.goto + '"]');
     if (tab) tab.click();
     document.getElementById('menu').scrollIntoView({behavior:'smooth', block:'start'});
+    tile.classList.remove('flash');
+    void tile.offsetWidth;
+    tile.classList.add('flash');
+    tile.addEventListener('animationend', function(){ tile.classList.remove('flash'); }, { once: true });
   });
 });
 
@@ -958,6 +970,14 @@ function proximaApertura(){
 }
 function pintarEstado(){
   var abierto = estaAbierto();
+  var nota = document.getElementById('deliveryNote');
+  if (!nota){
+    nota = document.createElement('span');
+    nota.id = 'deliveryNote';
+    nota.className = 'delivery-note';
+    nota.textContent = '🚚 Domicilio: vie-dom 12pm a 8pm';
+    document.querySelector('.nav-inner').insertBefore(nota, document.getElementById('openCart'));
+  }
   var pill = document.getElementById('statusPill');
   if (!pill){
     pill = document.createElement('span');
@@ -982,7 +1002,9 @@ var ITEM_DISPONIBLE = {
   'Don Kangrejo': true,
   'Gohan Camarón': true,
   'Yakimeshi Camarón': true,
-  'Bento Camarón': true
+  'Bento Camarón': true,
+  'Bobba Soda': false,
+  'Té Verde': false
 };
 function pintarDisponibilidadItems(){
   Object.keys(ITEM_DISPONIBLE).forEach(function(name){
@@ -1001,11 +1023,21 @@ pintarDisponibilidadItems();
 
 // ===== Direccion obligatoria =====
 function direccionOk(){
+  if (document.getElementById('pickupCheck').checked) return true;
   return document.getElementById('addrInput').value.trim().length >= 10;
 }
 document.getElementById('addrInput').addEventListener('input', function(){
   this.classList.remove('falta');
   document.getElementById('addrHint').style.display = 'none';
+});
+document.getElementById('pickupCheck').addEventListener('change', function(){
+  var inp = document.getElementById('addrInput');
+  inp.disabled = this.checked;
+  inp.style.opacity = this.checked ? '.5' : '1';
+  if (this.checked){
+    inp.classList.remove('falta');
+    document.getElementById('addrHint').style.display = 'none';
+  }
 });
 
 // ===== Estimador de envio (calibrado con cotizaciones reales de DiDi desde CP 54170) =====
@@ -1065,7 +1097,11 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   lines.push('');
   lines.push('*Subtotal: $' + subtotal + '*');
   lines.push('');
-  lines.push('📍 Dirección: ' + document.getElementById('addrInput').value.trim());
+  if (document.getElementById('pickupCheck').checked){
+    lines.push('🏠 El cliente pasa por su pedido a la cocina');
+  } else {
+    lines.push('📍 Dirección: ' + document.getElementById('addrInput').value.trim());
+  }
   var msg = encodeURIComponent(lines.join('\n'));
   window.open('https://wa.me/' + CART_KEY_NUMBER + '?text=' + msg, '_blank');
 });
@@ -1309,6 +1345,12 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     return r.length ? r : ['Sin sabores disponibles por ahora'];
   }
 
+  var SALSAS_PALOMITAS = ['Salsa de anguila', 'Sriracha', 'Salsa de habanero Chernobyl', 'Soya ponzu limón', 'Soya picante'];
+  var ACOMPANANTES_BENTO = [
+    { key: 'acompanante1', label: 'Elige tu acompañante (obligatorio)', options: ['Rollito primavera', 'Verduritas tempura'] },
+    { key: 'acompanante2', label: 'Elige tus palomitas (obligatorio)', options: ['Palomitas de pollo', 'Palomitas de cangrejo'] }
+  ];
+
   var ITEM_SPECS = {
     'Sakana Bowl': {
       requiredSelects: [{ key: 'proteina', label: 'Elige tu proteína (obligatorio)', options: [
@@ -1316,20 +1358,37 @@ document.getElementById('sendOrder').addEventListener('click', function(){
         'Combinado salmón y lomo de atún salpimentado al sartén', 'Cangrejo Kanikama desmenuzado'] }],
       topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
     },
+    'Chikin Bowl': {
+      topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
+    },
     'Palomitas Camarón': {
-      requiredSelects: [{ key: 'salsa', label: 'Elige tu salsa (obligatorio)', options: ['Salsa de anguila', 'Sriracha', 'Sin salsa'] }]
+      requiredSelects: [{ key: 'salsa', label: 'Elige tu salsa (obligatorio)', options: SALSAS_PALOMITAS.concat(['Sin salsa']) }]
     },
     'Palomitas Pollo/Queso/Cangrejo': {
       requiredSelects: [
         { key: 'version', label: 'Elige tu versión (obligatorio)', options: ['Pollo', 'Queso manchego', 'Cangrejo surimi'] },
-        { key: 'salsa', label: 'Elige tu salsa (incluida)', options: ['Salsa de anguila', 'Sriracha'] }
+        { key: 'salsa', label: 'Elige tu salsa (incluida)', options: SALSAS_PALOMITAS }
       ]
     },
+    'Mix de verduritas tempura': {
+      requiredSelects: [{ key: 'salsa', label: 'Elige tu salsa o soya (obligatorio, elige 1)', options: TOPPINGS.concat(['Soya ponzu limón', 'Soya picante']) }],
+      topping: { price: 15, options: TOPPINGS.concat(['Soya ponzu limón', 'Soya picante']), noneLabel: 'Sin extra adicional' }
+    },
+    'Rollitos Primavera 5pz': {
+      requiredSelects: [{ key: 'soya', label: 'Elige tu soya (incluida)', options: ['Soya ponzu limón', 'Soya picante'] }]
+    },
     'Rollitos Primavera 10pz': {
-      requiredSelects: [{ key: 'salsa', label: 'Elige tu salsa (obligatorio)', options: ['Salsa de anguila', 'Sriracha'] }]
+      requiredSelects: [
+        { key: 'soya', label: 'Elige tu soya (obligatorio)', options: ['Soya ponzu limón', 'Soya picante'] },
+        { key: 'topping', label: 'Elige tu topping (obligatorio)', options: ['Sriracha', 'Salsa de anguila', 'Salsa de habanero Chernobyl', 'Salsa Teriyaki'] }
+      ]
+    },
+    'Brocheta Kushiage 1pz': {
+      topping: { price: 10, options: ["Chocolate Hershey's", 'Salsa de anguila'], noneLabel: 'Sin extra' }
     },
     'Brochetas Kushiage 3pz': {
-      requiredSelects: [{ key: 'salsa', label: 'Elige tu salsa (obligatorio)', options: ['Salsa de anguila', "Chocolate Hershey's"] }]
+      requiredSelects: [{ key: 'salsa', label: 'Elige tu salsa (obligatorio)', options: ['Salsa de anguila', "Chocolate Hershey's"] }],
+      topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
     },
     'Mushi Pan Dulce': { requiredSelects: [{ key: 'sabor', label: 'Elige tu sabor (obligatorio)', options: mushiDisponibles(MUSHI_DULCES) }] },
     'Mushi Pan Salado': { requiredSelects: [{ key: 'sabor', label: 'Elige tu sabor (obligatorio)', options: mushiDisponibles(MUSHI_SALADOS) }] }
@@ -1343,16 +1402,40 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     };
   });
 
+  ['Sopa Jiraiya 1/2L', 'Sopa Jiraiya 1L', 'Inu Dashi Ramen 1/2L', 'Inu Dashi Ramen 1L'].forEach(function(n){
+    ITEM_SPECS[n] = {
+      topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' },
+      extra2: { price: 10, options: ['Soya ponzu limón', 'Soya picante'], noneLabel: 'Sin soya extra', label: 'Soya extra' }
+    };
+  });
+
   ['Onigiri Frutal', 'Onigiri Green Roll', 'Onigiri Pollo', 'Onigiri Cangrejo', 'Onigiri Camarón', 'Onigiri Lomo de Atún', 'Onigiri Kanikama', 'Onigiri Salmón', 'Onigiri Salmón Ahumado'].forEach(function(n){
     ITEM_SPECS[n] = { topping: { price: 10, options: TOPPINGS.concat(['Empanizado con panko']), noneLabel: 'Sin extra' }, orden3: true };
   });
   ITEM_SPECS['Bento Green/Frutal/Cangrejo/Pollo'] = {
-    requiredSelects: [{ key: 'version', label: 'Elige tu versión (obligatorio)', options: ['Green Roll', 'Frutal', 'Cangrejo', 'Pollo'] }],
+    requiredSelects: [{ key: 'version', label: 'Elige tu versión (obligatorio)', options: ['Green Roll', 'Frutal', 'Cangrejo', 'Pollo'] }].concat(ACOMPANANTES_BENTO),
     topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
   };
-  ['Bento Camarón', 'Bento Lomo de Atún', 'Bento Salmón', 'Bento Salmón Ahumado'].forEach(function(n){
-    ITEM_SPECS[n] = { topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' } };
+  ['Bento Camarón', 'Bento Salmón Ahumado'].forEach(function(n){
+    ITEM_SPECS[n] = {
+      requiredSelects: ACOMPANANTES_BENTO,
+      topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
+    };
   });
+  ITEM_SPECS['Bento Lomo de Atún'] = {
+    requiredSelects: [{ key: 'proteina', label: 'Elige la preparación (obligatorio)', options: ['Lomo de atún crudo', 'Lomo de atún salpimentado al sartén'] }].concat(ACOMPANANTES_BENTO),
+    topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
+  };
+  ITEM_SPECS['Bento Salmón'] = {
+    requiredSelects: [{ key: 'proteina', label: 'Elige la preparación (obligatorio)', options: ['Salmón crudo', 'Salmón salpimentado al sartén'] }].concat(ACOMPANANTES_BENTO),
+    topping: { price: 15, options: TOPPINGS, noneLabel: 'Sin topping extra' }
+  };
+  ITEM_SPECS['Kangreburger con lomo de atún + las verduritas tempura'] = {
+    requiredSelects: [{ key: 'salsaVerduritas', label: 'Elige la salsa de tus verduritas (obligatorio)', options: ['Salsa de anguila', 'Salsa de habanero Chernobyl', 'Sriracha'] }]
+  };
+  ITEM_SPECS['Kangreburger con salmón ahumado + verduritas tempura'] = {
+    requiredSelects: [{ key: 'salsaVerduritas', label: 'Elige la salsa de tus verduritas (obligatorio)', options: ['Salsa de anguila', 'Salsa de habanero Chernobyl', 'Sriracha'] }]
+  };
 
   function abrirGenerico(nombre, precioBase, spec){
     titleEl.textContent = nombre;
@@ -1366,6 +1449,11 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     if (spec.topping){
       h += '<div class="cfg-step"><h4>Topping extra (opcional, +$' + spec.topping.price + ')</h4><div class="cfg-row"><select data-topping-g style="flex:1"><option value="">' + spec.topping.noneLabel + '</option>';
       spec.topping.options.forEach(function(t){ h += opt(t, t, false); });
+      h += '</select></div></div>';
+    }
+    if (spec.extra2){
+      h += '<div class="cfg-step"><h4>' + (spec.extra2.label || 'Extra') + ' (opcional, +$' + spec.extra2.price + ')</h4><div class="cfg-row"><select data-extra2-g style="flex:1"><option value="">' + spec.extra2.noneLabel + '</option>';
+      spec.extra2.options.forEach(function(t){ h += opt(t, t, false); });
       h += '</select></div></div>';
     }
     if (spec.soyaExtra){
@@ -1383,6 +1471,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     function recalc(){
       var porPieza = precioBase;
       if (spec.topping && body.querySelector('[data-topping-g]').value) porPieza += spec.topping.price;
+      if (spec.extra2 && body.querySelector('[data-extra2-g]').value) porPieza += spec.extra2.price;
       var mult = (spec.orden3 && body.querySelector('[data-orden3]').value === 'Orden de 3 piezas') ? 3 : 1;
       var total = porPieza * mult;
       if (spec.soyaExtra) total += soyaExtraCount * spec.soyaExtra.price;
@@ -1402,6 +1491,9 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     if (spec.topping){
       body.querySelector('[data-topping-g]').addEventListener('change', recalc);
     }
+    if (spec.extra2){
+      body.querySelector('[data-extra2-g]').addEventListener('change', recalc);
+    }
     if (spec.orden3){
       body.querySelector('[data-orden3]').addEventListener('change', recalc);
     }
@@ -1415,6 +1507,8 @@ document.getElementById('sendOrder').addEventListener('click', function(){
       });
       var toppingVal = spec.topping ? body.querySelector('[data-topping-g]').value : '';
       if (toppingVal) lines.push('Topping extra: ' + toppingVal + ' (+$' + spec.topping.price + ')');
+      var extra2Val = spec.extra2 ? body.querySelector('[data-extra2-g]').value : '';
+      if (extra2Val) lines.push((spec.extra2.label || 'Extra') + ': ' + extra2Val + ' (+$' + spec.extra2.price + ')');
       if (spec.soyaExtra && soyaExtraCount > 0) lines.push('Soya extra: ' + soyaExtraCount + ' pieza(s) (+$' + spec.soyaExtra.price + ' c/u)');
       var esOrden3 = spec.orden3 && body.querySelector('[data-orden3]').value === 'Orden de 3 piezas';
       var total = recalc();

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sé Distribuidor de Mushipan | Inu Sushi Tlalnepantla</title>
-<meta name="description" content="Vende Mushipan: el pan japonés al vapor que nadie más ofrece en tu zona. 12 sabores dulces y salados, empaque listo para venta, respaldo de 8 años de Inu Sushi. Pide informes por WhatsApp.">
+<meta name="description" content="Vende Mushipan: el pan japonés al vapor que nadie más ofrece en tu zona. 12 sabores dulces y salados, empaque listo para venta, receta perfeccionada por Inu Sushi desde 2022. Pide informes por WhatsApp.">
 <meta property="og:title" content="Sé Distribuidor de Mushipan — Inu Sushi">
-<meta property="og:description" content="El pan japonés al vapor que nadie más vende en tu zona. 12 sabores, empaque listo, respaldo de 8 años.">
+<meta property="og:description" content="El pan japonés al vapor que nadie más vende en tu zona. 12 sabores, empaque listo, receta perfeccionada desde 2022.">
 <meta property="og:image" content="https://inusushi.github.io/og-mushipan.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -131,6 +131,22 @@ footer a{color:var(--rosa);text-decoration:none;font-weight:700}
 .proyeccion-tabla th{background:var(--negro);color:var(--crema);font-size:.74rem;text-transform:uppercase;padding:.7rem .9rem;text-align:left}
 .proyeccion-tabla td{padding:.65rem .9rem;border-top:1px solid rgba(245,235,213,.1);font-size:.88rem}
 .proyeccion-tabla tr:last-child td{color:var(--rosa);font-weight:900}
+
+.mp-scroll{display:flex;flex-direction:column;gap:1.6rem}
+.mp-zone{border-radius:28px;padding:2.2rem 1.6rem;transform:scale(.96);opacity:.55;transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .5s ease, box-shadow .5s ease}
+.mp-zone.in-view{transform:scale(1);opacity:1;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.mp-c1{background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.3)}
+.mp-c2{background:var(--negro-tarjeta);border:1.5px solid rgba(255,95,0,.4)}
+.mp-c3{background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.3)}
+.mp-c4{background:linear-gradient(135deg, var(--rojo), var(--naranja));border:none;color:#fff}
+.mp-c4 h2{color:#fff}
+.mp-c4 .acc{color:var(--crema)}
+.mp-c4 .eyebrow{color:var(--crema)}
+.mp-c4 .sec-sub{color:#fff;opacity:.9}
+.mp-c4 .bcard{background:rgba(29,29,27,.35);border:1px solid rgba(255,255,255,.3)}
+.mp-c4 .bcard h3{color:#fff}
+.mp-c4 .bcard p{color:#fff;opacity:.9}
+@media (prefers-reduced-motion: reduce){.mp-zone{transform:none;opacity:1}}
 </style>
 </head>
 <body>
@@ -163,7 +179,7 @@ footer a{color:var(--rosa);text-decoration:none;font-weight:700}
 
 <div class="trustbar">
   <div class="trustbar-inner">
-    <div class="tstat"><span class="tnum">2022</span><span class="tlabel">mejorando la receta</span></div>
+    <div class="tstat"><span class="tnum">Desde 2022</span><span class="tlabel">mejorando la receta</span></div>
     <div class="tdot">🌸</div>
     <div class="tstat"><span class="tnum">12</span><span class="tlabel">sabores dulces y salados</span></div>
     <div class="tdot">🌸</div>
@@ -173,73 +189,92 @@ footer a{color:var(--rosa);text-decoration:none;font-weight:700}
   </div>
 </div>
 
-<section id="numeros">
-  <div class="sec-head">
-    <p class="eyebrow">Antes de seguir leyendo</p>
-    <h2>Lo que <span class="acc">esto significa</span> para ti</h2>
-    <p class="sec-sub">Números reales de mayoreo contra precio al público — para que sepas exactamente cuánto pagas y cuánto puedes ganar.</p>
-  </div>
+<section id="mp-scroll" class="mp-scroll" aria-label="Todo lo que necesitas saber para ser distribuidor de Mushipan">
 
-  <div class="tabla-wrap"><table class="precio-tabla">
-    <thead><tr><th>Tipo</th><th>Mayoreo (tú pagas)</th><th>Público (tú vendes)</th><th>Ganancia por pieza</th></tr></thead>
-    <tbody>
-      <tr><td>Pan dulce</td><td>$12.50</td><td>$25</td><td class="ganancia">$12.50 (100%)</td></tr>
-      <tr><td>Pan salado</td><td>$15.00</td><td>$30</td><td class="ganancia">$15.00 (100%)</td></tr>
-    </tbody>
-  </table></div>
-  <p class="precio-nota">Precio mayoreo aplica a partir de 102 piezas (17 cajas de 6).</p>
-
-  <div class="numeros-grid">
-    <div class="numero-card"><span class="val">$1,380</span><span class="lbl">Inversión primer pedido</span><span class="sub">102 piezas / 17 cajas</span></div>
-    <div class="numero-card"><span class="val">$2,760</span><span class="lbl">Venta potencial</span><span class="sub">A precio público</span></div>
-    <div class="numero-card"><span class="val">$1,380</span><span class="lbl">Tu ganancia</span><span class="sub">100% de tu inversión</span></div>
-  </div>
-  <p class="numeros-nota">Por cada peso que inviertes, recuperas dos. No es un cálculo optimista — es el precio de mayoreo real contra el precio al público real.</p>
-
-  <div class="tabla-wrap" style="margin-top:2rem"><table class="proyeccion-tabla">
-    <thead><tr><th>¿Qué pasa si vendes 102 piezas cada semana?</th><th>Ganancia acumulada</th></tr></thead>
-    <tbody>
-      <tr><td>Por semana</td><td>$1,380</td></tr>
-      <tr><td>Por mes (4 semanas)</td><td>$5,520</td></tr>
-      <tr><td>Por año (52 semanas)</td><td>$71,760</td></tr>
-    </tbody>
-  </table></div>
-  <p class="numeros-nota">102 piezas a la semana equivale a ~14 panes por día. En un plantel con decenas o cientos de alumnos, es un número totalmente alcanzable.</p>
-</section>
-
-<section id="promo-arranque">
-  <div class="sec-head">
-    <p class="eyebrow">Promo de arranque</p>
-    <h2>Solo con tu primer pedido <span class="acc">de 17 cajas</span></h2>
-    <p class="sec-sub">Para que arranques con todo lo necesario, con tu primer pedido de 17 cajas (102 piezas) te regalamos:</p>
-  </div>
-  <div class="tabla-wrap"><table class="promo-tabla">
-    <thead><tr><th>Incluye</th><th>Valor</th><th>Costo para ti</th></tr></thead>
-    <tbody>
-      <tr><td>Vaporera de bambú para calentar panes en el punto de venta</td><td>$750</td><td class="gratis">GRATIS</td></tr>
-      <tr><td>Lona 1×1m con marca Inu Sushi — solo la cuelgas</td><td>$120</td><td class="gratis">GRATIS</td></tr>
-      <tr><td>Cartel doble carta con menú y precios para exhibición</td><td>$14</td><td class="gratis">GRATIS</td></tr>
-      <tr><td>Sampler de los 12 sabores en caja kraft — uno de cada uno</td><td>$75</td><td class="gratis">GRATIS</td></tr>
-      <tr><td>Branding en punto de venta marca Inu Sushi — Mushi Pan constante + sabores de temporada</td><td>Incluido</td><td class="gratis">GRATIS</td></tr>
-      <tr><td>Capacitación de 15 min sobre exhibición y manejo del producto</td><td>Incluida</td><td class="gratis">GRATIS</td></tr>
-      <tr><td>Soporte directo por WhatsApp — permanente, sin límite de tiempo</td><td>Incluido</td><td class="gratis">GRATIS</td></tr>
-      <tr class="total"><td>Total en beneficios</td><td>$959+</td><td>$0</td></tr>
-    </tbody>
-  </table></div>
-  <p class="precio-nota">Todo esto para que el primer día de venta tengas el equipo, el material y el conocimiento necesario. Nosotros ponemos todo — tú solo vendes.</p>
-</section>
-
-<section id="que-es">
-  <div class="que-es">
-    <div class="que-es-txt">
-      <p class="eyebrow">¿Qué es el Mushipan?</p>
-      <h2 style="margin-bottom:1rem">Un pan que <span class="acc">se siente nuevo</span></h2>
-      <p>El <b>Mushipan</b> (蒸しパン, "pan al vapor") es una técnica japonesa que en Inu Sushi adaptamos con rellenos japomexas: desde <b>chocolate abuelita</b> y <b>Nutella</b> hasta <b>cerdo teriyaki</b> y <b>pizza de pepperoni</b>.</p>
-      <p>Se cocina al vapor en vez de hornearse — por eso queda húmedo, suave y esponjoso, muy distinto a cualquier pan que tu cliente ya conozca. Es antojable, fotogénico y <b>fácil de vender solo</b> (se explica con una probada).</p>
-      <p>Llega en charola cerrada de 6 piezas, lista para exhibir en mostrador, tienda de conveniencia, cafetería o punto de venta ambulante.</p>
+  <div class="mp-zone mp-c1" id="que-es" data-mpz>
+    <div class="que-es">
+      <div class="que-es-txt">
+        <p class="eyebrow">¿Qué es el Mushipan?</p>
+        <h2 style="margin-bottom:1rem">Un pan que <span class="acc">se siente nuevo</span></h2>
+        <p>El <b>Mushipan</b> (蒸しパン, "pan al vapor") es una técnica japonesa que en Inu Sushi adaptamos con rellenos japomexas: desde <b>chocolate abuelita</b> y <b>Nutella</b> hasta <b>cerdo teriyaki</b> y <b>pizza de pepperoni</b>.</p>
+        <p>Se cocina al vapor en vez de hornearse — por eso queda húmedo, suave y esponjoso, muy distinto a cualquier pan que tu cliente ya conozca. Es antojable, fotogénico y <b>fácil de vender solo</b> (se explica con una probada).</p>
+        <p>Llega en charola cerrada de 6 piezas, lista para exhibir en mostrador, tienda de conveniencia, cafetería o punto de venta ambulante.</p>
+      </div>
+      <img src="fotos/mushi-caja.webp" alt="Charola de Mushipan sabor chocobanana lista para venta" loading="lazy">
     </div>
-    <img src="fotos/mushi-caja.webp" alt="Charola de Mushipan sabor chocobanana lista para venta" loading="lazy">
   </div>
+
+  <div class="mp-zone mp-c2" id="numeros" data-mpz>
+    <div class="sec-head">
+      <p class="eyebrow">Antes de seguir leyendo</p>
+      <h2>Lo que <span class="acc">esto significa</span> para ti</h2>
+      <p class="sec-sub">Números reales de mayoreo contra precio al público — para que sepas exactamente cuánto pagas y cuánto puedes ganar.</p>
+    </div>
+
+    <div class="tabla-wrap"><table class="precio-tabla">
+      <thead><tr><th>Tipo</th><th>Mayoreo (tú pagas)</th><th>Público (tú vendes)</th><th>Ganancia por pieza</th></tr></thead>
+      <tbody>
+        <tr><td>Pan dulce</td><td>$12.50</td><td>$25</td><td class="ganancia">$12.50 (100%)</td></tr>
+        <tr><td>Pan salado</td><td>$15.00</td><td>$30</td><td class="ganancia">$15.00 (100%)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="precio-nota">Precio mayoreo aplica a partir de 102 piezas (17 cajas de 6).</p>
+
+    <div class="numeros-grid">
+      <div class="numero-card"><span class="val">$1,380</span><span class="lbl">Inversión primer pedido</span><span class="sub">102 piezas / 17 cajas</span></div>
+      <div class="numero-card"><span class="val">$2,760</span><span class="lbl">Venta potencial</span><span class="sub">A precio público</span></div>
+      <div class="numero-card"><span class="val">$1,380</span><span class="lbl">Tu ganancia</span><span class="sub">100% de tu inversión</span></div>
+    </div>
+    <p class="numeros-nota">Por cada peso que inviertes, recuperas dos. No es un cálculo optimista — es el precio de mayoreo real contra el precio al público real.</p>
+
+    <div class="tabla-wrap" style="margin-top:2rem"><table class="proyeccion-tabla">
+      <thead><tr><th>¿Qué pasa si vendes 102 piezas cada semana?</th><th>Ganancia acumulada</th></tr></thead>
+      <tbody>
+        <tr><td>Por semana</td><td>$1,380</td></tr>
+        <tr><td>Por mes (4 semanas)</td><td>$5,520</td></tr>
+        <tr><td>Por año (52 semanas)</td><td>$71,760</td></tr>
+      </tbody>
+    </table></div>
+    <p class="numeros-nota">102 piezas a la semana equivale a ~14 panes por día. En un plantel con decenas o cientos de alumnos, es un número totalmente alcanzable.</p>
+  </div>
+
+  <div class="mp-zone mp-c3" id="promo-arranque" data-mpz>
+    <div class="sec-head">
+      <p class="eyebrow">Promo de arranque</p>
+      <h2>Solo con tu primer pedido <span class="acc">de 17 cajas</span></h2>
+      <p class="sec-sub">Para que arranques con todo lo necesario, con tu primer pedido de 17 cajas (102 piezas) te regalamos:</p>
+    </div>
+    <div class="tabla-wrap"><table class="promo-tabla">
+      <thead><tr><th>Incluye</th><th>Valor</th><th>Costo para ti</th></tr></thead>
+      <tbody>
+        <tr><td>Vaporera de bambú para calentar panes en el punto de venta</td><td>$750</td><td class="gratis">GRATIS</td></tr>
+        <tr><td>Lona 1×1m con marca Inu Sushi — solo la cuelgas</td><td>$120</td><td class="gratis">GRATIS</td></tr>
+        <tr><td>Cartel doble carta con menú y precios para exhibición</td><td>$14</td><td class="gratis">GRATIS</td></tr>
+        <tr><td>Sampler de los 12 sabores en caja kraft — uno de cada uno</td><td>$75</td><td class="gratis">GRATIS</td></tr>
+        <tr><td>Branding en punto de venta marca Inu Sushi — Mushi Pan constante + sabores de temporada</td><td>Incluido</td><td class="gratis">GRATIS</td></tr>
+        <tr><td>Capacitación de 15 min sobre exhibición y manejo del producto</td><td>Incluida</td><td class="gratis">GRATIS</td></tr>
+        <tr><td>Soporte directo por WhatsApp — permanente, sin límite de tiempo</td><td>Incluido</td><td class="gratis">GRATIS</td></tr>
+        <tr class="total"><td>Total en beneficios</td><td>$959+</td><td>$0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="precio-nota">Todo esto para que el primer día de venta tengas el equipo, el material y el conocimiento necesario. Nosotros ponemos todo — tú solo vendes.</p>
+  </div>
+
+  <div class="mp-zone mp-c4" id="beneficios" data-mpz>
+    <div class="sec-head">
+      <p class="eyebrow">Para ti como distribuidor</p>
+      <h2>Por qué <span class="acc">Mushipan Inu</span></h2>
+    </div>
+    <div class="beneficios">
+      <div class="bcard"><span class="ico">🆕</span><h3>Producto sin competencia</h3><p>Casi nadie más lo vende en México — te posicionas como el único punto donde se consigue en tu zona.</p></div>
+      <div class="bcard"><span class="ico">📦</span><h3>Listo para exhibir y vender</h3><p>Llega en charola cerrada, higiénica y transparente. Solo la colocas en tu mostrador.</p></div>
+      <div class="bcard"><span class="ico">🎥</span><h3>Se vende solo en redes</h3><p>Su textura esponjosa y sus colores lo hacen perfecto para reels y TikToks — tus clientes lo comparten por ti.</p></div>
+      <div class="bcard"><span class="ico">🛡️</span><h3>Respaldo desde 2022</h3><p>Receta ya probada y perfeccionada por Inu Sushi desde 2022 — no estás arriesgando con un producto sin probar.</p></div>
+      <div class="bcard"><span class="ico">🍡</span><h3>12 sabores, un solo pedido</h3><p>Arma tu combinación de dulces y salados según lo que mejor se venda en tu punto.</p></div>
+      <div class="bcard"><span class="ico">🤝</span><h3>Trato directo con la cocina</h3><p>Sin intermediarios: hablas directo con nosotros para precios, volumen y entregas.</p></div>
+    </div>
+  </div>
+
 </section>
 
 <section id="sabores">
@@ -269,21 +304,6 @@ footer a{color:var(--rosa);text-decoration:none;font-weight:700}
       <div class="scard"><img src="fotos/mushi-cebollin.webp" alt="Mushipan carne con cebollín" loading="lazy"><p>Carne con Cebollín</p></div>
       <div class="scard"><img src="fotos/mushi-pepperoni.webp" alt="Mushipan pizza de pepperoni" loading="lazy"><p>Pizza de Pepperoni</p></div>
     </div>
-  </div>
-</section>
-
-<section id="beneficios">
-  <div class="sec-head">
-    <p class="eyebrow">Para ti como distribuidor</p>
-    <h2>Por qué <span class="acc">Mushipan Inu</span></h2>
-  </div>
-  <div class="beneficios">
-    <div class="bcard"><span class="ico">🆕</span><h3>Producto sin competencia</h3><p>Casi nadie más lo vende en México — te posicionas como el único punto donde se consigue en tu zona.</p></div>
-    <div class="bcard"><span class="ico">📦</span><h3>Listo para exhibir y vender</h3><p>Llega en charola cerrada, higiénica y transparente. Solo la colocas en tu mostrador.</p></div>
-    <div class="bcard"><span class="ico">🎥</span><h3>Se vende solo en redes</h3><p>Su textura esponjosa y sus colores lo hacen perfecto para reels y TikToks — tus clientes lo comparten por ti.</p></div>
-    <div class="bcard"><span class="ico">🛡️</span><h3>Respaldo de 8 años</h3><p>Receta ya probada y perfeccionada por Inu Sushi desde 2018 — no estás arriesgando con un producto sin probar.</p></div>
-    <div class="bcard"><span class="ico">🍡</span><h3>12 sabores, un solo pedido</h3><p>Arma tu combinación de dulces y salados según lo que mejor se venda en tu punto.</p></div>
-    <div class="bcard"><span class="ico">🤝</span><h3>Trato directo con la cocina</h3><p>Sin intermediarios: hablas directo con nosotros para precios, volumen y entregas.</p></div>
   </div>
 </section>
 
@@ -331,6 +351,18 @@ var MSG = encodeURIComponent('¡Hola Inu Sushi! 🍞 Me interesa ser distribuido
 var WA_URL = 'https://wa.me/525548981886?text=' + MSG;
 document.getElementById('btnDistribuidor').addEventListener('click', function(){ window.open(WA_URL, '_blank'); });
 document.getElementById('btnDistribuidor2').addEventListener('click', function(){ window.open(WA_URL, '_blank'); });
+
+var mpZones = document.querySelectorAll('.mp-zone');
+if (mpZones.length && 'IntersectionObserver' in window){
+  var mpObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.22 });
+  mpZones.forEach(function(zone){ mpObs.observe(zone); });
+} else {
+  mpZones.forEach(function(zone){ zone.classList.add('in-view'); });
+}
 </script>
 </body>
 </html>
