@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kangreburger — La hamburguesa de sushi | Inu Sushi Tlalnepantla</title>
 <meta name="description" content="La Kangreburger de Inu Sushi: bollos de arroz gohan empanizados, kanikama, lomo de atún, wakame y teriyaki. La hamburguesa de sushi de Tlalnepantla. Pídela por WhatsApp.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20106%20100%27%3E%3Cg%20fill%3D%27%23FF49B0%27%3E%3Cellipse%20cx%3D%2735%27%20cy%3D%2726%27%20rx%3D%279.5%27%20ry%3D%2713%27%20transform%3D%27rotate%28-22%2035%2026%29%27/%3E%3Cellipse%20cx%3D%2753%27%20cy%3D%2718%27%20rx%3D%279%27%20ry%3D%2712.5%27/%3E%3Cellipse%20cx%3D%2771%27%20cy%3D%2726%27%20rx%3D%279.5%27%20ry%3D%2713%27%20transform%3D%27rotate%2822%2071%2026%29%27/%3E%3Cellipse%20cx%3D%2722%27%20cy%3D%2747%27%20rx%3D%278.5%27%20ry%3D%2711.5%27%20transform%3D%27rotate%28-45%2022%2047%29%27/%3E%3Cellipse%20cx%3D%2784%27%20cy%3D%2747%27%20rx%3D%278.5%27%20ry%3D%2711.5%27%20transform%3D%27rotate%2845%2084%2047%29%27/%3E%3Cpath%20d%3D%27M53%2038%20C68%2038%2080%2050%2080%2063%20C80%2078%2068%2088%2053%2088%20C38%2088%2026%2078%2026%2063%20C26%2050%2038%2038%2053%2038%20Z%27/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2788%27%3E%F0%9F%8D%94%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="Kangreburger — La hamburguesa de sushi de Inu Sushi">
 <meta property="og:description" content="Uniendo dos culturas en cada bocado desde 2018. Arma tu pedido y envíalo directo por WhatsApp.">
 <meta property="og:image" content="https://inusushi.github.io/og-burger.jpg">
@@ -33,7 +33,9 @@ img{display:block;max-width:100%}
 button{font-family:inherit}
 
 /* ===== NAV ===== */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(29,29,27,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--rosa)}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;
+  background:linear-gradient(90deg, rgba(29,29,27,.35) 0%, rgba(29,29,27,.68) 40%, rgba(29,29,27,.88) 68%, rgba(29,29,27,.96) 100%), url('fotos/gran-ola-kanagawa-banner.webp') left center/cover no-repeat, rgba(29,29,27,.94);
+  backdrop-filter:blur(8px);border-bottom:2px solid var(--rosa)}
 .nav-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1.2rem;row-gap:.35rem}
 .nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
 .nav-brand img{width:40px;height:40px;border-radius:50%}
@@ -166,7 +168,7 @@ h2 .acc{color:var(--rosa)}
 @media(max-width:760px){.tores{grid-template-columns:1fr}.kage-wrap{grid-template-columns:1fr}.kage-wrap img{max-width:210px}}
 
 /* ===== HISTORIA ===== */
-.historia-wrap{background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.22);border-radius:26px;padding:2.2rem 1.8rem;display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:center}
+.historia-wrap{background:linear-gradient(120deg, rgba(29,29,27,.9), rgba(29,29,27,.75)), url('fotos/gran-ola-kanagawa.webp') center/cover no-repeat, var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.22);border-radius:26px;padding:2.2rem 1.8rem;display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:center}
 .hcol p{color:var(--crema);opacity:.88;margin-top:.8rem;font-size:.93rem}
 .hcol p b{color:var(--rosa);opacity:1}
 .hstats{display:flex;flex-direction:column;gap:1rem}
