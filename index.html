@@ -33,7 +33,9 @@ img{display:block;max-width:100%}
 button{font-family:inherit}
 
 /* ===== NAV ===== */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(29,29,27,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--rosa)}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;
+  background:linear-gradient(90deg, rgba(29,29,27,.45) 0%, rgba(29,29,27,.72) 30%, rgba(29,29,27,.9) 60%, rgba(29,29,27,.96) 100%), url('fotos/gran-ola-kanagawa.webp') left center/auto 320% no-repeat, rgba(29,29,27,.94);
+  backdrop-filter:blur(8px);border-bottom:2px solid var(--rosa)}
 .nav-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1.2rem;row-gap:.35rem}
 .nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
 .nav-brand img{width:40px;height:40px;border-radius:50%}
@@ -166,7 +168,7 @@ h2 .acc{color:var(--rosa)}
 @media(max-width:760px){.tores{grid-template-columns:1fr}.kage-wrap{grid-template-columns:1fr}.kage-wrap img{max-width:210px}}
 
 /* ===== HISTORIA ===== */
-.historia-wrap{background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.22);border-radius:26px;padding:2.2rem 1.8rem;display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:center}
+.historia-wrap{background:linear-gradient(120deg, rgba(29,29,27,.9), rgba(29,29,27,.75)), url('fotos/gran-ola-kanagawa.webp') center/cover no-repeat, var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.22);border-radius:26px;padding:2.2rem 1.8rem;display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:center}
 .hcol p{color:var(--crema);opacity:.88;margin-top:.8rem;font-size:.93rem}
 .hcol p b{color:var(--rosa);opacity:1}
 .hstats{display:flex;flex-direction:column;gap:1rem}
@@ -214,24 +216,6 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .wa-float{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:var(--naranja);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 24px rgba(255,95,0,.5);transition:transform .15s ease}
 .wa-float:hover{transform:scale(1.08)}
 .wa-float svg{width:28px;height:28px}
-
-/* ===== BENTO SCROLL (armado con scroll) ===== */
-.bento-scroll{position:relative;height:280vh;max-width:none;padding:0;margin:0;background:#000}
-.bs-sticky{position:sticky;top:0;height:100svh;overflow:hidden}
-.bs-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.bs-head{position:absolute;top:0;left:0;right:0;z-index:3;text-align:center;padding:4.6rem 1.2rem 0;pointer-events:none}
-.bs-head .eyebrow{margin-bottom:.3rem}
-.bs-head h2{text-shadow:0 4px 24px rgba(0,0,0,.8)}
-.bs-caption{position:absolute;left:0;right:0;bottom:9vh;z-index:3;text-align:center;padding:0 1.2rem;pointer-events:none;opacity:0;transform:translateY(12px);transition:opacity .35s ease, transform .35s ease}
-.bs-caption.on{opacity:1;transform:none}
-.bs-caption b{display:block;font-family:'Reggae One','Arial Black',sans-serif;font-weight:400;font-size:clamp(1.3rem,4.5vw,2rem);color:var(--rosa);text-shadow:0 3px 18px rgba(0,0,0,.85)}
-.bs-caption span{display:block;font-size:clamp(.85rem,2.4vw,1.05rem);color:var(--crema);opacity:.92;margin-top:.25rem;text-shadow:0 2px 12px rgba(0,0,0,.85)}
-.bs-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:2.2vh;z-index:3;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crema);opacity:.7;pointer-events:none;transition:opacity .4s ease;animation:bsFloat 1.6s ease-in-out infinite}
-.bs-hint.off{opacity:0}
-@keyframes bsFloat{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-6px)}}
-.bs-progress{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:4;background:rgba(245,235,213,.12)}
-.bs-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rosa),var(--naranja))}
-@media (prefers-reduced-motion: reduce){.bs-hint{animation:none}}
 
 /* ===== HORARIO + DIRECCION ===== */
 .status-pill{display:inline-flex;align-items:center;font-size:.68rem;font-weight:800;padding:.28rem .65rem;border-radius:999px;white-space:nowrap;margin-left:auto;margin-right:.6rem}
@@ -415,19 +399,6 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <div class="tstat"><span class="tnum">0</span><span class="tlabel">comisiones por WhatsApp</span></div>
   </div>
 </div>
-
-<section id="armado" class="bento-scroll" aria-label="Así armamos tu bento paso a paso">
-  <div class="bs-sticky">
-    <canvas class="bs-canvas" id="bsCanvas" aria-hidden="true"></canvas>
-    <div class="bs-head">
-      <p class="eyebrow">En vivo desde la cocina</p>
-      <h2>Así se arma <span class="acc">tu bento</span></h2>
-    </div>
-    <div class="bs-caption" id="bsCaption"><b></b><span></span></div>
-    <p class="bs-hint" id="bsHint">Sigue bajando 🍣</p>
-    <div class="bs-progress"><span id="bsBar"></span></div>
-  </div>
-</section>
 
 <section id="favoritos">
   <div class="sec-head">
@@ -1627,112 +1598,6 @@ function changeQtyExtra(id, delta){
 renderCart();
 </script>
 
-<script>
-/* ===== BENTO SCROLL: armado frame a frame ===== */
-(function(){
-  const FRAME_COUNT = 115;
-  const framePath = i => 'frames/frame-' + String(i).padStart(3,'0') + '.webp';
-
-  const section = document.getElementById('armado');
-  const canvas  = document.getElementById('bsCanvas');
-  const caption = document.getElementById('bsCaption');
-  const capTitle = caption.querySelector('b');
-  const capSub   = caption.querySelector('span');
-  const hint    = document.getElementById('bsHint');
-  const bar     = document.getElementById('bsBar');
-  if (!section || !canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  const CAPTIONS = [
-    { from:0.02, to:0.26, t:'Arroz japomexa',        s:'Salteado y servido al momento' },
-    { from:0.26, to:0.50, t:'Medio rollo: 5 piezas',   s:'La mitad de un rollo completo, para que pruebes de todo' },
-    { from:0.50, to:0.66, t:'Complementos de la casa', s:'Crujientes, salsa y tu galleta de la suerte' },
-    { from:0.69, to:1.01, t:'Sellado y listo',       s:'De nuestra dark kitchen directo a tu puerta' }
-  ];
-
-  const images = new Array(FRAME_COUNT + 1);
-  const loaded = new Array(FRAME_COUNT + 1).fill(false);
-  let currentFrame = 1;
-  let started = false;
-
-  function preload(){
-    if (started) return;
-    started = true;
-    for (let i = 1; i <= FRAME_COUNT; i++){
-      const img = new Image();
-      img.decoding = 'async';
-      img.src = framePath(i);
-      img.onload = () => { loaded[i] = true; if (i === currentFrame || i === 1) draw(currentFrame); };
-      images[i] = img;
-    }
-  }
-
-  // Empieza a precargar cuando la sección se acerca (o de inmediato si ya es visible)
-  if ('IntersectionObserver' in window){
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some(e => e.isIntersecting)){ preload(); io.disconnect(); }
-    }, { rootMargin: '100% 0px' });
-    io.observe(section);
-  } else { preload(); }
-
-  function nearestLoaded(i){
-    if (loaded[i]) return i;
-    for (let d = 1; d < FRAME_COUNT; d++){
-      if (loaded[i-d]) return i-d;
-      if (loaded[i+d]) return i+d;
-    }
-    return 0;
-  }
-
-  function resize(){
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width  = Math.round(canvas.clientWidth  * dpr);
-    canvas.height = Math.round(canvas.clientHeight * dpr);
-    draw(currentFrame);
-  }
-
-  function draw(i){
-    const idx = nearestLoaded(i);
-    if (!idx) return;
-    const img = images[idx];
-    const cw = canvas.width, ch = canvas.height;
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, cw, ch);
-    // "contain": el fondo negro del frame se funde con el del canvas
-    const scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
-    const w = img.naturalWidth * scale, h = img.naturalHeight * scale;
-    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-  }
-
-  let ticking = false;
-  function onScroll(){
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      ticking = false;
-      const rect = section.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      const p = Math.min(1, Math.max(0, -rect.top / total));
-      const frame = Math.min(FRAME_COUNT, Math.max(1, Math.round(p * (FRAME_COUNT - 1)) + 1));
-      if (frame !== currentFrame){ currentFrame = frame; draw(frame); }
-      bar.style.width = (p * 100) + '%';
-      hint.classList.toggle('off', p > 0.04);
-      const cap = CAPTIONS.find(c => p >= c.from && p < c.to);
-      if (cap){
-        if (capTitle.textContent !== cap.t){ capTitle.textContent = cap.t; capSub.textContent = cap.s; }
-        caption.classList.add('on');
-      } else {
-        caption.classList.remove('on');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', resize);
-  resize();
-  onScroll();
-})();
-</script>
 <script>
 // ===== Cotizar evento privado: boton con caminito de huellitas -> WhatsApp =====
 (function(){
