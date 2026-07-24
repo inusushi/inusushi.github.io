@@ -367,7 +367,7 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
 
 .evento-wrap{background:linear-gradient(135deg, var(--rojo), var(--naranja));border-radius:26px;padding:2.8rem 1.8rem;text-align:center;color:#fff}
 .evento-wrap .eyebrow{color:#fff;opacity:.85}
-.evento-wrap h2{color:#fff}
+.evento-wrap h2{color:#fff;font-size:clamp(2rem,6vw,3rem)}
 .evento-wrap h2 .acc{color:var(--negro)}
 .evento-wrap .sec-sub{color:#fff;opacity:.92;max-width:520px;margin:0 auto 1.7rem}
 .evento-btn-wrap{position:relative;display:inline-block}
@@ -377,8 +377,9 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
 .bh-walk{position:absolute;width:24px;height:24px;color:#fff;opacity:0;pointer-events:none;z-index:6;animation:bhWalkEvt 1.3s ease forwards}
 @keyframes bhWalkEvt{0%{opacity:0}20%{opacity:.95}100%{opacity:0;transform:translateX(52px) translateY(-10px)}}
 
-.mushi-teaser{display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:center;background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.25);border-radius:26px;padding:1.8rem;text-decoration:none;color:inherit;transition:border-color .2s ease, transform .2s ease}
+.mushi-teaser{position:relative;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:center;background:var(--negro-tarjeta);border:1.5px solid rgba(255,73,176,.25);border-radius:26px;padding:1.8rem;text-decoration:none;color:inherit;transition:border-color .2s ease, transform .2s ease, box-shadow .25s ease}
 .mushi-teaser:hover{border-color:var(--rosa);transform:translateY(-3px)}
+.mushi-teaser.neon-hit{border-color:var(--rosa);box-shadow:0 0 0 4px rgba(255,73,176,.45), 0 0 34px 10px rgba(255,73,176,.85), 0 0 70px 20px rgba(255,73,176,.5)}
 .mushi-teaser img{width:100%;filter:drop-shadow(0 14px 30px rgba(0,0,0,.5))}
 .mushi-teaser .btn{pointer-events:none;margin-top:1.1rem}
 @media(max-width:760px){.mushi-teaser{grid-template-columns:1fr;text-align:center;padding:1.6rem}.mushi-teaser img{max-width:200px;margin:0 auto}}
@@ -695,9 +696,9 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
 
 <section id="evento-privado" aria-label="Cotizar servicio para evento privado">
   <div class="evento-wrap">
-    <p class="eyebrow">Para tu celebración</p>
-    <h2>Cotizar el servicio <span class="acc">para mi evento privado</span></h2>
-    <p class="sec-sub">Cumpleaños, oficina, reunión familiar — contáctanos y te ayudamos a cotizar el evento a tus necesidades.</p>
+    <p class="eyebrow">Para tu evento social o familiar</p>
+    <h2>¿Nos quieres invitar a tu evento?</h2>
+    <p class="sec-sub">Si estás organizando una feria gastronómica, bazar universitario, convención, evento social, familiar o necesitas servicio de catering a nuestro estilo, da click en este botón para atenderte directamente.</p>
     <div class="evento-btn-wrap">
       <button class="btn btn-paw" id="btnEvento" type="button"><svg class="pawico" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg><span>Cotizar mi evento</span></button>
     </div>
@@ -1780,6 +1781,33 @@ renderCart();
       })(i);
     }
     setTimeout(function(){ window.open(url, '_blank'); }, 500);
+  });
+})();
+</script>
+<script>
+// ===== Teaser de Mushipan: neon rosa + caminito de huellitas -> mushipan.html =====
+(function(){
+  var teaser = document.querySelector('.mushi-teaser');
+  if (!teaser) return;
+  teaser.addEventListener('click', function(e){
+    e.preventDefault();
+    var href = teaser.getAttribute('href');
+    teaser.classList.add('neon-hit');
+    for (var i = 0; i < 3; i++){
+      (function(i){
+        setTimeout(function(){
+          var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          s.setAttribute('viewBox', '0 0 106 100');
+          s.setAttribute('class', 'bh-walk');
+          s.innerHTML = '<use href="#pawshape" fill="currentColor"/>';
+          s.style.left = (teaser.clientWidth / 2 - 12 + i * 30) + 'px';
+          s.style.top = (teaser.clientHeight - 30 + (i % 2 ? 4 : -12)) + 'px';
+          teaser.appendChild(s);
+          setTimeout(function(){ s.remove(); }, 1400);
+        }, i * 150);
+      })(i);
+    }
+    setTimeout(function(){ window.location.href = href; }, 650);
   });
 })();
 </script>
