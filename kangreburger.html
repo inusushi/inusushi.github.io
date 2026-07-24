@@ -198,6 +198,9 @@ h2 .acc{color:var(--rosa)}
 .drawer-foot{padding:1.1rem 1.2rem;border-top:1px solid rgba(245,235,213,.15)}
 .subtotal-row{display:flex;justify-content:space-between;font-size:.95rem;font-weight:900;color:var(--crema);margin-bottom:.9rem}
 .subtotal-row .val{font-family:'Reggae One','Arial Black',sans-serif;color:var(--rosa);font-size:1.3rem}
+.price-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--crema);opacity:.8;margin-bottom:.35rem}
+.price-row.descuento-row{color:#2ECC71;opacity:1;font-weight:800}
+.price-row.descuento-row .val{color:#2ECC71}
 .send-btn{width:100%;background:var(--naranja);color:#fff;border:none;padding:.9rem;border-radius:999px;font-weight:900;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .15s ease}
 .send-btn:hover{background:var(--rojo)}
 .send-btn:disabled{opacity:.4;cursor:not-allowed}
@@ -755,7 +758,9 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
     <label class="pickup-check"><input type="checkbox" id="pickupCheck"> 🏠 Paso por mi pedido a la cocina</label>
     <button class="ship-btn" id="shipBtn" type="button">🛵 Calcular mi envío estimado (usa tu ubicación)</button>
     <p class="ship-out" id="shipOut"></p>
-    <div class="subtotal-row"><span>Subtotal</span><span class="val" id="subtotalVal">$0</span></div>
+    <div class="price-row"><span>Subtotal</span><span class="val" id="subtotalVal">$0</span></div>
+    <div class="price-row descuento-row"><span>🎉 Descuento 10% web</span><span class="val" id="descuentoVal">-$0</span></div>
+    <div class="subtotal-row"><span>Total</span><span class="val" id="totalVal">$0</span></div>
     <button class="send-btn" id="sendOrder" disabled>📲 Enviar pedido por WhatsApp</button>
     <p class="pay-note">🕐 Entrega: 30–90 min según demanda · 💵 Pago en efectivo o transferencia (te pasamos los datos por WhatsApp)</p>
   </div>
@@ -857,6 +862,7 @@ document.querySelectorAll('[data-goto]').forEach(function(tile){
 
 // ===== CARRITO =====
 var CART_KEY_NUMBER = '525548981886';
+var DESCUENTO_WEB = 0.10; // promo: 10% de descuento por comprar desde la pagina web
 var cart = {}; // { name: {price, qty} }
 
 var drawer = document.getElementById('drawer');
@@ -928,7 +934,11 @@ function renderCart(){
     body.innerHTML = html;
   }
 
+  var descuento = Math.round(subtotal * DESCUENTO_WEB);
+  var total = subtotal - descuento;
   document.getElementById('subtotalVal').textContent = '$' + subtotal;
+  document.getElementById('descuentoVal').textContent = '-$' + descuento;
+  document.getElementById('totalVal').textContent = '$' + total;
   var badge = document.getElementById('cartBadge');
   var label = document.getElementById('navCartLabel');
   if(count > 0){
@@ -1112,8 +1122,12 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     lines.push('• ' + item.qty + ' x ' + item.title + ' (personalizado) — $' + lineTotal);
     item.lines.forEach(function(l){ lines.push('   ' + l); });
   });
+  var descuento = Math.round(subtotal * DESCUENTO_WEB);
+  var total = subtotal - descuento;
   lines.push('');
-  lines.push('*Subtotal: $' + subtotal + '*');
+  lines.push('Subtotal: $' + subtotal);
+  lines.push('Descuento 10% (compra por página web): -$' + descuento);
+  lines.push('*Total: $' + total + '*');
   lines.push('');
   if (document.getElementById('pickupCheck').checked){
     lines.push('🏠 El cliente pasa por su pedido a la cocina');
