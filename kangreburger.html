@@ -1695,6 +1695,10 @@ renderCart();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = canvas.clientWidth  || window.innerWidth;
     const h = canvas.clientHeight || window.innerHeight;
+    if (!w || !h){
+      setTimeout(resize, 50);
+      return;
+    }
     canvas.width  = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     draw(currentFrame);
@@ -1768,7 +1772,7 @@ renderCart();
   requestAnimationFrame(resize);
   window.addEventListener('resize', resize);
   if ('ResizeObserver' in window){
-    new ResizeObserver(resize).observe(canvas);
+    new ResizeObserver(resize).observe(canvas.parentElement);
   }
   onScroll();
 })();
