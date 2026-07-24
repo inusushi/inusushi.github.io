@@ -121,7 +121,6 @@ h2 .acc{color:var(--rosa)}
 .tab{background:transparent;border:1.5px solid rgba(245,235,213,.35);color:var(--crema);font-weight:700;font-size:.82rem;padding:.48rem .95rem;border-radius:999px;cursor:pointer;transition:all .15s ease}
 .tab:hover{border-color:var(--rosa);color:var(--rosa)}
 .tab.active{background:var(--rosa);border-color:var(--rosa);color:var(--negro)}
-.tab.no-hoy,.cat-tile.no-hoy{opacity:.4;pointer-events:none;filter:grayscale(.6)}
 .panel{display:none;animation:fadeUp .35s ease}
 .panel.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -924,27 +923,12 @@ var DIA_CORTO = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
 function ahoraCDMX(){
   return new Date(new Date().toLocaleString('en-US', {timeZone: 'America/Mexico_City'}));
 }
-// ===== Excepcion de horario para un dia especifico =====
-// Se autodesactiva sola despues de esa fecha, no requiere revertir nada manualmente.
-// 23-jul-2026: jueves especial con menu reducido (rollos, onigiris, burgers), abre 2pm.
-var HOY_ESPECIAL = { fecha: '2026-07-23', abre: 14, cierra: 20 };
-function fechaCDMX(n){
-  return n.getFullYear() + '-' + String(n.getMonth()+1).padStart(2,'0') + '-' + String(n.getDate()).padStart(2,'0');
-}
-function esHoyEspecial(){
-  return fechaCDMX(ahoraCDMX()) === HOY_ESPECIAL.fecha;
-}
-function horaAmPm(h){
-  return (h > 12 ? h - 12 : h) + ' pm';
-}
 function estaAbierto(){
   var n = ahoraCDMX();
-  if (esHoyEspecial()) return n.getHours() >= HOY_ESPECIAL.abre && n.getHours() < HOY_ESPECIAL.cierra;
   return HORARIO.dias.indexOf(n.getDay()) !== -1 && n.getHours() >= HORARIO.abre && n.getHours() < HORARIO.cierra;
 }
 function proximaApertura(){
   var n = ahoraCDMX();
-  if (esHoyEspecial() && n.getHours() < HOY_ESPECIAL.abre) return 'hoy ' + horaAmPm(HOY_ESPECIAL.abre);
   for (var i = 0; i < 8; i++){
     var d = (n.getDay() + i) % 7;
     if (HORARIO.dias.indexOf(d) === -1) continue;
@@ -962,11 +946,9 @@ function pintarEstado(){
     nota = document.createElement('span');
     nota.id = 'deliveryNote';
     nota.className = 'delivery-note';
+    nota.textContent = '🚚 Domicilio: vie-dom 12pm a 8pm';
     document.querySelector('.nav-inner').insertBefore(nota, document.getElementById('openCart'));
   }
-  nota.textContent = esHoyEspecial()
-    ? '🚚 Hoy: rollos, onigiris y burgers · 2pm a 8pm'
-    : '🚚 Domicilio: vie-dom 12pm a 8pm';
   var pill = document.getElementById('statusPill');
   if (!pill){
     pill = document.createElement('span');
@@ -1008,33 +990,6 @@ function pintarDisponibilidadItems(){
   });
 }
 pintarDisponibilidadItems();
-
-// ===== Categorias no disponibles solo por hoy (menu reducido, ver HOY_ESPECIAL) =====
-var CATEGORIAS_NO_HOY = ['p-entradas', 'p-comple', 'p-poke', 'p-ramen', 'p-bento'];
-function pintarCategoriasNoDisponiblesHoy(){
-  if (!esHoyEspecial()) return;
-  CATEGORIAS_NO_HOY.forEach(function(id){
-    var tab = document.querySelector('.tab[data-panel="' + id + '"]');
-    if (tab){ tab.classList.add('no-hoy'); tab.setAttribute('aria-disabled', 'true'); }
-    var tile = document.querySelector('.cat-tile[data-goto="' + id + '"]');
-    if (tile){
-      tile.classList.add('no-hoy');
-      var span = tile.querySelector('span');
-      if (span) span.textContent += ' · hoy no';
-    }
-    var panel = document.getElementById(id);
-    if (panel){
-      panel.querySelectorAll('.item').forEach(function(el){
-        el.classList.add('agotado');
-        var precio = el.querySelector('.p');
-        if (precio) precio.textContent = 'No disponible hoy';
-        var btn = el.querySelector('[data-add]');
-        if (btn) btn.remove();
-      });
-    }
-  });
-}
-pintarCategoriasNoDisponiblesHoy();
 
 
 // ===== Direccion obligatoria =====
