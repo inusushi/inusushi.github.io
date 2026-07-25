@@ -1,0 +1,37 @@
+backend:
+  name: github
+  repo: inusushi/inusushi.github.io
+  branch: main
+  base_url: https://TU-PROXY-OAUTH.vercel.app
+  auth_endpoint: auth
+
+media_folder: "fotos"
+public_folder: "/fotos"
+
+collections:
+  - name: "config"
+    label: "Configuración del sitio"
+    files:
+      - name: "site-data"
+        label: "Horario, descuento y avisos"
+        file: "data/site-data.json"
+        format: "json"
+        fields:
+          - label: "Horario"
+            name: "horario"
+            widget: "object"
+            fields:
+              - {label: "Hora de apertura (0-23)", name: "abre", widget: "number", min: 0, max: 23, value_type: "int"}
+              - {label: "Hora de cierre (0-23)", name: "cierra", widget: "number", min: 0, max: 23, value_type: "int"}
+          - label: "Descuento por compra web"
+            name: "descuento_web"
+            widget: "object"
+            fields:
+              - {label: "Activo", name: "activo", widget: "boolean"}
+              - {label: "Porcentaje", name: "porcentaje", widget: "number", min: 0, max: 100, value_type: "int"}
+          - label: "Banner de aviso"
+            name: "banner_aviso"
+            widget: "object"
+            fields:
+              - {label: "Activo", name: "activo", widget: "boolean"}
+              - {label: "Texto del aviso", name: "texto", widget: "string", required: false}
