@@ -2,7 +2,7 @@ backend:
   name: github
   repo: inusushi/inusushi.github.io
   branch: main
-  base_url: https://TU-PROXY-OAUTH.vercel.app
+  base_url: https://inusushi-cms-auth.vercel.app
   auth_endpoint: auth
 
 media_folder: "fotos"
