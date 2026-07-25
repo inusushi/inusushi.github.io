@@ -8,7 +8,7 @@
     "porcentaje": 10
   },
   "banner_aviso": {
-    "activo": true,
-    "texto": "Todo gratis todo el año!!!!"
+    "activo": false,
+    "texto": ""
   }
 }
