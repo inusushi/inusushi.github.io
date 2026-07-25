@@ -1,0 +1,14 @@
+{
+  "horario": {
+    "abre": 12,
+    "cierra": 20
+  },
+  "descuento_web": {
+    "activo": true,
+    "porcentaje": 10
+  },
+  "banner_aviso": {
+    "activo": false,
+    "texto": ""
+  }
+}

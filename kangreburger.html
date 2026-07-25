@@ -259,6 +259,8 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
 @media(max-width:420px){.status-pill{font-size:.6rem;padding:.24rem .5rem}}
 .delivery-note{font-size:.7rem;font-weight:700;color:var(--crema);opacity:.85;white-space:nowrap;margin-left:auto;margin-right:.5rem}
 @media(max-width:420px){.delivery-note{font-size:.62rem}}
+.aviso-banner{background:var(--rosa);color:#1D1D1B;text-align:center;font-weight:800;font-size:.82rem;padding:.55rem 1rem;line-height:1.3}
+@media(max-width:420px){.aviso-banner{font-size:.72rem;padding:.5rem .8rem}}
 .addr-label{display:block;font-size:.78rem;font-weight:800;color:var(--crema);margin-bottom:.35rem}
 .addr-input{width:100%;background:#181816;border:1.5px solid rgba(245,235,213,.25);border-radius:10px;color:var(--crema);font-family:inherit;font-size:.9rem;padding:.6rem .7rem;resize:none;margin-bottom:.55rem}
 .addr-input:focus{outline:none;border-color:var(--rosa)}
@@ -977,21 +979,26 @@ var DIA_CORTO = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
 function ahoraCDMX(){
   return new Date(new Date().toLocaleString('en-US', {timeZone: 'America/Mexico_City'}));
 }
+function horaAmPm(h){
+  var hh = ((h + 11) % 12) + 1;
+  return hh + (h >= 12 ? ' pm' : ' am');
+}
 function estaAbierto(){
   var n = ahoraCDMX();
   return HORARIO.dias.indexOf(n.getDay()) !== -1 && n.getHours() >= HORARIO.abre && n.getHours() < HORARIO.cierra;
 }
 function proximaApertura(){
   var n = ahoraCDMX();
+  var horaTxt = horaAmPm(HORARIO.abre);
   for (var i = 0; i < 8; i++){
     var d = (n.getDay() + i) % 7;
     if (HORARIO.dias.indexOf(d) === -1) continue;
     if (i === 0 && n.getHours() >= HORARIO.cierra) continue;
-    if (i === 0) return 'hoy 12 pm';
-    if (i === 1) return 'mañana 12 pm';
-    return DIA_CORTO[d] + ' 12 pm';
+    if (i === 0) return 'hoy ' + horaTxt;
+    if (i === 1) return 'mañana ' + horaTxt;
+    return DIA_CORTO[d] + ' ' + horaTxt;
   }
-  return 'vie 12 pm';
+  return 'vie ' + horaTxt;
 }
 function pintarEstado(){
   var abierto = estaAbierto();
@@ -1000,7 +1007,7 @@ function pintarEstado(){
     nota = document.createElement('span');
     nota.id = 'deliveryNote';
     nota.className = 'delivery-note';
-    nota.textContent = '🚚 Domicilio: vie-dom 12pm a 8pm';
+    nota.textContent = '🚚 Domicilio: vie-dom ' + horaAmPm(HORARIO.abre).replace(' ', '') + ' a ' + horaAmPm(HORARIO.cierra).replace(' ', '');
     document.querySelector('.nav-inner').insertBefore(nota, document.getElementById('openCart'));
   }
   var pill = document.getElementById('statusPill');
@@ -1010,13 +1017,44 @@ function pintarEstado(){
     document.querySelector('.nav-inner').insertBefore(pill, document.getElementById('openCart'));
   }
   pill.className = 'status-pill ' + (abierto ? 'abierto' : 'cerrado');
-  pill.textContent = abierto ? '🟢 Abierto · hasta 8 pm' : '🔴 Abre ' + proximaApertura();
+  pill.textContent = abierto ? '🟢 Abierto · hasta ' + horaAmPm(HORARIO.cierra) : '🔴 Abre ' + proximaApertura();
   document.getElementById('sendOrder').textContent = abierto ? '📲 Enviar pedido por WhatsApp' : '🐾 Programar pedido por WhatsApp';
   var bb = document.getElementById('buyBurgerLabel');
   if (bb) bb.textContent = abierto ? 'Pedir Burger +$150' : 'Programar Burger +$150';
 }
 pintarEstado();
 setInterval(pintarEstado, 60000);
+
+// ===== Datos editables (panel autoadministrable) =====
+function aplicarBannerAviso(banner){
+  var existente = document.getElementById('avisoBanner');
+  if (!banner || !banner.activo || !banner.texto){
+    if (existente) existente.remove();
+    return;
+  }
+  if (!existente){
+    existente = document.createElement('div');
+    existente.id = 'avisoBanner';
+    existente.className = 'aviso-banner';
+    var nav = document.querySelector('nav');
+    nav.parentNode.insertBefore(existente, nav);
+  }
+  existente.textContent = banner.texto;
+}
+fetch('data/site-data.json?v=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(data){
+  if (data.horario){
+    if (typeof data.horario.abre === 'number') HORARIO.abre = data.horario.abre;
+    if (typeof data.horario.cierra === 'number') HORARIO.cierra = data.horario.cierra;
+  }
+  if (data.descuento_web){
+    DESCUENTO_WEB = (data.descuento_web.activo && typeof data.descuento_web.porcentaje === 'number')
+      ? data.descuento_web.porcentaje / 100
+      : 0;
+  }
+  aplicarBannerAviso(data.banner_aviso);
+  pintarEstado();
+  renderCart();
+}).catch(function(){ /* si falla, se quedan los valores por defecto ya cargados */ });
 
 // ===== Disponibilidad de platillos del menu regular (por fuera de stock hoy) =====
 // Para reactivar un platillo, cambia su valor a true aqui abajo.
