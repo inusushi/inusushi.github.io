@@ -1,1 +1,22 @@
+# Configuracion local de Claude Code (rutas absolutas de esta maquina)
 .claude/
+
+# ─────────────────────────────────────────────────────────────────
+#  SISTEMA DE NEGOCIO — NUNCA SE PUBLICA
+#  Este repo es GitHub Pages: TODO lo commiteado queda visible en
+#  inusushi.github.io para cualquiera. Estas carpetas contienen
+#  nombres y sueldos del equipo, costos, estrategia y metodologia.
+#  No quitar estas lineas sin pensarlo dos veces.
+# ─────────────────────────────────────────────────────────────────
+CLAUDE.md
+memoria.md
+Skills/
+negocio/
+contenido/
+marca/
+informes/
+inu-studio/
+mushipan-b2b/
+
+# Accesos directos de Windows que se cuelan al copiar carpetas
+*.lnk

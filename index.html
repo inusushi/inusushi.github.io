@@ -15,214 +15,1143 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://inusushi.github.io/">
-<script type="application/ld+json" id="ld-restaurant">
+<script type="application/ld+json" id="ld-graph">
 {
   "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "@id": "https://inusushi.github.io/#restaurant",
-  "name": "Inu Sushi",
-  "alternateName": "Inu Sushi Japomexa",
-  "description": "Dark kitchen de sushi estilo Japomexa en Tlalnepantla. Rollos de 10 piezas hechos al momento, bentos, poke bowls, ramen y onigiris con entrega a domicilio.",
-  "url": "https://inusushi.github.io/",
-  "logo": "https://inusushi.github.io/logo-inu-sushi.png",
-  "image": "https://inusushi.github.io/og-bento.jpg",
-  "telephone": "+52-55-4898-1886",
-  "foundingDate": "2018",
-  "priceRange": "$$",
-  "currenciesAccepted": "MXN",
-  "paymentAccepted": "Efectivo, Transferencia",
-  "servesCuisine": ["Japonesa", "Mexicana", "Fusión Japomexa", "Sushi"],
-  "acceptsReservations": false,
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Tlalnepantla de Baz",
-    "addressRegion": "Estado de México",
-    "postalCode": "54170",
-    "addressCountry": "MX"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 19.5085,
-    "longitude": -99.1650
-  },
-  "areaServed": [
-    { "@type": "City", "name": "Tlalnepantla de Baz" },
-    { "@type": "Place", "name": "Ciudad Satélite" },
-    { "@type": "Place", "name": "Lindavista" },
-    { "@type": "Place", "name": "Azcapotzalco" },
-    { "@type": "Place", "name": "Polanco" },
-    { "@type": "Place", "name": "Coacalco" },
-    { "@type": "Place", "name": "Cuautepec" }
-  ],
-  "openingHoursSpecification": [{
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Friday", "Saturday", "Sunday"],
-    "opens": "12:00",
-    "closes": "20:00"
-  }],
-  "potentialAction": {
-    "@type": "OrderAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://wa.me/525548981886",
-      "actionPlatform": [
-        "http://schema.org/DesktopWebPlatform",
-        "http://schema.org/MobileWebPlatform"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://inusushi.github.io/#website",
+      "url": "https://inusushi.github.io/",
+      "name": "Inu Sushi",
+      "inLanguage": "es-MX",
+      "publisher": {
+        "@id": "https://inusushi.github.io/#restaurant"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://inusushi.github.io/#webpage",
+      "url": "https://inusushi.github.io/",
+      "name": "Sushi a Domicilio en Tlalnepantla | Inu Sushi — Japomexa",
+      "inLanguage": "es-MX",
+      "isPartOf": {
+        "@id": "https://inusushi.github.io/#website"
+      },
+      "about": {
+        "@id": "https://inusushi.github.io/#restaurant"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://inusushi.github.io/#og"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://inusushi.github.io/#og",
+      "url": "https://inusushi.github.io/og-bento.jpg",
+      "contentUrl": "https://inusushi.github.io/og-bento.jpg",
+      "width": 1200,
+      "height": 630,
+      "caption": "Bento box de Inu Sushi"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://inusushi.github.io/#dany-varona",
+      "name": "Daniel Varona",
+      "alternateName": "Chef Dany Varona",
+      "jobTitle": "Chef y fundador",
+      "worksFor": {
+        "@id": "https://inusushi.github.io/#restaurant"
+      },
+      "sameAs": [
+        "https://www.youtube.com/@InuSushiChefDanyVarona",
+        "https://www.youtube.com/@SinTantoRolloConDanyVarona"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "@id": "https://inusushi.github.io/#restaurant",
+      "name": "Inu Sushi",
+      "alternateName": "Inu Sushi Japomexa",
+      "description": "Dark kitchen de sushi estilo Japomexa en Tlalnepantla. Rollos de 10 piezas hechos al momento, bentos, poke bowls, ramen y onigiris con entrega a domicilio.",
+      "url": "https://inusushi.github.io/",
+      "logo": "https://inusushi.github.io/logo-inu-sushi.png",
+      "image": {
+        "@id": "https://inusushi.github.io/#og"
+      },
+      "telephone": "+52-55-4898-1886",
+      "foundingDate": "2018",
+      "priceRange": "$$",
+      "currenciesAccepted": "MXN",
+      "paymentAccepted": "Efectivo, Transferencia",
+      "servesCuisine": [
+        "Japonesa",
+        "Mexicana",
+        "Fusión Japomexa",
+        "Sushi"
+      ],
+      "acceptsReservations": false,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tlalnepantla de Baz",
+        "addressRegion": "Estado de México",
+        "postalCode": "54170",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.5085,
+        "longitude": -99.165
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Tlalnepantla de Baz"
+        },
+        {
+          "@type": "Place",
+          "name": "Ciudad Satélite"
+        },
+        {
+          "@type": "Place",
+          "name": "Lindavista"
+        },
+        {
+          "@type": "Place",
+          "name": "Azcapotzalco"
+        },
+        {
+          "@type": "Place",
+          "name": "Polanco"
+        },
+        {
+          "@type": "Place",
+          "name": "Coacalco"
+        },
+        {
+          "@type": "Place",
+          "name": "Cuautepec"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "12:00",
+          "closes": "20:00"
+        }
+      ],
+      "potentialAction": {
+        "@type": "OrderAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://wa.me/525548981886",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        }
+      },
+      "sameAs": [
+        "https://www.instagram.com/inusushi_/",
+        "https://www.tiktok.com/@inusushi_"
+      ],
+      "founder": {
+        "@id": "https://inusushi.github.io/#dany-varona"
+      },
+      "hasMenu": {
+        "@id": "https://inusushi.github.io/#menu"
+      }
+    },
+    {
+      "@type": "Menu",
+      "name": "Menú Inu Sushi",
+      "inLanguage": "es-MX",
+      "hasMenuSection": [
+        {
+          "@type": "MenuSection",
+          "name": "Rollos",
+          "description": "Rollos de sushi elaborados al momento cortados en 10 piezas acompañados de soya ponzu.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Furutsu Roll",
+              "description": "Frutas del día con queso crema, envuelto en hoja de arroz. 12 piezas.",
+              "image": "https://inusushi.github.io/fotos/furutsu-roll.webp",
+              "suitableForDiet": "https://schema.org/VegetarianDiet",
+              "offers": {
+                "@type": "Offer",
+                "price": "72",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Green Roll",
+              "description": "Estilo california: queso crema, pepino, aguacate y ajonjolí.",
+              "image": "https://inusushi.github.io/fotos/green-roll.webp",
+              "suitableForDiet": "https://schema.org/VegetarianDiet",
+              "offers": {
+                "@type": "Offer",
+                "price": "72",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "California Roll",
+              "description": "Cangrejo, pepino y queso crema.",
+              "image": "https://inusushi.github.io/fotos/california-roll.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "80",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Veggie",
+              "description": "Champiñones y cebollín salteados, zanahoria caramelizada y aguacate.",
+              "image": "https://inusushi.github.io/fotos/veggie.webp",
+              "suitableForDiet": "https://schema.org/VegetarianDiet",
+              "offers": {
+                "@type": "Offer",
+                "price": "80",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Rollo Suizo",
+              "description": "Empanizado, quesos crema y manchego fundidos con pollo.",
+              "image": "https://inusushi.github.io/fotos/rollo-suizo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "105",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Spicy Tuna Roll",
+              "description": "Lomo de atún picante, zanahoria caramelizada, aguacate y manchego.",
+              "image": "https://inusushi.github.io/fotos/spicy-tuna-roll.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "115",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Rollo Gobernador",
+              "description": "Empanizado relleno de camarón tempurizado con tampico.",
+              "image": "https://inusushi.github.io/fotos/rollo-gobernador.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "115",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Rollito Pío",
+              "description": "Pollo crunchy con tampico y pepino, cobertura de aguacate.",
+              "image": "https://inusushi.github.io/fotos/rollito-pio.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "115",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Musashi Roll",
+              "description": "Cobertura de manchego empanizado, salmón fresco, queso crema y aguacate.",
+              "image": "https://inusushi.github.io/fotos/musashi-roll.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "130",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Ichigo Roll",
+              "description": "Abundante queso crema, zanahoria frita, tampico, aguacate y camarón empanizado.",
+              "image": "https://inusushi.github.io/fotos/ichigo-roll.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "130",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Sakura Roll",
+              "description": "Camarón frito con panko, aguacate y queso crema. Envuelto en sashimi de salmón ahumado.",
+              "image": "https://inusushi.github.io/fotos/sakura-roll.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "140",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Don Kangrejo",
+              "description": "Empanizado: camarón con kanikama, champiñón, tampico y manchego fundido.",
+              "image": "https://inusushi.github.io/fotos/don-kangrejo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "140",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-rollos"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Entradas",
+          "description": "Crujientes para abrir el apetito: palomitas, tempura, brochetas y rollitos.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Mix de verduritas tempura",
+              "description": "Zanahoria, calabacita y brocolí capeadas, con salsa de anguila.",
+              "image": "https://inusushi.github.io/fotos/mix-de-verduritas-tempura.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "70",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Palomitas panko — Camarón",
+              "description": "Capeadas en tempura y empanizadas en panko, con sriracha.",
+              "image": "https://inusushi.github.io/fotos/palomitas-camaron.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "130",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Palomitas — Pollo / Queso / Cangrejo",
+              "description": "Crujientes, con topping de salsa sriracha.",
+              "image": "https://inusushi.github.io/fotos/palomitas-pollo-queso-cangrejo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "95",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Rollitos Primavera — 5 pzas",
+              "description": "Verduritas en pasta wonton, con soya ponzu.",
+              "image": "https://inusushi.github.io/fotos/rollitos-primavera-5pz.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "70",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Rollitos Primavera — 10 pzas",
+              "description": "Verduritas en pasta wonton, con soya ponzu.",
+              "image": "https://inusushi.github.io/fotos/rollitos-primavera-10pz.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "130",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Brocheta Kushiage — 1 pza",
+              "description": "Plátano macho con queso manchego, empanizada.",
+              "image": "https://inusushi.github.io/fotos/brocheta-kushiage-1pz.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "40",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Brochetas Kushiage — 3 pzas",
+              "description": "Plátano macho con queso manchego, empanizadas.",
+              "image": "https://inusushi.github.io/fotos/brochetas-kushiage-3pz.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "105",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-entradas"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Gohan · Yakimeshi",
+          "description": "Arroces japomexa: gohan fresquito y yakimeshi al wok.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Gohan Sencillo",
+              "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.",
+              "image": "https://inusushi.github.io/fotos/gohan-sencillo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "60",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Gohan Veggie",
+              "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.",
+              "image": "https://inusushi.github.io/fotos/gohan-veggie.webp",
+              "suitableForDiet": "https://schema.org/VegetarianDiet",
+              "offers": {
+                "@type": "Offer",
+                "price": "68",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Gohan con Tampico",
+              "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.",
+              "image": "https://inusushi.github.io/fotos/gohan-con-tampico.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "75",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Gohan Camarón",
+              "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.",
+              "image": "https://inusushi.github.io/fotos/gohan-camaron.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "87",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Gohan Mixto",
+              "description": "Camarón, surimi, pollo y chicharrón de salmón.",
+              "image": "https://inusushi.github.io/fotos/gohan-mixto.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "85",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Yakimeshi Sencillo",
+              "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.",
+              "image": "https://inusushi.github.io/fotos/yakimeshi-sencillo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "65",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Yakimeshi Pollo",
+              "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.",
+              "image": "https://inusushi.github.io/fotos/yakimeshi-pollo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "85",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Yakimeshi Cangrejo",
+              "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.",
+              "image": "https://inusushi.github.io/fotos/yakimeshi-cangrejo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "85",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Yakimeshi Camarón",
+              "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.",
+              "image": "https://inusushi.github.io/fotos/yakimeshi-camaron.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "100",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Yakimeshi Mixto",
+              "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.",
+              "image": "https://inusushi.github.io/fotos/yakimeshi-mixto.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "90",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-gohan-yakimeshi"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Poke Bowl",
+          "description": "Bowls de comida fresca y bien preparada, arroz gohan con proteína, vegetales, salsas y toppings bien pensados para saciar tu antojo.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Chikin Bowl",
+              "description": "Pollo teriyaki, hongos, calabacita, jitomate, aguacate y fruta con amaranto.",
+              "image": "https://inusushi.github.io/fotos/chikin-bowl.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "100",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Sakana Bowl",
+              "description": "Proteína a elegir (salmón, atún o kanikama), aguacate, pepino, wakame, tampico y edamames.",
+              "image": "https://inusushi.github.io/fotos/sakana-bowl.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "135",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-poke-bowl"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Ramen",
+          "description": "Caldito que abraza: nuestro ramen y sopas de la casa.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Sopa Jiraiya — ½ litro",
+              "description": "Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.",
+              "image": "https://inusushi.github.io/fotos/sopa-jiraiya-1-2l.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "85",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Sopa Jiraiya — 1 litro",
+              "description": "Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.",
+              "image": "https://inusushi.github.io/fotos/sopa-jiraiya-1l.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "160",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Inu Dashi Ramen — ½ litro",
+              "description": "Tallarines de trigo, camarón, cangrejo, atún y salmón.",
+              "image": "https://inusushi.github.io/fotos/inu-dashi-ramen-1-2l.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "87",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Inu Dashi Ramen — 1 litro",
+              "description": "Tallarines de trigo, camarón, cangrejo, atún y salmón.",
+              "image": "https://inusushi.github.io/fotos/inu-dashi-ramen-1l.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "165",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-ramen"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Bento Box",
+          "description": "La comida completa: incluye yakimeshi, verduras o rollito primavera, palomitas, galleta de la fortuna y 5 piezas de sushi.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Bento con Green Roll / Frutal / Cangrejo / Pollo",
+              "image": "https://inusushi.github.io/fotos/bento-green-frutal-cangrejo-pollo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "110",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Bento con rollo de Camarón",
+              "image": "https://inusushi.github.io/fotos/bento-camaron.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "120",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Bento con rollo de Lomo de Atún",
+              "image": "https://inusushi.github.io/fotos/bento-lomo-de-atun.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "130",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Bento con rollo de Salmón",
+              "image": "https://inusushi.github.io/fotos/bento-salmon.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "130",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Bento con rollo de Salmón Ahumado",
+              "offers": {
+                "@type": "Offer",
+                "price": "140",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-bento-box"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Sushi Burger",
+          "description": "¡¡La parte exótica del menú!! Todo el sabor Inu Sushi en una super burger.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Kangreburger con lomo de atún",
+              "description": "Bollos de arroz gohan empanizados en panko con queso crema y tampico untados, doble proteína de kanikama y lomo de atún, con alga wakame, aguacate, jitomate y salsa teriyaki artesanal.",
+              "image": "https://inusushi.github.io/fotos/kangreburger.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "150",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Kangreburger con lomo de atún + verduritas tempura",
+              "description": "+120 gramos de verduritas tempura fritas.",
+              "image": "https://inusushi.github.io/fotos/kangreburger-verduritas.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "180",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Kangreburger Salmón Ahumado",
+              "description": "Bollos de arroz gohan empanizados en panko con queso crema y tampico untados, proteína de salmón ahumado con kanikama, alga wakame, aguacate, jitomate y salsa teriyaki artesanal.",
+              "image": "https://inusushi.github.io/fotos/kangreburger-salmon-ahumado.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "180",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Kangreburger con salmón ahumado + verduritas tempura",
+              "description": "Proteína de salmón ahumado con kanikama + 120 gramos de verduritas tempura fritas.",
+              "image": "https://inusushi.github.io/fotos/kangreburger-salmon-ahumado-verduritas.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "210",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-sushi-burger"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Onigiris",
+          "description": "El snack japomexa: triángulos de arroz rellenos.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Frutal",
+              "image": "https://inusushi.github.io/fotos/onigiri-frutal.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "42",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Green Roll",
+              "image": "https://inusushi.github.io/fotos/onigiri-green-roll.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "42",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Pollo",
+              "image": "https://inusushi.github.io/fotos/onigiri-pollo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "47",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Cangrejo",
+              "image": "https://inusushi.github.io/fotos/onigiri-cangrejo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "47",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Camarón",
+              "image": "https://inusushi.github.io/fotos/onigiri-camaron.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "52",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Lomo de Atún",
+              "image": "https://inusushi.github.io/fotos/onigiri-lomo-atun.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "52",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Kanikama",
+              "image": "https://inusushi.github.io/fotos/onigiri-cangrejo.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "52",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Salmón",
+              "image": "https://inusushi.github.io/fotos/onigiri-salmon.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "60",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Onigiri Salmón Ahumado",
+              "image": "https://inusushi.github.io/fotos/onigiri-salmon.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "60",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-onigiris"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Mushi Pan",
+          "description": "Pan japonés al vapor: dulce o salado, calientito.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Mushi Pan Dulce",
+              "description": "Elige tu sabor al agregarlo al carrito.",
+              "image": "https://inusushi.github.io/fotos/mushi-pan-dulce.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "25",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Mushi Pan Salado",
+              "description": "Elige tu sabor al agregarlo al carrito.",
+              "image": "https://inusushi.github.io/fotos/mushi-pan-salado.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "30",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Mushi Pan — Arma tu caja",
+              "description": "Elige hasta 6 mushipanes — al llevar 5 ganas 1 gratis.",
+              "image": "https://inusushi.github.io/fotos/mushi-hero.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "25",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-mushi-pan"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Charola 50 rollos",
+          "description": "Charolas familiares para compartir: el festín completo samurai.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Inu Tore — 50 piezas",
+              "description": "5 rollos a elegir + 5 soyas ponzu + 5 toppings.",
+              "image": "https://inusushi.github.io/fotos/inu-tore-grande.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "360",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Sen'yo Tore — 50 piezas",
+              "description": "La charola especial: incluye opciones con salmón, camarón, atún y kanikama.",
+              "image": "https://inusushi.github.io/fotos/sen-yo-tore-grande.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "460",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-charola-50-rollos"
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Bebidas",
+          "description": "Para acompañar: bubba sodas, calpis e infusiones.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Bobba Soda",
+              "description": "400 ml.",
+              "image": "https://inusushi.github.io/fotos/bobba-soda.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "50",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Calpis",
+              "description": "400 ml.",
+              "image": "https://inusushi.github.io/fotos/calpis.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "42",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Infusión de Jamaica, jengibre y canela",
+              "image": "https://inusushi.github.io/fotos/infusion-jamaica.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "35",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Té Verde con limón",
+              "image": "https://inusushi.github.io/fotos/te-verde.webp",
+              "offers": {
+                "@type": "Offer",
+                "price": "35",
+                "priceCurrency": "MXN",
+                "availability": "https://schema.org/InStock",
+                "url": "https://inusushi.github.io/#menu"
+              }
+            }
+          ],
+          "@id": "https://inusushi.github.io/#menu-bebidas"
+        }
+      ],
+      "@id": "https://inusushi.github.io/#menu",
+      "url": "https://inusushi.github.io/#menu"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://inusushi.github.io/#faq",
+      "isPartOf": {
+        "@id": "https://inusushi.github.io/#webpage"
+      },
+      "about": {
+        "@id": "https://inusushi.github.io/#restaurant"
+      },
+      "inLanguage": "es-MX",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es su horario?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Entregamos a domicilio de viernes a domingo, de 12:00 a 20:00 hrs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hasta dónde entregan y cuánto cuesta el envío?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Llegamos a Tlalnepantla, Ciudad Satélite, Lindavista, Azcapotzalco, Polanco, Coacalco y Cuautepec. El costo depende de la distancia desde nuestra cocina en Prado Vallejo: aproximadamente $80 a 5 km, $130 a 10 km, $175 a 15 km y $220 a 20 km. En el carrito puedes calcular el tuyo con tu ubicación, y lo confirmamos por WhatsApp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tarda mi pedido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Entre 30 y 90 minutos según la demanda del momento. Todo se prepara al momento, no tenemos platillos hechos con anticipación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo puedo pagar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Efectivo o transferencia. Los datos bancarios te los pasamos por WhatsApp al confirmar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántas piezas trae un rollo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todos nuestros rollos van en 10 piezas. La única excepción es el Furutsu Roll, que viene en 12."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene pedir por WhatsApp o por las apps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Estamos en Rappi, DiDi Food y Uber Eats, pero pidiendo directo por WhatsApp no hay comisiones de plataforma y además tienes 10% de descuento web."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo pasar por mi pedido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Al armar tu carrito marca la casilla 🏠 Paso por mi pedido a la cocina y te ahorras el envío."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo programar un pedido para más tarde?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Si nos escribes fuera de horario, el botón del carrito cambia a Programar pedido por WhatsApp y coordinamos contigo la hora de entrega."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tienen opciones vegetarianas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: el Veggie, el Green Roll y el Furutsu Roll no llevan carne ni pescado. Llevan queso crema, así que son vegetarianos, no veganos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hacen eventos y catering?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, atendemos ferias gastronómicas, bazares, convenciones y eventos familiares. Escríbenos para cotizar."
+          }
+        }
       ]
     }
-  },
-  "sameAs": [
-    "https://www.instagram.com/inusushi_/",
-    "https://www.tiktok.com/@inusushi_",
-    "https://www.youtube.com/@InuSushiChefDanyVarona",
-    "https://www.youtube.com/@SinTantoRolloConDanyVarona"
-  ],
-  "hasMenu": {
-    "@type": "Menu",
-    "name": "Menú Inu Sushi",
-    "inLanguage": "es-MX",
-    "hasMenuSection": [
-      {
-        "@type": "MenuSection",
-        "name": "Rollos",
-        "description": "Rollos de sushi elaborados al momento cortados en 10 piezas acompañados de soya ponzu.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Furutsu Roll", "description": "Frutas del día con queso crema, envuelto en hoja de arroz. 12 piezas.", "image": "https://inusushi.github.io/fotos/furutsu-roll.webp", "suitableForDiet": "https://schema.org/VegetarianDiet", "offers": { "@type": "Offer", "price": "72", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Green Roll", "description": "Estilo california: queso crema, pepino, aguacate y ajonjolí.", "image": "https://inusushi.github.io/fotos/green-roll.webp", "suitableForDiet": "https://schema.org/VegetarianDiet", "offers": { "@type": "Offer", "price": "72", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "California Roll", "description": "Cangrejo, pepino y queso crema.", "image": "https://inusushi.github.io/fotos/california-roll.webp", "offers": { "@type": "Offer", "price": "80", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Veggie", "description": "Champiñones y cebollín salteados, zanahoria caramelizada y aguacate.", "image": "https://inusushi.github.io/fotos/veggie.webp", "suitableForDiet": "https://schema.org/VegetarianDiet", "offers": { "@type": "Offer", "price": "80", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Rollo Suizo", "description": "Empanizado, quesos crema y manchego fundidos con pollo.", "image": "https://inusushi.github.io/fotos/rollo-suizo.webp", "offers": { "@type": "Offer", "price": "105", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Spicy Tuna Roll", "description": "Lomo de atún picante, zanahoria caramelizada, aguacate y manchego.", "image": "https://inusushi.github.io/fotos/spicy-tuna-roll.webp", "offers": { "@type": "Offer", "price": "115", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Rollo Gobernador", "description": "Empanizado relleno de camarón tempurizado con tampico.", "image": "https://inusushi.github.io/fotos/rollo-gobernador.webp", "offers": { "@type": "Offer", "price": "115", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Rollito Pío", "description": "Pollo crunchy con tampico y pepino, cobertura de aguacate.", "image": "https://inusushi.github.io/fotos/rollito-pio.webp", "offers": { "@type": "Offer", "price": "115", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Musashi Roll", "description": "Cobertura de manchego empanizado, salmón fresco, queso crema y aguacate.", "image": "https://inusushi.github.io/fotos/musashi-roll.webp", "offers": { "@type": "Offer", "price": "130", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Ichigo Roll", "description": "Abundante queso crema, zanahoria frita, tampico, aguacate y camarón empanizado.", "image": "https://inusushi.github.io/fotos/ichigo-roll.webp", "offers": { "@type": "Offer", "price": "130", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Sakura Roll", "description": "Camarón frito con panko, aguacate y queso crema. Envuelto en sashimi de salmón ahumado.", "image": "https://inusushi.github.io/fotos/sakura-roll.webp", "offers": { "@type": "Offer", "price": "140", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Don Kangrejo", "description": "Empanizado: camarón con kanikama, champiñón, tampico y manchego fundido.", "image": "https://inusushi.github.io/fotos/don-kangrejo.webp", "offers": { "@type": "Offer", "price": "140", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Entradas",
-        "description": "Crujientes para abrir el apetito: palomitas, tempura, brochetas y rollitos.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Mix de verduritas tempura", "description": "Zanahoria, calabacita y brocolí capeadas, con salsa de anguila.", "image": "https://inusushi.github.io/fotos/mix-de-verduritas-tempura.webp", "offers": { "@type": "Offer", "price": "70", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Palomitas panko — Camarón", "description": "Capeadas en tempura y empanizadas en panko, con sriracha.", "image": "https://inusushi.github.io/fotos/palomitas-camaron.webp", "offers": { "@type": "Offer", "price": "130", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Palomitas — Pollo / Queso / Cangrejo", "description": "Crujientes, con topping de salsa sriracha.", "image": "https://inusushi.github.io/fotos/palomitas-pollo-queso-cangrejo.webp", "offers": { "@type": "Offer", "price": "95", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Rollitos Primavera — 5 pzas", "description": "Verduritas en pasta wonton, con soya ponzu.", "image": "https://inusushi.github.io/fotos/rollitos-primavera-5pz.webp", "offers": { "@type": "Offer", "price": "70", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Rollitos Primavera — 10 pzas", "description": "Verduritas en pasta wonton, con soya ponzu.", "image": "https://inusushi.github.io/fotos/rollitos-primavera-10pz.webp", "offers": { "@type": "Offer", "price": "130", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Brocheta Kushiage — 1 pza", "description": "Plátano macho con queso manchego, empanizada.", "image": "https://inusushi.github.io/fotos/brocheta-kushiage-1pz.webp", "offers": { "@type": "Offer", "price": "40", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Brochetas Kushiage — 3 pzas", "description": "Plátano macho con queso manchego, empanizadas.", "image": "https://inusushi.github.io/fotos/brochetas-kushiage-3pz.webp", "offers": { "@type": "Offer", "price": "105", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Gohan · Yakimeshi",
-        "description": "Arroces japomexa: gohan fresquito y yakimeshi al wok.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Gohan Sencillo", "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.", "image": "https://inusushi.github.io/fotos/gohan-sencillo.webp", "offers": { "@type": "Offer", "price": "60", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Gohan Veggie", "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.", "image": "https://inusushi.github.io/fotos/gohan-veggie.webp", "suitableForDiet": "https://schema.org/VegetarianDiet", "offers": { "@type": "Offer", "price": "68", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Gohan con Tampico", "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.", "image": "https://inusushi.github.io/fotos/gohan-con-tampico.webp", "offers": { "@type": "Offer", "price": "75", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Gohan Camarón", "description": "Arroz gohan al vapor con cebollín, furikake, ajonjolí y soya ponzu.", "image": "https://inusushi.github.io/fotos/gohan-camaron.webp", "offers": { "@type": "Offer", "price": "87", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Gohan Mixto", "description": "Camarón, surimi, pollo y chicharrón de salmón.", "image": "https://inusushi.github.io/fotos/gohan-mixto.webp", "offers": { "@type": "Offer", "price": "85", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Yakimeshi Sencillo", "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.", "image": "https://inusushi.github.io/fotos/yakimeshi-sencillo.webp", "offers": { "@type": "Offer", "price": "65", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Yakimeshi Pollo", "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.", "image": "https://inusushi.github.io/fotos/yakimeshi-pollo.webp", "offers": { "@type": "Offer", "price": "85", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Yakimeshi Cangrejo", "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.", "image": "https://inusushi.github.io/fotos/yakimeshi-cangrejo.webp", "offers": { "@type": "Offer", "price": "85", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Yakimeshi Camarón", "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.", "image": "https://inusushi.github.io/fotos/yakimeshi-camaron.webp", "offers": { "@type": "Offer", "price": "100", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Yakimeshi Mixto", "description": "Arroz frito con jengibre, ajo, soya, vegetales y huevo.", "image": "https://inusushi.github.io/fotos/yakimeshi-mixto.webp", "offers": { "@type": "Offer", "price": "90", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Poke Bowl",
-        "description": "Bowls de comida fresca y bien preparada, arroz gohan con proteína, vegetales, salsas y toppings bien pensados para saciar tu antojo.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Chikin Bowl", "description": "Pollo teriyaki, hongos, calabacita, jitomate, aguacate y fruta con amaranto.", "image": "https://inusushi.github.io/fotos/chikin-bowl.webp", "offers": { "@type": "Offer", "price": "100", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Sakana Bowl", "description": "Proteína a elegir (salmón, atún o kanikama), aguacate, pepino, wakame, tampico y edamames.", "image": "https://inusushi.github.io/fotos/sakana-bowl.webp", "offers": { "@type": "Offer", "price": "135", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Ramen",
-        "description": "Caldito que abraza: nuestro ramen y sopas de la casa.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Sopa Jiraiya — ½ litro", "description": "Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.", "image": "https://inusushi.github.io/fotos/sopa-jiraiya-1-2l.webp", "offers": { "@type": "Offer", "price": "85", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Sopa Jiraiya — 1 litro", "description": "Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.", "image": "https://inusushi.github.io/fotos/sopa-jiraiya-1l.webp", "offers": { "@type": "Offer", "price": "160", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Inu Dashi Ramen — ½ litro", "description": "Tallarines de trigo, camarón, cangrejo, atún y salmón.", "image": "https://inusushi.github.io/fotos/inu-dashi-ramen-1-2l.webp", "offers": { "@type": "Offer", "price": "87", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Inu Dashi Ramen — 1 litro", "description": "Tallarines de trigo, camarón, cangrejo, atún y salmón.", "image": "https://inusushi.github.io/fotos/inu-dashi-ramen-1l.webp", "offers": { "@type": "Offer", "price": "165", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Bento Box",
-        "description": "La comida completa: incluye yakimeshi, verduras o rollito primavera, palomitas, galleta de la fortuna y 5 piezas de sushi.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Bento con Green Roll / Frutal / Cangrejo / Pollo", "image": "https://inusushi.github.io/fotos/bento-green-frutal-cangrejo-pollo.webp", "offers": { "@type": "Offer", "price": "110", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Bento con rollo de Camarón", "image": "https://inusushi.github.io/fotos/bento-camaron.webp", "offers": { "@type": "Offer", "price": "120", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Bento con rollo de Lomo de Atún", "image": "https://inusushi.github.io/fotos/bento-lomo-de-atun.webp", "offers": { "@type": "Offer", "price": "130", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Bento con rollo de Salmón", "image": "https://inusushi.github.io/fotos/bento-salmon.webp", "offers": { "@type": "Offer", "price": "130", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Bento con rollo de Salmón Ahumado", "offers": { "@type": "Offer", "price": "140", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Sushi Burger",
-        "description": "¡¡La parte exótica del menú!! Todo el sabor Inu Sushi en una super burger.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Kangreburger con lomo de atún", "description": "Bollos de arroz gohan empanizados en panko con queso crema y tampico untados, doble proteína de kanikama y lomo de atún, con alga wakame, aguacate, jitomate y salsa teriyaki artesanal.", "image": "https://inusushi.github.io/fotos/kangreburger.webp", "offers": { "@type": "Offer", "price": "150", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Kangreburger con lomo de atún + verduritas tempura", "description": "+120 gramos de verduritas tempura fritas.", "image": "https://inusushi.github.io/fotos/kangreburger-verduritas.webp", "offers": { "@type": "Offer", "price": "180", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Kangreburger Salmón Ahumado", "description": "Bollos de arroz gohan empanizados en panko con queso crema y tampico untados, proteína de salmón ahumado con kanikama, alga wakame, aguacate, jitomate y salsa teriyaki artesanal.", "image": "https://inusushi.github.io/fotos/kangreburger-salmon-ahumado.webp", "offers": { "@type": "Offer", "price": "180", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Kangreburger con salmón ahumado + verduritas tempura", "description": "Proteína de salmón ahumado con kanikama + 120 gramos de verduritas tempura fritas.", "image": "https://inusushi.github.io/fotos/kangreburger-salmon-ahumado-verduritas.webp", "offers": { "@type": "Offer", "price": "210", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Onigiris",
-        "description": "El snack japomexa: triángulos de arroz rellenos.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Onigiri Frutal", "image": "https://inusushi.github.io/fotos/onigiri-frutal.webp", "offers": { "@type": "Offer", "price": "42", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Green Roll", "image": "https://inusushi.github.io/fotos/onigiri-green-roll.webp", "offers": { "@type": "Offer", "price": "42", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Pollo", "image": "https://inusushi.github.io/fotos/onigiri-pollo.webp", "offers": { "@type": "Offer", "price": "47", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Cangrejo", "image": "https://inusushi.github.io/fotos/onigiri-cangrejo.webp", "offers": { "@type": "Offer", "price": "47", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Camarón", "image": "https://inusushi.github.io/fotos/onigiri-camaron.webp", "offers": { "@type": "Offer", "price": "52", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Lomo de Atún", "image": "https://inusushi.github.io/fotos/onigiri-lomo-atun.webp", "offers": { "@type": "Offer", "price": "52", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Kanikama", "image": "https://inusushi.github.io/fotos/onigiri-cangrejo.webp", "offers": { "@type": "Offer", "price": "52", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Salmón", "image": "https://inusushi.github.io/fotos/onigiri-salmon.webp", "offers": { "@type": "Offer", "price": "60", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Onigiri Salmón Ahumado", "image": "https://inusushi.github.io/fotos/onigiri-salmon.webp", "offers": { "@type": "Offer", "price": "60", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Mushi Pan",
-        "description": "Pan japonés al vapor: dulce o salado, calientito.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Mushi Pan Dulce", "description": "Elige tu sabor al agregarlo al carrito.", "image": "https://inusushi.github.io/fotos/mushi-pan-dulce.webp", "offers": { "@type": "Offer", "price": "25", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Mushi Pan Salado", "description": "Elige tu sabor al agregarlo al carrito.", "image": "https://inusushi.github.io/fotos/mushi-pan-salado.webp", "offers": { "@type": "Offer", "price": "30", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Mushi Pan — Arma tu caja", "description": "Elige hasta 6 mushipanes — al llevar 5 ganas 1 gratis.", "image": "https://inusushi.github.io/fotos/mushi-hero.webp", "offers": { "@type": "Offer", "price": "25", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Charola 50 rollos",
-        "description": "Charolas familiares para compartir: el festín completo samurai.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Inu Tore — 50 piezas", "description": "5 rollos a elegir + 5 soyas ponzu + 5 toppings.", "image": "https://inusushi.github.io/fotos/inu-tore-grande.webp", "offers": { "@type": "Offer", "price": "360", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Sen'yo Tore — 50 piezas", "description": "La charola especial: incluye opciones con salmón, camarón, atún y kanikama.", "image": "https://inusushi.github.io/fotos/sen-yo-tore-grande.webp", "offers": { "@type": "Offer", "price": "460", "priceCurrency": "MXN" } }
-        ]
-      },
-      {
-        "@type": "MenuSection",
-        "name": "Bebidas",
-        "description": "Para acompañar: bubba sodas, calpis e infusiones.",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Bobba Soda", "description": "400 ml.", "image": "https://inusushi.github.io/fotos/bobba-soda.webp", "offers": { "@type": "Offer", "price": "50", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Calpis", "description": "400 ml.", "image": "https://inusushi.github.io/fotos/calpis.webp", "offers": { "@type": "Offer", "price": "42", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Infusión de Jamaica, jengibre y canela", "image": "https://inusushi.github.io/fotos/infusion-jamaica.webp", "offers": { "@type": "Offer", "price": "35", "priceCurrency": "MXN" } },
-          { "@type": "MenuItem", "name": "Té Verde con limón", "image": "https://inusushi.github.io/fotos/te-verde.webp", "offers": { "@type": "Offer", "price": "35", "priceCurrency": "MXN" } }
-        ]
-      }
-    ]
-  }
+  ]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -582,64 +1511,6 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .faq-answer b{color:var(--rosa);opacity:1}
 @media(max-width:760px){.faq-item summary{font-size:.93rem;padding:.85rem .95rem}.faq-answer{padding:0 .95rem .95rem;font-size:.9rem}}
 </style>
-<script type="application/ld+json" id="ld-faq">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Cuál es el horario de Inu Sushi?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Entregamos a domicilio de viernes a domingo, de 12:00 a 20:00 hrs." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Hasta dónde entrega Inu Sushi y cuánto cuesta el envío?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Entregamos en Tlalnepantla, Ciudad Satélite, Lindavista, Azcapotzalco, Polanco, Coacalco y Cuautepec. El costo aproximado desde nuestra cocina en Prado Vallejo es de $80 a 5 km, $130 a 10 km, $175 a 15 km y $220 a 20 km. Puedes calcularlo en el carrito con tu ubicación y lo confirmamos por WhatsApp." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cuánto tarda en llegar mi pedido?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Entre 30 y 90 minutos según la demanda. Todo se prepara al momento, no tenemos platillos hechos con anticipación." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué formas de pago aceptan?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Efectivo o transferencia. Los datos bancarios se comparten por WhatsApp al confirmar el pedido." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cuántas piezas trae un rollo?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Todos los rollos vienen en 10 piezas, excepto el Furutsu Roll que viene en 12." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Puedo pedir por Rappi, DiDi Food o Uber Eats?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí, estamos en las tres plataformas. Pidiendo directo por WhatsApp no hay comisiones de plataforma y obtienes 10% de descuento web." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Puedo recoger mi pedido en la cocina?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Al armar tu pedido marca la casilla \"Paso por mi pedido a la cocina\" en el carrito y no pagas envío." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Puedo programar un pedido con anticipación?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí. Si nos escribes fuera de horario, el botón del carrito cambia a \"Programar pedido por WhatsApp\" y coordinamos contigo la hora de entrega." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Inu Sushi tiene opciones vegetarianas?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí: el Veggie, el Green Roll y el Furutsu Roll no llevan carne ni pescado. Llevan queso crema, así que son vegetarianos, no veganos." }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Hacen catering para eventos?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Sí, atendemos ferias gastronómicas, bazares universitarios, convenciones y eventos sociales o familiares. Escríbenos por WhatsApp para cotizar." }
-    }
-  ]
-}
-</script>
 </head>
 <body>
 
@@ -1353,12 +2224,18 @@ function aplicarBannerAviso(banner){
 // Si algo falla no debe romper la pagina: el schema se queda con el horario escrito en el HTML.
 function hhmm(h){ return (h < 10 ? '0' : '') + h + ':00'; }
 
+// Todo el JSON-LD vive en un solo @graph; se busca el nodo por su @type.
+function nodoDelGrafo(ld, tipo){
+  return (ld['@graph'] || []).filter(function(n){ return n['@type'] === tipo; })[0];
+}
+
 function sincronizarSchemaHorario(){
   try {
-    var el = document.getElementById('ld-restaurant');
+    var el = document.getElementById('ld-graph');
     if (!el) return;
     var ld = JSON.parse(el.textContent);
-    var spec = ld.openingHoursSpecification && ld.openingHoursSpecification[0];
+    var rest = nodoDelGrafo(ld, 'Restaurant');
+    var spec = rest && rest.openingHoursSpecification && rest.openingHoursSpecification[0];
     if (!spec) return;
     spec.opens = hhmm(HORARIO.abre);
     spec.closes = hhmm(HORARIO.cierra);
@@ -1378,10 +2255,12 @@ function sincronizarFAQ(){
     if (d) d.textContent = descuentoTxt;
   } catch (e) { /* texto intacto */ }
   try {
-    var el = document.getElementById('ld-faq');
+    var el = document.getElementById('ld-graph');
     if (!el) return;
     var ld = JSON.parse(el.textContent);
-    (ld.mainEntity || []).forEach(function(q){
+    var faq = nodoDelGrafo(ld, 'FAQPage');
+    if (!faq) return;
+    (faq.mainEntity || []).forEach(function(q){
       var a = q.acceptedAnswer;
       if (!a || !a.text) return;
       a.text = a.text
