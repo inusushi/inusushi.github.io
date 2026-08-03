@@ -4,11 +4,11 @@
     "cierra": 20
   },
   "descuento_web": {
-    "activo": true,
+    "activo": false,
     "porcentaje": 10
   },
   "banner_aviso": {
-    "activo": true,
+    "activo": false,
     "texto": "!!Último fin de semana con 10% de descuento sobre el total de tu pedido!!!"
   }
 }
