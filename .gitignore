@@ -18,5 +18,10 @@ informes/
 inu-studio/
 mushipan-b2b/
 
+# Material original de las resenas: 7.850 KB de PNG sin optimizar.
+# La web usa las versiones .webp de resenas/ (453 KB en total).
+# Los originales se quedan en local por si hay que reprocesarlos.
+Reseñas clientes inu sushi/
+
 # Accesos directos de Windows que se cuelan al copiar carpetas
 *.lnk
