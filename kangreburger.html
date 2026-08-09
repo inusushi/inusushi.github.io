@@ -1359,7 +1359,9 @@ var ITEM_DISPONIBLE = {
   'Yakimeshi Camarón': true,
   'Bento Camarón': true,
   'Bobba Soda': false,
-  'Té Verde': false
+  'Té Verde': false,
+  'Rollitos Primavera 5pz': false,
+  'Rollitos Primavera 10pz': false
 };
 function pintarDisponibilidadItems(){
   Object.keys(ITEM_DISPONIBLE).forEach(function(name){
@@ -1730,7 +1732,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
 
   var SALSAS_PALOMITAS = ['Salsa de anguila', 'Sriracha', 'Salsa de habanero Chernobyl', 'Soya ponzu limón', 'Soya picante'];
   var ACOMPANANTES_BENTO = [
-    { key: 'acompanante1', label: 'Elige tu acompañante (obligatorio)', options: ['Rollito primavera', 'Verduritas tempura'] },
+    { key: 'acompanante1', label: 'Elige tu acompañante (obligatorio)', options: ['Verduritas tempura'] },
     { key: 'acompanante2', label: 'Elige tus palomitas (obligatorio)', options: ['Palomitas de pollo', 'Palomitas de cangrejo'] }
   ];
 
