@@ -1982,7 +1982,7 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <textarea id="addrInput" class="addr-input" rows="2" placeholder="Calle, número, colonia y una referencia"></textarea>
     <p class="addr-hint" id="addrHint">Escribe tu dirección para poder enviar el pedido 🙏</p>
     <label class="pickup-check"><input type="checkbox" id="pickupCheck"> 🏠 Paso por mi pedido a la cocina</label>
-    <button class="ship-btn" id="shipBtn" type="button">🛵 Calcular mi envío estimado (usa tu ubicación)</button>
+    <button class="ship-btn" id="shipBtn" type="button">🛵 Calcular mi envío estimado</button>
     <p class="ship-out" id="shipOut"></p>
     <div class="price-row"><span>Subtotal</span><span class="val" id="subtotalVal">$0</span></div>
     <div class="price-row descuento-row"><span>🎉 Descuento 10% web</span><span class="val" id="descuentoVal">-$0</span></div>
@@ -2561,18 +2561,40 @@ function estimarEnvio(lat, lon){
   var est = 35 + 9.3 * km; // calibrado con cotizaciones DiDi reales (jul 2026)
   return { km: km, min: Math.round(est*0.82/5)*5, max: Math.round(est*1.15/5)*5 };
 }
+function mostrarResultadoEnvio(out, e){
+  if (e.km > 30){ out.innerHTML = 'Estás a ~' + Math.round(e.km) + ' km — quizá quedamos algo lejos 😢 Escríbenos por WhatsApp y lo checamos.'; return; }
+  out.innerHTML = '🛵 Envío estimado: <b style="color:var(--rosa)">$' + e.min + '–$' + e.max + '</b> (~' + Math.round(e.km) + ' km en DiDi/Rappi). El costo exacto se confirma por WhatsApp.';
+}
+function calcularEnvioPorGPS(out){
+  if (!navigator.geolocation){ out.textContent = 'Tu navegador no permite ubicación. Escribe tu dirección arriba o mándanos tu colonia por WhatsApp 🙏'; return; }
+  out.textContent = 'Calculando… 📍';
+  navigator.geolocation.getCurrentPosition(function(pos){
+    mostrarResultadoEnvio(out, estimarEnvio(pos.coords.latitude, pos.coords.longitude));
+  }, function(){
+    out.textContent = 'No pudimos leer tu ubicación. Escribe tu dirección arriba o mándanos tu colonia por WhatsApp 🙏';
+  }, { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 });
+}
+function geocodeNominatim(query){
+  return fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=mx&viewbox=-99.35,19.65,-98.95,19.25&bounded=1&q=' + encodeURIComponent(query))
+    .then(function(r){ return r.json(); });
+}
 document.getElementById('shipBtn').addEventListener('click', function(){
   var out = document.getElementById('shipOut');
   out.style.display = 'block';
-  if (!navigator.geolocation){ out.textContent = 'Tu navegador no permite ubicación. Mándanos tu colonia por WhatsApp y te cotizamos 🙏'; return; }
-  out.textContent = 'Calculando… 📍';
-  navigator.geolocation.getCurrentPosition(function(pos){
-    var e = estimarEnvio(pos.coords.latitude, pos.coords.longitude);
-    if (e.km > 30){ out.innerHTML = 'Estás a ~' + Math.round(e.km) + ' km — quizá quedamos algo lejos 😢 Escríbenos por WhatsApp y lo checamos.'; return; }
-    out.innerHTML = '🛵 Envío estimado: <b style="color:var(--rosa)">$' + e.min + '–$' + e.max + '</b> (~' + Math.round(e.km) + ' km en DiDi/Rappi). El costo exacto se confirma por WhatsApp.';
-  }, function(){
-    out.textContent = 'No pudimos leer tu ubicación. Mándanos tu colonia por WhatsApp y te cotizamos al momento 🙏';
-  }, { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 });
+  var direccion = document.getElementById('addrInput').value.trim();
+  if (direccion.length < 10){ calcularEnvioPorGPS(out); return; }
+  out.textContent = 'Buscando tu dirección… 📍';
+  geocodeNominatim(direccion + ', México').then(function(data){
+    if (data.length) return data;
+    // Reintento simplificado: colonia + ciudad (las calles con numero a veces no matchean)
+    var partes = direccion.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    var simple = partes.slice(-2).join(', ');
+    if (!simple || simple === direccion) return [];
+    return geocodeNominatim(simple + ', México');
+  }).then(function(data){
+    if (!data.length){ out.textContent = 'No encontramos esa dirección en el mapa. Probamos con tu ubicación del navegador…'; calcularEnvioPorGPS(out); return; }
+    mostrarResultadoEnvio(out, estimarEnvio(parseFloat(data[0].lat), parseFloat(data[0].lon)));
+  }).catch(function(){ out.textContent = 'No pudimos buscar esa dirección. Probamos con tu ubicación del navegador…'; calcularEnvioPorGPS(out); });
 });
 
 // Enviar pedido por WhatsApp con el mensaje ya armado
