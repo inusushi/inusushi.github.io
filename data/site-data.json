@@ -8,7 +8,7 @@
     "porcentaje": 10
   },
   "banner_aviso": {
-    "activo": true,
+    "activo": false,
     "texto": "¡¡Del 7 al 10 de Agosto te damos un 15% de descuento en los platillos con \"Salmón\" o \"Salmón Ahumado\"!!"
   }
 }
