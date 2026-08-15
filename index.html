@@ -1459,6 +1459,18 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .cfg-err{color:#FF8A80;font-size:.76rem;margin-top:.4rem;display:none}
 .cart-cfg-lines{font-size:.72rem;opacity:.75;margin-top:.25rem;line-height:1.5;white-space:pre-line}
 
+/* ===== POPUP PROMO DEL DIA/SEMANA ===== */
+.promo-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.promo-overlay.open{opacity:1;pointer-events:auto}
+.promo-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);width:min(420px,90vw);max-height:88vh;overflow-y:auto;background:var(--negro-suave);border:1.5px solid rgba(255,73,176,.35);border-radius:20px;z-index:81;opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;box-shadow:0 30px 70px rgba(0,0,0,.6);padding:1.3rem}
+.promo-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.promo-close{position:absolute;top:.6rem;right:.8rem;background:transparent;border:none;color:var(--crema);font-size:1.6rem;line-height:1;cursor:pointer;opacity:.7}
+.promo-close:hover{opacity:1;color:var(--rosa)}
+.promo-img{width:100%;border-radius:14px;object-fit:cover;max-height:220px;margin-bottom:.9rem}
+.promo-modal h3{font-family:'Reggae One','Arial Black',sans-serif;font-weight:400;font-size:1.2rem;color:var(--crema);margin-bottom:.4rem}
+.promo-modal p{font-size:.86rem;color:var(--crema);opacity:.85;line-height:1.4;margin-bottom:.6rem}
+.promo-precio{font-family:'Reggae One','Arial Black',sans-serif;color:var(--rosa);font-size:1.3rem;margin-bottom:.9rem}
+
 /* ===== CATEGORIAS (reemplazo de favoritos) ===== */
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.8rem}
 .cat-tile{position:relative;aspect-ratio:1;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,73,176,.18);background:#000;padding:0;transition:transform .15s ease, border-color .15s ease}
@@ -2008,6 +2020,15 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     <button class="btn btn-wa" id="cfgAddBtn">🐾 Agregar al carrito</button>
   </div>
 </div>
+<div class="promo-overlay" id="promoOverlay"></div>
+<div class="promo-modal" id="promoModal" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+  <button class="promo-close" id="promoClose" aria-label="Cerrar">&times;</button>
+  <img id="promoImg" class="promo-img" alt="">
+  <h3 id="promoTitle"></h3>
+  <p id="promoTexto"></p>
+  <div class="promo-precio" id="promoPrecio"></div>
+  <button class="btn btn-wa" id="promoAddBtn">🐾 Agregar al carrito</button>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -2351,6 +2372,7 @@ document.querySelectorAll('[data-add]').forEach(function(btn){
     e.stopPropagation();
     var card = btn.closest('[data-name]');
     if(!card) return;
+    if(card.classList.contains('agotado')) return;
     if(card.dataset.cfg){
       abrirConfigurador(card.dataset.cfg, card.dataset.name, parseInt(card.dataset.price, 10));
       return;
@@ -2514,6 +2536,10 @@ var ITEM_DISPONIBLE = {
   'Gohan Camarón': true,
   'Yakimeshi Camarón': true,
   'Bento Camarón': true,
+  'Palomitas Camarón': true,
+  'Onigiri Camarón': true,
+  'Inu Dashi Ramen 1/2L': true,
+  'Inu Dashi Ramen 1L': true,
   'Bobba Soda': false,
   'Té Verde': false,
   'Rollitos Primavera 5pz': false,
@@ -3248,6 +3274,36 @@ renderCart();
     }
     setTimeout(function(){ window.location.href = href; }, 650);
   });
+})();
+
+// ===== POPUP PROMO DEL DIA/SEMANA =====
+(function(){
+  function cerrarPromo(){
+    document.getElementById('promoOverlay').classList.remove('open');
+    document.getElementById('promoModal').classList.remove('open');
+  }
+  document.getElementById('promoClose').addEventListener('click', cerrarPromo);
+  document.getElementById('promoOverlay').addEventListener('click', cerrarPromo);
+
+  fetch('data/promos.json?_=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var promo = (data.promos || []).find(function(p){ return p.activo; });
+      if(!promo) return;
+      document.getElementById('promoImg').src = promo.imagen;
+      document.getElementById('promoImg').alt = promo.nombre;
+      document.getElementById('promoTitle').textContent = promo.nombre;
+      document.getElementById('promoTexto').textContent = promo.texto;
+      document.getElementById('promoPrecio').textContent = '$' + promo.precio;
+      document.getElementById('promoAddBtn').onclick = function(){
+        addToCart(promo.nombre, promo.precio);
+        drawer.classList.add('open'); overlay.classList.add('open');
+        cerrarPromo();
+      };
+      document.getElementById('promoOverlay').classList.add('open');
+      document.getElementById('promoModal').classList.add('open');
+    })
+    .catch(function(){ /* sin promo activa, no se muestra nada */ });
 })();
 </script>
 </body>

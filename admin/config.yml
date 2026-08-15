@@ -35,3 +35,22 @@ collections:
             fields:
               - {label: "Activo", name: "activo", widget: "boolean"}
               - {label: "Texto del aviso", name: "texto", widget: "string", required: false}
+
+  - name: "promos"
+    label: "Promoción del día/semana"
+    files:
+      - name: "promos-data"
+        label: "Promociones"
+        file: "data/promos.json"
+        format: "json"
+        fields:
+          - label: "Promociones"
+            name: "promos"
+            widget: "list"
+            summary: "{{nombre}} — {{activo}}"
+            fields:
+              - {label: "Nombre", name: "nombre", widget: "string"}
+              - {label: "Texto promocional", name: "texto", widget: "text"}
+              - {label: "Imagen", name: "imagen", widget: "image"}
+              - {label: "Precio", name: "precio", widget: "number", value_type: "int"}
+              - {label: "Activa", name: "activo", widget: "boolean", default: false}

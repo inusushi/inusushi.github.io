@@ -1,0 +1,11 @@
+{
+  "promos": [
+    {
+      "nombre": "Promo de ejemplo",
+      "texto": "Edita esta promoción desde el panel de administración: cambia el nombre, el texto, la imagen y el precio, y actívala cuando quieras que aparezca en la web.",
+      "imagen": "fotos/gohan-camaron.webp",
+      "precio": 0,
+      "activo": false
+    }
+  ]
+}
