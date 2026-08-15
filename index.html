@@ -1460,13 +1460,18 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
 .cart-cfg-lines{font-size:.72rem;opacity:.75;margin-top:.25rem;line-height:1.5;white-space:pre-line}
 
 /* ===== POPUP PROMO DEL DIA/SEMANA ===== */
-.promo-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.promo-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:80;opacity:0;pointer-events:none;transition:opacity .25s ease}
 .promo-overlay.open{opacity:1;pointer-events:auto}
-.promo-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);width:min(420px,90vw);max-height:88vh;overflow-y:auto;background:var(--negro-suave);border:1.5px solid rgba(255,73,176,.35);border-radius:20px;z-index:81;opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;box-shadow:0 30px 70px rgba(0,0,0,.6);padding:1.3rem}
-.promo-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.promo-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.4);width:min(420px,90vw);max-height:88vh;overflow-y:auto;background:var(--negro-suave);border:1.5px solid rgba(255,73,176,.35);border-radius:20px;z-index:81;opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;box-shadow:0 30px 70px rgba(0,0,0,.6);padding:1.3rem}
+.promo-modal.open{opacity:1;pointer-events:auto;animation:promoPop .55s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes promoPop{
+  0%{transform:translate(-50%,-50%) scale(.4)}
+  60%{transform:translate(-50%,-50%) scale(1.04)}
+  100%{transform:translate(-50%,-50%) scale(1)}
+}
 .promo-close{position:absolute;top:.6rem;right:.8rem;background:transparent;border:none;color:var(--crema);font-size:1.6rem;line-height:1;cursor:pointer;opacity:.7}
 .promo-close:hover{opacity:1;color:var(--rosa)}
-.promo-img{width:100%;border-radius:14px;object-fit:cover;max-height:220px;margin-bottom:.9rem}
+.promo-img{display:block;max-width:100%;max-height:60vh;width:auto;height:auto;margin:0 auto .9rem;border-radius:14px;object-fit:contain}
 .promo-modal h3{font-family:'Reggae One','Arial Black',sans-serif;font-weight:400;font-size:1.2rem;color:var(--crema);margin-bottom:.4rem}
 .promo-modal p{font-size:.86rem;color:var(--crema);opacity:.85;line-height:1.4;margin-bottom:.6rem}
 .promo-precio{font-family:'Reggae One','Arial Black',sans-serif;color:var(--rosa);font-size:1.3rem;margin-bottom:.9rem}
