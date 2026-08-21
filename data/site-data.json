@@ -10,11 +10,11 @@
     "cierra": 20
   },
   "descuento_web": {
-    "activo": false,
+    "activo": true,
     "porcentaje": 10
   },
   "banner_aviso": {
-    "activo": false,
-    "texto": "¡¡Del 7 al 10 de Agosto te damos un 15% de descuento en los platillos con \"Salmón\" o \"Salmón Ahumado\"!!"
+    "activo": true,
+    "texto": "¡¡Estamos estrenando este PORTAL, por eso te regalamos un 10% de descuento en tu compra total !!"
   }
 }
