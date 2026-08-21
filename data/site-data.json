@@ -1,5 +1,6 @@
 {
   "horario": {
+    "dias": [5, 6, 0],
     "abre": 12,
     "cierra": 20
   },

@@ -21,6 +21,20 @@ collections:
             name: "horario"
             widget: "object"
             fields:
+              - label: "Días abiertos"
+                name: "dias"
+                widget: "select"
+                multiple: true
+                hint: "Elige los días en que el negocio recibe pedidos por la web"
+                default: [5, 6, 0]
+                options:
+                  - {label: "Domingo", value: 0}
+                  - {label: "Lunes", value: 1}
+                  - {label: "Martes", value: 2}
+                  - {label: "Miércoles", value: 3}
+                  - {label: "Jueves", value: 4}
+                  - {label: "Viernes", value: 5}
+                  - {label: "Sábado", value: 6}
               - {label: "Hora de apertura (0-23)", name: "abre", widget: "number", min: 0, max: 23, value_type: "int"}
               - {label: "Hora de cierre (0-23)", name: "cierra", widget: "number", min: 0, max: 23, value_type: "int"}
           - label: "Descuento por compra web"
