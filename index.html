@@ -2295,9 +2295,13 @@ function renderCart(){
       count += item.qty;
       if(item.isPromo) ahorroSalmon += (item.originalPrice - item.price) * item.qty;
       var promoTag = item.isPromo ? '' : '';
+      var baseTxt = item.base ? ' — base $'+item.base : '';
       html += '<div class="cart-row">' +
-        '<div class="ci"><div class="cn">'+item.title+' (config.)'+promoTag+'</div><div class="cp">$'+item.price+' c/u</div>' +
-          '<div class="cart-cfg-lines">'+item.lines.join('\n')+'</div></div>' +
+        '<div class="ci">' +
+          '<div class="cn">'+item.title+' (config.)'+promoTag+baseTxt+'</div>' +
+          '<div class="cart-cfg-lines">'+item.lines.join('\n')+'</div>' +
+          '<div class="cp" style="margin-top:.3rem">Total del platillo: $'+item.price+' c/u</div>' +
+        '</div>' +
         '<div class="qty">' +
           '<button data-decx="'+item.id+'" aria-label="Quitar uno">−</button>' +
           '<span>'+item.qty+'</span>' +
@@ -2629,7 +2633,9 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     subtotal += lineTotal;
     if(item.isPromo) ahorroSalmon += (item.originalPrice - item.price) * item.qty;
     lines.push('• ' + item.qty + ' x ' + item.title + ' (personalizado)' + (item.isPromo ? ' (15% OFF salmón)' : '') + ' — $' + lineTotal);
+    if(item.base) lines.push('   Precio base: $' + item.base);
     item.lines.forEach(function(l){ lines.push('   ' + l); });
+    if(item.base) lines.push('   Total del platillo: $' + item.price + (item.qty > 1 ? ' c/u' : ''));
     itemsPedido.push({ nombre: item.title, cantidad: item.qty, precio_unitario: item.price, subtotal_linea: lineTotal, personalizacion: item.lines });
   });
   var descuento = Math.round(subtotal * DESCUENTO_WEB);
@@ -2821,7 +2827,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
 
       var total = recalc();
       cfgOnAdd = null;
-      addConfigurado(nombre, total, lines);
+      addConfigurado(nombre, total, lines, precioBase);
       closeCfg();
     };
   }
@@ -2882,7 +2888,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
       if (lines.length === 0){
         addToCart(nombre, precioBase);
       } else {
-        addConfigurado(nombre, total, lines);
+        addConfigurado(nombre, total, lines, precioBase);
       }
       closeCfg();
     };
@@ -3030,11 +3036,12 @@ document.getElementById('sendOrder').addEventListener('click', function(){
 
     var soyaExtraCount = 0;
     function recalc(){
-      var porPieza = precioBase;
-      if (spec.topping && body.querySelector('[data-topping-g]').value) porPieza += spec.topping.price;
-      if (spec.extra2 && body.querySelector('[data-extra2-g]').value) porPieza += spec.extra2.price;
+      // Las piezas multiplican el precio del platillo; el topping y los extras
+      // se cobran una sola vez por la orden, no por pieza.
       var mult = (spec.orden3 && body.querySelector('[data-orden3]').value === 'Orden de 3 piezas') ? 3 : 1;
-      var total = porPieza * mult;
+      var total = precioBase * mult;
+      if (spec.topping && body.querySelector('[data-topping-g]').value) total += spec.topping.price;
+      if (spec.extra2 && body.querySelector('[data-extra2-g]').value) total += spec.extra2.price;
       if (spec.soyaExtra) total += soyaExtraCount * spec.soyaExtra.price;
       totalEl.textContent = '$' + total;
       return total;
@@ -3066,20 +3073,20 @@ document.getElementById('sendOrder').addEventListener('click', function(){
         var val = body.querySelector('[data-req="' + idx + '"]').value;
         lines.push(r.label.replace(' (obligatorio)', '').replace(' (incluida)', '') + ': ' + val);
       });
+      var esOrden3 = spec.orden3 && body.querySelector('[data-orden3]').value === 'Orden de 3 piezas';
+      if (esOrden3) lines.push('Orden de 3 piezas: 3 x $' + precioBase + ' (+$' + (precioBase * 2) + ')');
       var toppingVal = spec.topping ? body.querySelector('[data-topping-g]').value : '';
       if (toppingVal) lines.push('Topping extra: ' + toppingVal + ' (+$' + spec.topping.price + ')');
       var extra2Val = spec.extra2 ? body.querySelector('[data-extra2-g]').value : '';
       if (extra2Val) lines.push((spec.extra2.label || 'Extra') + ': ' + extra2Val + ' (+$' + spec.extra2.price + ')');
       if (spec.soyaExtra && soyaExtraCount > 0) lines.push('Soya extra: ' + soyaExtraCount + ' pieza(s) (+$' + spec.soyaExtra.price + ' c/u)');
-      var esOrden3 = spec.orden3 && body.querySelector('[data-orden3]').value === 'Orden de 3 piezas';
       var total = recalc();
-      if (esOrden3) lines.push('Cantidad: Orden de 3 piezas (' + (total - (spec.soyaExtra ? soyaExtraCount * spec.soyaExtra.price : 0)) + ' en total)');
 
       cfgOnAdd = null;
       if (reqs.length === 0 && lines.length === 0){
         addToCart(nombre, precioBase);
       } else {
-        addConfigurado(nombre, total, lines);
+        addConfigurado(nombre, total, lines, precioBase);
       }
       closeCfg();
     };
@@ -3171,8 +3178,12 @@ document.getElementById('sendOrder').addEventListener('click', function(){
 
 // ===== Carrito: items configurados (Tore / rollos con extras) =====
 var cartExtra = [];
-function addConfigurado(title, price, lines){
-  cartExtra.push({ id: 'cfg' + Date.now() + Math.random().toString(16).slice(2), title: title, price: price, qty: 1, lines: lines, isPromo: false, originalPrice: price });
+function addConfigurado(title, price, lines, base){
+  // El precio base (solo si el platillo lleva extras que suben el precio) se
+  // guarda aparte: se muestra junto al nombre y el total ya sumado va hasta
+  // abajo del desglose.
+  var precioBaseItem = (typeof base === 'number' && base > 0 && base < price) ? base : null;
+  cartExtra.push({ id: 'cfg' + Date.now() + Math.random().toString(16).slice(2), title: title, price: price, qty: 1, lines: lines, base: precioBaseItem, isPromo: false, originalPrice: price });
   renderCart();
   drawer.classList.add('open'); overlay.classList.add('open');
   showToast('Agregado: ' + title);
