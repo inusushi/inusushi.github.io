@@ -10,11 +10,11 @@
     "cierra": 20
   },
   "descuento_web": {
-    "activo": true,
+    "activo": false,
     "porcentaje": 10
   },
   "banner_aviso": {
-    "activo": true,
+    "activo": false,
     "texto": "¡¡Estamos estrenando este PORTAL, por eso te regalamos un 10% de descuento en tu compra total !!"
   }
 }
