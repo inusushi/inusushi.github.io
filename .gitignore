@@ -17,6 +17,9 @@ marca/
 informes/
 inu-studio/
 mushipan-b2b/
+# Copias del Costeador Maestro (costos reales). El asterisco cubre tambien
+# las copias futuras con otra fecha en el nombre y el .xlsx suelto.
+COSTEADOR*
 
 # Material original de las resenas: 7.850 KB de PNG sin optimizar.
 # La web usa las versiones .webp de resenas/ (453 KB en total).
