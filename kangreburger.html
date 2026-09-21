@@ -655,7 +655,7 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
     <div class="items">
       <div class="item" data-name="Furutsu Roll" data-price="72" data-cfg="roll"><img class="thumb" src="fotos/furutsu-roll.webp" alt="Furutsu Roll" loading="lazy"><div class="info"><div class="nombre">Furutsu Roll (12 pzas)</div><div class="desc">Frutas del día con queso crema, envuelto en hoja de arroz.</div></div><div class="right"><span class="p">$72</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Green Roll" data-price="72" data-cfg="roll"><img class="thumb" src="fotos/green-roll.webp" alt="Green Roll" loading="lazy"><div class="info"><div class="nombre">Green Roll</div><div class="desc">Estilo california: queso crema, pepino, aguacate y ajonjolí.</div></div><div class="right"><span class="p">$72</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="California Roll" data-price="80" data-cfg="roll"><img class="thumb" src="fotos/california-roll.webp" alt="California Roll" loading="lazy"><div class="info"><div class="nombre">California Roll</div><div class="desc">Cangrejo, pepino y queso crema.</div></div><div class="right"><span class="p">$80</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="California Roll" data-price="80" data-cfg="roll"><img class="thumb" src="fotos/california-roll.webp" alt="California Roll" loading="lazy"><div class="info"><div class="nombre">California Roll</div><div class="desc">Cangrejo, pepino y queso crema — puedes cambiar la proteína.</div></div><div class="right"><span class="p">$80</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Veggie" data-price="80" data-cfg="roll"><img class="thumb" src="fotos/veggie.webp" alt="Veggie" loading="lazy"><div class="info"><div class="nombre">Veggie</div><div class="desc">Champiñones y cebollín salteados, zanahoria caramelizada y aguacate.</div></div><div class="right"><span class="p">$80</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Rollo Suizo" data-price="105" data-cfg="roll"><img class="thumb" src="fotos/rollo-suizo.webp" alt="Rollo Suizo" loading="lazy"><div class="info"><div class="nombre">Rollo Suizo</div><div class="desc">Empanizado, quesos crema y manchego fundidos con pollo.</div></div><div class="right"><span class="p">$105</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
       <div class="item" data-name="Spicy Tuna Roll" data-price="115" data-cfg="roll"><img class="thumb" src="fotos/spicy-tuna-roll.webp" alt="Spicy Tuna Roll" loading="lazy"><div class="info"><div class="nombre">Spicy Tuna Roll</div><div class="desc">Lomo de atún picante, zanahoria caramelizada, aguacate y manchego.</div></div><div class="right"><span class="p">$115</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
@@ -1361,8 +1361,8 @@ var ITEM_DISPONIBLE = {
   'Inu Dashi Ramen 1L': true,
   'Bobba Soda': false,
   'Té Verde': false,
-  'Rollitos Primavera 5pz': false,
-  'Rollitos Primavera 10pz': false
+  'Rollitos Primavera 5pz': true,
+  'Rollitos Primavera 10pz': true
 };
 function pintarDisponibilidadItems(){
   Object.keys(ITEM_DISPONIBLE).forEach(function(name){
@@ -1542,6 +1542,19 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   var TOPPINGS = ['Salsa de anguila', 'Tampico', 'Salsa de habanero Chernobyl', 'Salsa Teriyaki',
     "Jarabe de chocolate Hershey's", 'Sriracha (chile rojo fermentado)'];
 
+  // Variantes de proteina: solo para los rollos listados aqui. Sustituyen la
+  // proteina base del platillo; el precio de la opcion elegida se suma al precio base.
+  var ROLL_PROTEINA_VARIANTES = {
+    'California Roll': [
+      { label: 'Cangrejo (original)', price: 0 },
+      { label: 'Pollo', price: 5 },
+      { label: 'Camarón', price: 10 },
+      { label: 'Lomo de atún', price: 15 },
+      { label: 'Salmón', price: 20 },
+      { label: 'Cangrejo Kanikama', price: 15 }
+    ]
+  };
+
   var overlay = document.getElementById('cfgOverlay');
   var modal = document.getElementById('cfgModal');
   var body = document.getElementById('cfgBody');
@@ -1680,6 +1693,15 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     cfgMode = 'roll';
     titleEl.textContent = nombre;
     var h = '';
+    var proteinas = ROLL_PROTEINA_VARIANTES[nombre];
+    if (proteinas){
+      h += '<div class="cfg-step"><h4>Elige tu proteína (obligatorio)</h4><div class="cfg-row"><select data-proteina-roll style="flex:1">';
+      proteinas.forEach(function(p, i){
+        var etiqueta = p.label + (p.price > 0 ? ' (+$' + p.price + ')' : ' — incluido');
+        h += opt(p.label, etiqueta, i === 0);
+      });
+      h += '</select></div></div>';
+    }
     h += '<div class="cfg-step"><h4>Topping o salsa extra (opcional, +$15)</h4>';
     h += '<div class="cfg-row"><select data-topping-roll style="flex:1"><option value="">Sin topping extra</option>';
     TOPPINGS.forEach(function(t){ h += opt(t, t, false); });
@@ -1711,9 +1733,19 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     pintar();
 
     body.querySelector('[data-topping-roll]').addEventListener('change', recalc);
+    if (proteinas){
+      body.querySelector('[data-proteina-roll]').addEventListener('change', recalc);
+    }
 
+    function proteinaElegida(){
+      if (!proteinas) return null;
+      var val = body.querySelector('[data-proteina-roll]').value;
+      return proteinas.find(function(p){ return p.label === val; }) || null;
+    }
     function recalc(){
       var total = precioBase;
+      var prot = proteinaElegida();
+      if (prot) total += prot.price;
       if (body.querySelector('[data-topping-roll]').value) total += 15;
       total += (exPon + exPic) * 10;
       totalEl.textContent = '$' + total;
@@ -1723,6 +1755,8 @@ document.getElementById('sendOrder').addEventListener('click', function(){
 
     cfgOnAdd = function(){
       var lines = [];
+      var prot = proteinaElegida();
+      if (prot && prot.price > 0) lines.push('Proteína (en vez de cangrejo): ' + prot.label + ' (+$' + prot.price + ')');
       var top = body.querySelector('[data-topping-roll]').value;
       if (top) lines.push('Topping extra: ' + top + ' (+$15)');
       if (exPon + exPic > 0) lines.push('Soya extra (+$10 c/u): ' + exPon + ' ponzu · ' + exPic + ' ponzu picante');
