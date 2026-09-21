@@ -1287,6 +1287,29 @@ h2 .acc{color:var(--rosa)}
 .item .desc{font-size:.76rem;color:var(--crema);opacity:.65;margin-top:.1rem}
 .item .right{display:flex;align-items:center;gap:.6rem;white-space:nowrap}
 .item .p{font-family:'Reggae One','Arial Black',sans-serif;color:var(--rosa);font-size:1rem}
+
+/* ===== VISOR DE FOTOS DEL MENU ===== */
+/* La foto del platillo se vuelve un boton (teclado + lupita para el celular). */
+.thumb-zoom{position:relative;display:block;flex-shrink:0;width:52px;height:52px;padding:0;border:0;background:none;border-radius:10px;cursor:zoom-in;color:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.thumb-zoom .thumb{transition:transform .15s ease}
+.thumb-zoom:hover .thumb{transform:scale(1.06)}
+.thumb-lupa{position:absolute;right:-4px;bottom:-4px;width:18px;height:18px;border-radius:50%;background:var(--rosa);color:var(--negro);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--negro-tarjeta);pointer-events:none}
+.thumb-lupa svg{width:10px;height:10px}
+.visor-fondo{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:max(1rem,env(safe-area-inset-top)) max(1rem,env(safe-area-inset-right)) max(1rem,env(safe-area-inset-bottom)) max(1rem,env(safe-area-inset-left));background:rgba(0,0,0,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility 0s linear .2s;overscroll-behavior:contain}
+.visor-fondo.open{opacity:1;visibility:visible;transition:opacity .2s ease}
+.visor-cerrar{position:absolute;top:max(.8rem,env(safe-area-inset-top));right:max(.8rem,env(safe-area-inset-right));width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,73,176,.6);background:rgba(29,29,27,.9);color:var(--crema);font-size:1.7rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.visor-cerrar:hover{background:var(--rosa);color:var(--negro)}
+.visor-caja{width:min(92vw,480px);max-height:100%;overflow-y:auto;text-align:center;background:radial-gradient(ellipse 80% 55% at 50% 30%, rgba(255,73,176,.16), transparent 70%), var(--negro-suave);border:1.5px solid rgba(255,73,176,.35);border-radius:20px;padding:1.1rem 1.1rem 1.3rem;transform:scale(.94);transition:transform .2s ease}
+.visor-fondo.open .visor-caja{transform:none}
+/* Las miniaturas miden 200px: se muestran mas chicas para que no se vean borrosas.
+   Una foto grande (400px o mas) ocupa todo el ancho de la caja. */
+.visor-foto{display:block;width:100%;max-height:56vh;max-height:56svh;aspect-ratio:1;object-fit:contain;margin:0 auto}
+.visor-foto.chica{width:min(74vw,320px)}
+.visor-nombre{font-family:'Reggae One','Arial Black',sans-serif;font-size:1.35rem;line-height:1.2;color:var(--crema);margin-top:.9rem}
+.visor-desc{font-size:.9rem;color:var(--crema);opacity:.8;margin-top:.35rem}
+.visor-precio{font-family:'Reggae One','Arial Black',sans-serif;font-size:1.3rem;color:var(--rosa);margin-top:.5rem}
+/* Celular en horizontal: foto mas baja para que todo quepa sin desplazarse. */
+@media (max-height:480px){.visor-foto{max-height:42vh;max-height:42svh}.visor-nombre{margin-top:.6rem}}
 .addmini{width:30px;height:30px;border-radius:50%;background:rgba(255,95,0,.16);border:1.5px solid var(--naranja);color:var(--naranja);font-weight:900;font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s ease,color .12s ease}
 .addmini:hover{background:var(--naranja);color:#fff}
 .promo-salmon{display:inline-block;margin-left:.4rem;padding:.14rem .5rem;font-size:.62rem;font-weight:900;letter-spacing:.02em;color:#fff;border-radius:20px;background:linear-gradient(90deg,#1e6fe0,#3fc7ff);vertical-align:middle;white-space:nowrap}
@@ -2008,6 +2031,17 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
   <button class="btn btn-wa" id="promoAddBtn">🐾 Agregar al carrito</button>
 </div>
 <div class="toast" id="toast"></div>
+
+<!-- Visor de fotos del menu: se abre al tocar la foto de un platillo -->
+<div class="visor-fondo" id="visorFondo" role="dialog" aria-modal="true" aria-labelledby="visorNombre">
+  <button class="visor-cerrar" id="visorCerrar" type="button" aria-label="Cerrar foto">&times;</button>
+  <div class="visor-caja" id="visorCaja">
+    <img class="visor-foto" id="visorFoto" alt="">
+    <div class="visor-nombre" id="visorNombre"></div>
+    <div class="visor-desc" id="visorDesc"></div>
+    <div class="visor-precio" id="visorPrecio"></div>
+  </div>
+</div>
 
 <script>
 // ===== Tabs del menú =====
@@ -3315,6 +3349,122 @@ renderCart();
       document.getElementById('promoModal').classList.add('open');
     })
     .catch(function(){ /* sin promo activa, no se muestra nada */ });
+})();
+</script>
+<script>
+// ===== Visor de fotos del menu =====
+// Al tocar la foto de un platillo se abre grande, con su nombre, descripcion y
+// precio. Un solo listener atiende todas las fotos (tambien las que se agreguen
+// despues). Si existe fotos/grande/<mismo-nombre>.webp se usa esa; si no, la
+// miniatura ampliada. Bloque aislado: si algo falla aqui, el carrito y el resto
+// de la pagina siguen funcionando.
+(function(){
+  var menu = document.getElementById('menu');
+  var fondo = document.getElementById('visorFondo');
+  if (!menu || !fondo) return;
+  var caja = document.getElementById('visorCaja');
+  var foto = document.getElementById('visorFoto');
+  var nombre = document.getElementById('visorNombre');
+  var desc = document.getElementById('visorDesc');
+  var precio = document.getElementById('visorPrecio');
+  var cerrar = document.getElementById('visorCerrar');
+  var LUPA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>';
+  var abierto = false, disparador = null, turno = 0, sinGrande = {};
+
+  function textoDe(item, sel){
+    var e = item.querySelector(sel);
+    return e ? e.textContent.trim() : '';
+  }
+
+  // Cada foto de platillo pasa a ser un boton: se puede tocar, abrir con teclado
+  // y lleva una lupita (en el celular no existe el hover que avise que se toca).
+  menu.querySelectorAll('.item .thumb').forEach(function(img){
+    var item = img.closest('.item');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'thumb-zoom';
+    b.setAttribute('aria-label', 'Ver foto de ' + (textoDe(item, '.nombre') || item.getAttribute('data-name') || 'platillo'));
+    img.parentNode.insertBefore(b, img);
+    b.appendChild(img);
+    var lupa = document.createElement('span');
+    lupa.className = 'thumb-lupa';
+    lupa.innerHTML = LUPA;
+    b.appendChild(lupa);
+  });
+
+  // Si hay una version grande de la foto, reemplaza a la miniatura al terminar de cargar.
+  function intentarGrande(src, mi){
+    if (!/^fotos\/[^\/]+$/.test(src) || sinGrande[src]) return;
+    var url = src.replace('fotos/', 'fotos/grande/');
+    var pre = new Image();
+    pre.onload = function(){
+      if (mi !== turno || !abierto) return;
+      foto.src = url;
+      foto.classList.toggle('chica', pre.naturalWidth < 400);
+    };
+    pre.onerror = function(){ sinGrande[src] = true; };
+    pre.src = url;
+  }
+
+  function abrir(btn){
+    var item = btn.closest('.item');
+    var img = btn.querySelector('img');
+    var nom = textoDe(item, '.nombre') || item.getAttribute('data-name') || '';
+    var des = textoDe(item, '.desc');
+    var pre = textoDe(item, '.p');
+    var src = img.getAttribute('src');
+    turno++;
+    nombre.textContent = nom;
+    desc.textContent = des;
+    desc.style.display = des ? '' : 'none';
+    precio.textContent = pre;
+    precio.style.display = pre ? '' : 'none';
+    foto.alt = nom;
+    foto.className = 'visor-foto' + (img.naturalWidth < 400 ? ' chica' : '');
+    foto.src = src;
+    disparador = btn;
+    abierto = true;
+    fondo.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    cerrar.focus();
+    intentarGrande(src, turno);
+  }
+
+  function cerrarVisor(){
+    if (!abierto) return;
+    abierto = false;
+    turno++;
+    fondo.classList.remove('open');
+    document.body.style.overflow = '';
+    if (disparador) disparador.focus({ preventScroll: true });
+  }
+
+  menu.addEventListener('click', function(e){
+    var b = e.target.closest('.thumb-zoom');
+    if (b) abrir(b);
+  });
+  cerrar.addEventListener('click', cerrarVisor);
+  fondo.addEventListener('click', function(e){ if (e.target === fondo) cerrarVisor(); });
+  document.addEventListener('keydown', function(e){
+    if (!abierto) return;
+    if (e.key === 'Escape') cerrarVisor();
+    else if (e.key === 'Tab'){ e.preventDefault(); cerrar.focus(); }
+  });
+
+  // Celular: deslizar hacia abajo cierra el visor.
+  var y0 = null, x0 = 0;
+  fondo.addEventListener('touchstart', function(e){
+    if (e.touches.length === 1){ y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; }
+    else y0 = null;
+  }, { passive: true });
+  fondo.addEventListener('touchend', function(e){
+    if (y0 === null) return;
+    var t = e.changedTouches[0];
+    var desliza = t.clientY - y0 > 80 && Math.abs(t.clientX - x0) < 60;
+    y0 = null;
+    // Si la caja se puede desplazar (celular en horizontal), ese gesto es para leerla.
+    if (desliza && caja.scrollHeight <= caja.clientHeight + 2) cerrarVisor();
+  }, { passive: true });
 })();
 </script>
 </body>
