@@ -247,12 +247,27 @@ h2 .acc{color:var(--rosa)}
 }
 
 /* ===== MENÚ TABS ===== */
-.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
-.tab{background:transparent;border:1.5px solid rgba(245,235,213,.35);color:var(--crema);font-weight:700;font-size:.82rem;padding:.48rem .95rem;border-radius:999px;cursor:pointer;transition:all .15s ease}
+/* Pegajosa debajo del nav: --nav-bottom lo mide el JS (nav + aviso de horario,
+   si esta activo). El valor fijo es solo respaldo antes de que el JS corra. */
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:.6rem 0;position:sticky;top:var(--nav-bottom,58px);z-index:20;background:rgba(29,29,27,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,73,176,.16)}
+.tab{background:transparent;border:1.5px solid rgba(245,235,213,.35);color:var(--crema);font-weight:700;font-size:.82rem;padding:.48rem .95rem;border-radius:999px;cursor:pointer;transition:all .15s ease;flex-shrink:0}
 .tab:hover{border-color:var(--rosa);color:var(--rosa)}
 .tab.active{background:var(--rosa);border-color:var(--rosa);color:var(--negro)}
-.panel{display:none;animation:fadeUp .35s ease}
-.panel.active{display:block}
+/* Celular: una sola fila con scroll horizontal en vez de envolver a varias lineas
+   (la barra pegajosa no debe comerse media pantalla). */
+@media(max-width:680px){
+  .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  /* Desvanecido en el borde: avisa que hay mas categorias hacia ese lado. Las
+     clases las pone el JS segun el scroll horizontal real de la barra, asi que
+     solo aparece cuando de verdad hay algo mas por ver hacia ese lado. */
+  .tabs.desborda-der{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+  .tabs.desborda-izq{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 28px),transparent)}
+  .tabs.desborda-izq.desborda-der{-webkit-mask-image:linear-gradient(to right,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+}
+/* Categorias apiladas: todas visibles, se recorren con scroll. scroll-margin-top
+   deja lugar para el nav + la barra pegajosa al saltar con un clic. */
+.panel{scroll-margin-top:var(--sticky-total,120px)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .panel-note{font-size:.82rem;color:var(--naranja);font-weight:900;margin-bottom:.9rem}
 .panel-photo{border-radius:18px;overflow:hidden;margin-bottom:1rem;max-height:280px;border:1px solid rgba(255,73,176,.2)}
@@ -659,21 +674,21 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
     <p class="sec-sub">Todos los rollos van en 10 piezas (Furutsu en 12). Agrega lo que quieras al carrito y envíalo directo por WhatsApp.</p>
   </div>
 
-  <div class="tabs" role="tablist" aria-label="Categorías del menú">
-    <button class="tab active" data-panel="p-rollos" role="tab" aria-selected="true">Rollos</button>
-    <button class="tab" data-panel="p-entradas" role="tab" aria-selected="false">Entradas</button>
-    <button class="tab" data-panel="p-comple" role="tab" aria-selected="false">Gohan · Yakimeshi</button>
-    <button class="tab" data-panel="p-poke" role="tab" aria-selected="false">Poke Bowl</button>
-    <button class="tab" data-panel="p-ramen" role="tab" aria-selected="false">Ramen</button>
-    <button class="tab" data-panel="p-bento" role="tab" aria-selected="false">Bento Box</button>
-    <button class="tab" data-panel="p-burger" role="tab" aria-selected="false">Sushi Burger</button>
-    <button class="tab" data-panel="p-onigiri" role="tab" aria-selected="false">Onigiris</button>
-    <button class="tab" data-panel="p-mushi" role="tab" aria-selected="false">Mushi Pan</button>
-    <button class="tab" data-panel="p-tores" role="tab" aria-selected="false">Charola 50 rollos</button>
-    <button class="tab" data-panel="p-bebidas" role="tab" aria-selected="false">Bebidas</button>
+  <div class="tabs" role="group" aria-label="Categorías del menú">
+    <button class="tab active" type="button" data-panel="p-rollos">Rollos</button>
+    <button class="tab" type="button" data-panel="p-entradas">Entradas</button>
+    <button class="tab" type="button" data-panel="p-comple">Gohan · Yakimeshi</button>
+    <button class="tab" type="button" data-panel="p-poke">Poke Bowl</button>
+    <button class="tab" type="button" data-panel="p-ramen">Ramen</button>
+    <button class="tab" type="button" data-panel="p-bento">Bento Box</button>
+    <button class="tab" type="button" data-panel="p-burger">Sushi Burger</button>
+    <button class="tab" type="button" data-panel="p-onigiri">Onigiris</button>
+    <button class="tab" type="button" data-panel="p-mushi">Mushi Pan</button>
+    <button class="tab" type="button" data-panel="p-tores">Charola 50 rollos</button>
+    <button class="tab" type="button" data-panel="p-bebidas">Bebidas</button>
   </div>
 
-  <div class="panel active panel-fondo" id="p-rollos" style="--catbg:url('fotos/fondo-rollos.webp')">
+  <div class="panel panel-fondo" id="p-rollos" style="--catbg:url('fotos/fondo-rollos.webp')">
     <p class="panel-desc">Rollos de sushi elaborados al momento cortados en 10 piezas acompañados de soya ponzu.</p>
     <div class="items">
       <div class="item" data-name="Furutsu Roll" data-price="72" data-cfg="roll"><img class="thumb" src="fotos/furutsu-roll.webp" alt="Furutsu Roll" loading="lazy"><div class="info"><div class="nombre">Furutsu Roll (12 pzas)</div><div class="desc">Frutas del día con queso crema, envuelto en hoja de arroz.</div></div><div class="right"><span class="p">$72</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
@@ -808,7 +823,6 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
         </div>
       </button>
     </div>
-  </div>
   </div>
 
   <div class="panel panel-fondo" id="p-bebidas" style="--catbg:url('fotos/fondo-bebidas.webp')">
@@ -983,23 +997,113 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
 </div>
 
 <script>
-// ===== Tabs del menú =====
-document.querySelectorAll('.tab').forEach(function(tab){
-  tab.addEventListener('click', function(){
-    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});
-    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected','true');
-    document.getElementById(tab.dataset.panel).classList.add('active');
-  });
-});
+// ===== Menú: categorías apiladas + barra de pestañas pegajosa =====
+(function(){
+  var tabsEl = document.querySelector('.tabs');
+  var navEl = document.querySelector('nav');
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var paneles = tabs.map(function(t){ return document.getElementById(t.dataset.panel); }).filter(Boolean);
+  if (!tabsEl || !navEl || !tabs.length) return;
 
-// Cuadros de categoria (favoritos): saltan al tab correspondiente en el menu
+  // El offset se vuelve a medir solo (ancho de pantalla, o si las pestañas
+  // envuelven a mas de una linea). aplicarBannerAviso() lo llama tambien cuando
+  // el aviso de horario se prende o se apaga, porque eso mueve el nav sin
+  // cambiar su tamaño (algo que ResizeObserver no detecta por si solo).
+  function medirOffsetSticky(){
+    var navBottom = Math.ceil(navEl.getBoundingClientRect().bottom);
+    document.documentElement.style.setProperty('--nav-bottom', navBottom + 'px');
+    var tabsAlto = Math.ceil(tabsEl.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--sticky-total', (navBottom + tabsAlto) + 'px');
+  }
+  window.medirOffsetSticky = medirOffsetSticky;
+  medirOffsetSticky();
+  if (window.ResizeObserver){
+    new ResizeObserver(medirOffsetSticky).observe(navEl);
+    new ResizeObserver(medirOffsetSticky).observe(tabsEl);
+  } else {
+    window.addEventListener('resize', medirOffsetSticky);
+  }
+
+  // Desvanecido en los bordes de la barra (solo celular, cuando hay scroll
+  // horizontal real): avisa que hay mas categorias hacia ese lado, para que
+  // ninguna quede escondida sin que se note que se puede deslizar.
+  function actualizarDesbordeTabs(){
+    var max = tabsEl.scrollWidth - tabsEl.clientWidth;
+    if (max <= 1){
+      tabsEl.classList.remove('desborda-izq', 'desborda-der');
+      return;
+    }
+    tabsEl.classList.toggle('desborda-izq', tabsEl.scrollLeft > 2);
+    tabsEl.classList.toggle('desborda-der', tabsEl.scrollLeft < max - 2);
+  }
+  actualizarDesbordeTabs();
+  tabsEl.addEventListener('scroll', actualizarDesbordeTabs, { passive: true });
+  if (window.ResizeObserver){
+    new ResizeObserver(actualizarDesbordeTabs).observe(tabsEl);
+  } else {
+    window.addEventListener('resize', actualizarDesbordeTabs);
+  }
+
+  function marcarActivo(id){
+    tabs.forEach(function(t){
+      var activo = t.dataset.panel === id;
+      t.classList.toggle('active', activo);
+      if (activo) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
+    });
+    // En celular (barra con scroll horizontal propio) se desplaza sola para que la
+    // pestaña activa no quede fuera de vista. En escritorio las pestañas envuelven
+    // en vez de desplazarse, asi que aqui no hay nada que mover.
+    if (tabsEl.scrollWidth > tabsEl.clientWidth + 1){
+      var actual = tabs.filter(function(t){ return t.dataset.panel === id; })[0];
+      if (actual) actual.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+
+  // Clic: salto suave a la seccion (scroll-margin-top ya deja lugar para nav + pestañas).
+  var saltando = null;
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var panel = document.getElementById(tab.dataset.panel);
+      if (!panel) return;
+      marcarActivo(tab.dataset.panel);
+      clearTimeout(saltando);
+      saltando = setTimeout(function(){ saltando = null; }, 700);
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Scroll: resalta la categoria que esta debajo de la barra pegajosa. Se ignora
+  // mientras dura un salto por clic, para no parpadear entre varias pestañas al
+  // cruzar de golpe las secciones intermedias.
+  function actualizarPorScroll(){
+    if (saltando || !paneles.length) return;
+    var limite = tabsEl.getBoundingClientRect().bottom + 2;
+    var actual = paneles[0];
+    for (var i = 0; i < paneles.length; i++){
+      if (paneles[i].getBoundingClientRect().top <= limite) actual = paneles[i];
+      else break;
+    }
+    marcarActivo(actual.id);
+  }
+  // setTimeout en vez de requestAnimationFrame: rAF se puede pausar del todo con
+  // la pestaña en segundo plano, y si eso pasa justo en el primer scroll, la
+  // bandera de "ocupado" se queda trabada para siempre y el resaltado deja de
+  // actualizarse en toda la sesion. setTimeout no tiene ese riesgo.
+  var pendiente = false;
+  window.addEventListener('scroll', function(){
+    if (pendiente) return;
+    pendiente = true;
+    setTimeout(function(){ pendiente = false; actualizarPorScroll(); }, 100);
+  }, { passive: true });
+  actualizarPorScroll();
+})();
+
+// Cuadros de categoria (favoritos): saltan a la categoria correspondiente del menu.
+// El salto preciso ya lo hace el clic del tab (scroll-margin-top incluido).
 document.querySelectorAll('[data-goto]').forEach(function(tile){
   tile.addEventListener('click', function(){
     var tab = document.querySelector('.tab[data-panel="' + tile.dataset.goto + '"]');
     if (tab) tab.click();
-    document.getElementById('menu').scrollIntoView({behavior:'smooth', block:'start'});
     tile.classList.remove('flash');
     void tile.offsetWidth;
     tile.classList.add('flash');
@@ -1352,6 +1456,7 @@ function aplicarBannerAviso(banner){
   if (!banner || !banner.activo || !banner.texto){
     if (existente) existente.remove();
     if (nav) nav.style.top = '';
+    if (window.medirOffsetSticky) window.medirOffsetSticky();
     return;
   }
   if (!existente){
@@ -1362,6 +1467,7 @@ function aplicarBannerAviso(banner){
   }
   existente.textContent = banner.texto;
   nav.style.top = existente.offsetHeight + 'px';
+  if (window.medirOffsetSticky) window.medirOffsetSticky();
 }
 fetch('data/site-data.json?v=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(data){
   if (data.horario){
