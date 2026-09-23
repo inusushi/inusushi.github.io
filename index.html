@@ -2063,9 +2063,19 @@ footer{border-top:2px solid var(--rosa);margin-top:1rem;background:var(--negro-s
     // En celular (barra con scroll horizontal propio) se desplaza sola para que la
     // pestaña activa no quede fuera de vista. En escritorio las pestañas envuelven
     // en vez de desplazarse, asi que aqui no hay nada que mover.
+    // Ojo: se mueve solo la barra (scrollLeft), nunca la pagina. scrollIntoView
+    // tambien desplaza la ventana en vertical: al bajar mas alla del menu la barra
+    // ya no esta en pantalla y jalaba la pagina de regreso hacia arriba.
     if (tabsEl.scrollWidth > tabsEl.clientWidth + 1){
       var actual = tabs.filter(function(t){ return t.dataset.panel === id; })[0];
-      if (actual) actual.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      if (actual){
+        var destino = tabsEl.scrollLeft + actual.getBoundingClientRect().left - tabsEl.getBoundingClientRect().left - (tabsEl.clientWidth - actual.offsetWidth) / 2;
+        destino = Math.max(0, Math.min(destino, tabsEl.scrollWidth - tabsEl.clientWidth));
+        if (Math.abs(tabsEl.scrollLeft - destino) > 1){
+          if (tabsEl.scrollTo) tabsEl.scrollTo({ left: destino, behavior: 'smooth' });
+          else tabsEl.scrollLeft = destino;
+        }
+      }
     }
   }
 
