@@ -249,7 +249,11 @@ h2 .acc{color:var(--rosa)}
 /* ===== MENÚ TABS ===== */
 /* Pegajosa debajo del nav: --nav-bottom lo mide el JS (nav + aviso de horario,
    si esta activo). El valor fijo es solo respaldo antes de que el JS corra. */
-.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:.6rem 0;position:sticky;top:var(--nav-bottom,58px);z-index:20;background:rgba(29,29,27,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,73,176,.16)}
+/* Sin backdrop-filter a propósito: combinado con position:sticky, Safari de
+   iPhone tiene un bug documentado que puede congelar el scroll de toda la
+   página justo al "despegarse" la barra. El fondo ya casi opaco (94%) se ve
+   prácticamente igual sin el desenfoque. */
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:.6rem 0;position:sticky;top:var(--nav-bottom,58px);z-index:20;background:rgba(29,29,27,.97);border-bottom:1px solid rgba(255,73,176,.16)}
 .tab{background:transparent;border:1.5px solid rgba(245,235,213,.35);color:var(--crema);font-weight:700;font-size:.82rem;padding:.48rem .95rem;border-radius:999px;cursor:pointer;transition:all .15s ease;flex-shrink:0}
 .tab:hover{border-color:var(--rosa);color:var(--rosa)}
 .tab.active{background:var(--rosa);border-color:var(--rosa);color:var(--negro)}
@@ -750,10 +754,10 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
   <div class="panel panel-fondo" id="p-ramen" style="--catbg:url('fotos/fondo-ramen.webp')">
     <p class="panel-desc">Caldito que abraza: nuestro ramen y sopas de la casa.</p>
     <div class="items">
-      <div class="item" data-name="Sopa Jiraiya 1/2L" data-price="85" data-cfg="generic"><img class="thumb" src="fotos/sopa-jiraiya-1-2l.webp" alt="Sopa Jiraiya 1/2L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — ½ litro</div><div class="desc">Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.</div></div><div class="right"><span class="p">$85</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Sopa Jiraiya 1L" data-price="160" data-cfg="generic"><img class="thumb" src="fotos/sopa-jiraiya-1l.webp" alt="Sopa Jiraiya 1L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — 1 litro</div></div><div class="right"><span class="p">$160</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Inu Dashi Ramen 1/2L" data-price="87" data-cfg="generic"><img class="thumb" src="fotos/inu-dashi-ramen-1-2l.webp" alt="Inu Dashi Ramen 1/2L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — ½ litro</div><div class="desc">Tallarines de trigo, camarón, cangrejo, atún y salmón.</div></div><div class="right"><span class="p">$87</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
-      <div class="item" data-name="Inu Dashi Ramen 1L" data-price="165" data-cfg="generic"><img class="thumb" src="fotos/inu-dashi-ramen-1l.webp" alt="Inu Dashi Ramen 1L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — 1 litro</div></div><div class="right"><span class="p">$165</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Sopa Jiraiya 1/2L" data-price="85" data-cfg="generic"><img class="thumb" src="fotos/sopa-jiraiya-1-2l.webp" alt="Sopa Jiraiya 1/2L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — ½ litro<span class="promo-salmon">20% OFF</span></div><div class="desc">Caldo dashi con fideo harusame, wakame, atún y chicharrón de salmón.</div></div><div class="right"><span class="p">$85</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Sopa Jiraiya 1L" data-price="160" data-cfg="generic"><img class="thumb" src="fotos/sopa-jiraiya-1l.webp" alt="Sopa Jiraiya 1L" loading="lazy"><div class="info"><div class="nombre">Sopa Jiraiya — 1 litro<span class="promo-salmon">20% OFF</span></div></div><div class="right"><span class="p">$160</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Inu Dashi Ramen 1/2L" data-price="87" data-cfg="generic"><img class="thumb" src="fotos/inu-dashi-ramen-1-2l.webp" alt="Inu Dashi Ramen 1/2L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — ½ litro<span class="promo-salmon">20% OFF</span></div><div class="desc">Tallarines de trigo, camarón, cangrejo, atún y salmón.</div></div><div class="right"><span class="p">$87</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
+      <div class="item" data-name="Inu Dashi Ramen 1L" data-price="165" data-cfg="generic"><img class="thumb" src="fotos/inu-dashi-ramen-1l.webp" alt="Inu Dashi Ramen 1L" loading="lazy"><div class="info"><div class="nombre">Inu Dashi Ramen — 1 litro<span class="promo-salmon">20% OFF</span></div></div><div class="right"><span class="p">$165</span><button class="addmini" data-add><svg class="pawmini" viewBox="0 0 106 100" fill="currentColor" aria-hidden="true"><use href="#pawshape"/></svg></button></div></div>
     </div>
   </div>
 
@@ -952,7 +956,7 @@ header.burger-hero{display:block;min-height:0;height:300vh;padding:0;overflow:vi
     <p class="ship-out" id="shipOut"></p>
     <div class="price-row"><span>Subtotal</span><span class="val" id="subtotalVal">$0</span></div>
     <div class="price-row descuento-row"><span>🎉 Descuento 10% web</span><span class="val" id="descuentoVal">-$0</span></div>
-    <div class="price-row descuento-row" id="ahorroSalmonRow" style="display:none"><span>🐟 Ahorro promo salmón 15%</span><span class="val" id="ahorroSalmonVal">-$0</span></div>
+    <div class="price-row descuento-row" id="ahorroSalmonRow" style="display:none"><span>🍜 Ahorro promo ramen 20%</span><span class="val" id="ahorroSalmonVal">-$0</span></div>
     <div class="subtotal-row"><span>Total</span><span class="val" id="totalVal">$0</span></div>
     <button class="send-btn" id="sendOrder" disabled>📲 Enviar pedido por WhatsApp</button>
     <p class="pay-note">🕐 Entrega: 30–90 min según demanda · 💵 Pago en efectivo o transferencia (te pasamos los datos por WhatsApp)</p>
@@ -1278,8 +1282,11 @@ var DESCUENTO_WEB = 0; // promo general por pagina web (se controla desde data/s
 var N8N_WEBHOOK_URL = ''; // URL del webhook de n8n para registrar pedidos (vacio = desactivado, no bloquea el envio por WhatsApp)
 var cart = {}; // { name: {price, qty} }
 
-// Promo de salmón desactivada (15% OFF retirado). El estilo .promo-salmon se conserva para la próxima promo por platillo.
-function esPromoSalmon(nombre){ return false; }
+// Promo: 20% de descuento en la categoría Ramen (reutiliza el estilo .promo-salmon de la promo anterior).
+// Para apagarla: dejar PROMO_RAMEN_ITEMS vacío y quitar los listones "20% OFF" del menú.
+var DESCUENTO_RAMEN = 0.20;
+var PROMO_RAMEN_ITEMS = ['Sopa Jiraiya 1/2L', 'Sopa Jiraiya 1L', 'Inu Dashi Ramen 1/2L', 'Inu Dashi Ramen 1L'];
+function esPromoRamen(nombre){ return PROMO_RAMEN_ITEMS.indexOf(nombre) !== -1; }
 
 var drawer = document.getElementById('drawer');
 var overlay = document.getElementById('overlay');
@@ -1298,7 +1305,9 @@ function showToast(msg){
 
 function addToCart(name, price){
   if(!cart[name]){
-    cart[name] = {price: price, qty: 0, isPromo: false, originalPrice: price};
+    var esPromo = esPromoRamen(name);
+    var precioFinal = esPromo ? Math.round(price * (1 - DESCUENTO_RAMEN)) : price;
+    cart[name] = {price: precioFinal, qty: 0, isPromo: esPromo, originalPrice: price};
   }
   cart[name].qty += 1;
   renderCart();
@@ -1328,7 +1337,7 @@ function renderCart(){
       subtotal += lineTotal;
       count += item.qty;
       if(item.isPromo) ahorroSalmon += (item.originalPrice - item.price) * item.qty;
-      var promoTag = item.isPromo ? '' : '';
+      var promoTag = item.isPromo ? '<span class="promo-salmon">20% OFF</span>' : '';
       html += '<div class="cart-row">' +
         '<div class="ci"><div class="cn">'+name+promoTag+'</div><div class="cp">$'+item.price+' c/u</div></div>' +
         '<div class="qty">' +
@@ -1343,7 +1352,7 @@ function renderCart(){
       subtotal += lineTotal;
       count += item.qty;
       if(item.isPromo) ahorroSalmon += (item.originalPrice - item.price) * item.qty;
-      var promoTag = item.isPromo ? '' : '';
+      var promoTag = item.isPromo ? '<span class="promo-salmon">20% OFF</span>' : '';
       var baseTxt = item.base ? ' — base $'+item.base : '';
       html += '<div class="cart-row">' +
         '<div class="ci">' +
@@ -1618,14 +1627,14 @@ document.getElementById('sendOrder').addEventListener('click', function(){
     var lineTotal = item.price * item.qty;
     subtotal += lineTotal;
     if(item.isPromo) ahorroSalmon += (item.originalPrice - item.price) * item.qty;
-    lines.push('• ' + item.qty + ' x ' + name + (item.isPromo ? ' (15% OFF salmón)' : '') + ' — $' + lineTotal);
+    lines.push('• ' + item.qty + ' x ' + name + (item.isPromo ? ' (20% OFF ramen)' : '') + ' — $' + lineTotal);
     itemsPedido.push({ nombre: name, cantidad: item.qty, precio_unitario: item.price, subtotal_linea: lineTotal });
   });
   cartExtra.forEach(function(item){
     var lineTotal = item.price * item.qty;
     subtotal += lineTotal;
     if(item.isPromo) ahorroSalmon += (item.originalPrice - item.price) * item.qty;
-    lines.push('• ' + item.qty + ' x ' + item.title + ' (personalizado)' + (item.isPromo ? ' (15% OFF salmón)' : '') + ' — $' + lineTotal);
+    lines.push('• ' + item.qty + ' x ' + item.title + ' (personalizado)' + (item.isPromo ? ' (20% OFF ramen)' : '') + ' — $' + lineTotal);
     if(item.base) lines.push('   Precio base: $' + item.base);
     item.lines.forEach(function(l){ lines.push('   ' + l); });
     if(item.base) lines.push('   Total del platillo: $' + item.price + (item.qty > 1 ? ' c/u' : ''));
@@ -1636,7 +1645,7 @@ document.getElementById('sendOrder').addEventListener('click', function(){
   lines.push('');
   lines.push('Subtotal: $' + subtotal);
   if (descuento > 0) lines.push('Descuento web (' + Math.round(DESCUENTO_WEB * 100) + '%): -$' + descuento);
-  if (ahorroSalmon > 0) lines.push('🐟 Ahorro promo salmón 15%: -$' + ahorroSalmon);
+  if (ahorroSalmon > 0) lines.push('🍜 Ahorro promo ramen 20%: -$' + ahorroSalmon);
   lines.push('*Total: $' + total + '*');
   lines.push('');
   var esPickup = document.getElementById('pickupCheck').checked;
@@ -2210,7 +2219,13 @@ function addConfigurado(title, price, lines, base){
   // guarda aparte: se muestra junto al nombre y el total ya sumado va hasta
   // abajo del desglose.
   var precioBaseItem = (typeof base === 'number' && base > 0 && base < price) ? base : null;
-  cartExtra.push({ id: 'cfg' + Date.now() + Math.random().toString(16).slice(2), title: title, price: price, qty: 1, lines: lines, base: precioBaseItem, isPromo: false, originalPrice: price });
+  var esPromo = esPromoRamen(title);
+  var precioFinal = price;
+  if(esPromo){
+    precioFinal = Math.round(price * (1 - DESCUENTO_RAMEN));
+    lines = lines.concat(['🍜 Promo 20% de descuento en ramen (-$' + (price - precioFinal) + ')']);
+  }
+  cartExtra.push({ id: 'cfg' + Date.now() + Math.random().toString(16).slice(2), title: title, price: precioFinal, qty: 1, lines: lines, base: precioBaseItem, isPromo: esPromo, originalPrice: price });
   renderCart();
   drawer.classList.add('open'); overlay.classList.add('open');
   showToast('Agregado: ' + title);
